@@ -21,6 +21,8 @@ import java.util.Map;
  * https://github.com/MDE4CPP/MDE4CPP/blob/24e8ef69956d2a3c6b04dca3a61a97223f6aa959/generator/UML4CPP/UML4CPP.generator/src/UML4CPP/generator/main/Generate.java#L433
  * https://github.com/PasternakMichal/SimGen/blob/7276a61f301ee21daa5b88ddb72e068e12c56e7d/SimGen%20DSL/cs.queensu.ca.Unity/bin/cs/queensu/ca/generator/UMLRTLibraryGenerator.xtend#L71
  *
+ *
+ * https://medium.com/identity-beyond-borders/building-osgi-bundles-using-maven-bundle-plugin-with-embedded-dependencies-to-be-used-in-the-wso2-3b84b6a40ebe
  */
 public class TestUMLProfile {
 
