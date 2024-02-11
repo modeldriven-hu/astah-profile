@@ -248,5 +248,61 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.uml2</groupId>
+			<artifactId>uml</artifactId>
+			<version>5.5.0.v20210228-1829</version>
+			<scope>system</scope>
+			<systemPath>${astah.path}/lib/org.eclipse.uml2.uml-5.5.0.v20210228-1829.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.uml2</groupId>
+			<artifactId>common</artifactId>
+			<version>2.5.0.v20210228-1829</version>
+			<scope>system</scope>
+			<systemPath>${astah.path}/lib/org.eclipse.uml2.common-2.5.0.v20210228-1829.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.uml2</groupId>
+			<artifactId>types</artifactId>
+			<version>2.5.0.v20210228-1829</version>
+			<scope>system</scope>
+			<systemPath>${astah.path}/lib/org.eclipse.uml2.types-2.5.0.v20210228-1829.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.uml2.uml</groupId>
+			<artifactId>resources</artifactId>
+			<version>5.5.0.v20210228-1829</version>
+			<scope>system</scope>
+			<systemPath>${astah.path}/lib/org.eclipse.uml2.uml.resources-5.5.0.v20210228-1829.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>ecore</artifactId>
+			<version>2.26.0.v20220123-0838</version>
+			<scope>system</scope>
+			<systemPath>${astah.path}/lib/org.eclipse.emf.ecore-2.26.0.v20220123-0838.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf.ecore</groupId>
+			<artifactId>xmi</artifactId>
+			<version>2.16.0.v20190528-0725</version>
+			<scope>system</scope>
+			<systemPath>${astah.path}/lib/org.eclipse.emf.ecore.xmi-2.16.0.v20190528-0725.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.emf</groupId>
+			<artifactId>common</artifactId>
+			<version>2.24.0.v20220123-0838</version>
+			<scope>system</scope>
+			<systemPath>${astah.path}/lib/org.eclipse.emf.common-2.24.0.v20220123-0838.jar</systemPath>
+		</dependency>
 	</dependencies>
 </project>
