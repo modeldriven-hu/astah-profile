@@ -1,10 +1,8 @@
 package hu.modeldriven.core.uml.command;
 
 import hu.modeldriven.core.eventbus.EventBus;
-import hu.modeldriven.core.uml.UMLModel;
 import hu.modeldriven.core.uml.UMLProfile;
-import hu.modeldriven.core.uml.event.UMLProfileChangedEvent;
-import org.eclipse.emf.common.command.Command;
+import hu.modeldriven.core.uml.event.UMLProfileModifiedEvent;
 
 public class ChangeUMLProfileNameCommand implements ProfileCommand {
 
@@ -19,16 +17,8 @@ public class ChangeUMLProfileNameCommand implements ProfileCommand {
     }
 
     public void execute(){
-    }
-
-    void modifyImmutable(){
-        UMLProfile newProfile = profile.name(name);
-        eventBus.publish(new UMLProfileChangedEvent(newProfile));
-    }
-
-    void modifyMutable(){
         profile.setName(name);
-        eventBus.publish(new UMLProfileChangedEvent(profile));
+        eventBus.publish(new UMLProfileModifiedEvent(profile));
     }
 
 }

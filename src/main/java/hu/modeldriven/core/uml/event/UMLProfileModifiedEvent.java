@@ -3,11 +3,11 @@ package hu.modeldriven.core.uml.event;
 import hu.modeldriven.core.eventbus.Event;
 import hu.modeldriven.core.uml.UMLProfile;
 
-public class UMLProfileChangedEvent implements Event {
+public class UMLProfileModifiedEvent implements Event {
 
     private final UMLProfile profile;
 
-    public UMLProfileChangedEvent(UMLProfile profile){
+    public UMLProfileModifiedEvent(UMLProfile profile){
         this.profile = profile;
     }
 

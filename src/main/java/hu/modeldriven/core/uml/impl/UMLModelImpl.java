@@ -5,7 +5,7 @@ import hu.modeldriven.core.eventbus.EventHandler;
 import hu.modeldriven.core.uml.UMLModel;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.command.ProfileCommand;
-import hu.modeldriven.core.uml.event.UMLProfileChangedEvent;
+import hu.modeldriven.core.uml.event.UMLProfileCreatedEvent;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ public class UMLModelImpl implements UMLModel, EventHandler<Event> {
 
     @Override
     public void handleEvent(Event event) {
-        if (event instanceof UMLProfileChangedEvent){
-            this.profile = ((UMLProfileChangedEvent) event).profile();
+        if (event instanceof UMLProfileCreatedEvent){
+            this.profile = ((UMLProfileCreatedEvent) event).profile();
         }
     }
 
