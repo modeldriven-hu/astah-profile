@@ -6,13 +6,12 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.uml2.uml.PrimitiveType;
-import org.eclipse.uml2.uml.Profile;
-import org.eclipse.uml2.uml.UMLFactory;
-import org.eclipse.uml2.uml.UMLPackage;
+import org.eclipse.uml2.uml.*;
 import org.eclipse.uml2.uml.resource.UMLResource;
+import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -24,6 +23,22 @@ import java.util.Map;
  *
  */
 public class TestUMLProfile {
+
+    private static final ResourceSet RESOURCE_SET;
+
+    static {
+        // Create a resource-set to contain the resource(s) that we load and
+        // save
+        RESOURCE_SET = new ResourceSetImpl();
+
+        // Initialize registrations of resource factories, library models,
+        // profiles, Ecore metadata, and other dependencies required for
+        // serializing and working with UML resources. This is only necessary in
+        // applications that are not hosted in the Eclipse platform run-time, in
+        // which case these registrations are discovered automatically from
+        // Eclipse extension points.
+        UMLResourcesUtil.init(RESOURCE_SET);
+    }
 
     private Profile createProfile(String name, String nsURI){
         Profile profile = UMLFactory.eINSTANCE.createProfile();
@@ -42,6 +57,59 @@ public class TestUMLProfile {
         return primitiveType;
     }
 
+    protected Stereotype createStereotype(Profile profile, String name, boolean isAbstract) {
+        Stereotype stereotype = profile.createOwnedStereotype(name, isAbstract);
+        return stereotype;
+    }
+
+    protected static Property createAttribute(org.eclipse.uml2.uml.Class class_, String name, Type type, int lowerBound, int upperBound, Object defaultValue) {
+        Property attribute = class_.createOwnedAttribute(name, type, lowerBound, upperBound);
+
+        if (defaultValue instanceof Boolean) {
+            LiteralBoolean literal = (LiteralBoolean) attribute.createDefaultValue(null, null, UMLPackage.Literals.LITERAL_BOOLEAN);
+            literal.setValue(((Boolean) defaultValue).booleanValue());
+        } else if (defaultValue instanceof String) {
+            if (type instanceof Enumeration) {
+                InstanceValue value = (InstanceValue) attribute.createDefaultValue(null, null, UMLPackage.Literals.INSTANCE_VALUE);
+                value.setInstance(((Enumeration) type).getOwnedLiteral((String) defaultValue));
+            } else {
+                LiteralString literal = (LiteralString) attribute.createDefaultValue(null, null, UMLPackage.Literals.LITERAL_STRING);
+                literal.setValue((String) defaultValue);
+            }
+        }
+
+        return attribute;
+    }
+
+    protected org.eclipse.uml2.uml.Class referenceMetaclass(Profile profile, String name) {
+        Model umlMetamodel = (Model) load(URI.createURI(UMLResource.UML_METAMODEL_URI));
+        org.eclipse.uml2.uml.Class metaclass = (org.eclipse.uml2.uml.Class) umlMetamodel.getOwnedType(name);
+        profile.createMetaclassReference(metaclass);
+        return metaclass;
+    }
+
+    protected void defineProfile(Profile profile) {
+        profile.define();
+    }
+
+    protected void save(org.eclipse.uml2.uml.Package package_, URI uri) {
+        // Create the resource to be saved and add the package to it
+        Resource resource = RESOURCE_SET.createResource(uri);
+        resource.getContents().add(package_);
+
+        // And save.
+        try {
+            resource.save(null);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+    protected Extension createExtension(org.eclipse.uml2.uml.Class metaclass, Stereotype stereotype, boolean required) {
+        Extension extension = stereotype.createExtension(metaclass, required);
+        return extension;
+    }
+
     protected ResourceSet createResourceSet() {
         ResourceSet resourceSet = new ResourceSetImpl();
         resourceSet.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
@@ -56,6 +124,8 @@ public class TestUMLProfile {
         return resourceSet;
     }
 
+
+
     protected org.eclipse.uml2.uml.Package load(URI uri) {
         try {
             Resource resource = createResourceSet().getResource(uri, true);
@@ -69,10 +139,17 @@ public class TestUMLProfile {
 
     @Test
     public void testUMLProfile() {
-        Profile profile = createProfile("test", "http://localhost");
-        PrimitiveType booleanPrimitiveType = importPrimitiveType(profile, "Boolean");
+        Profile ecoreProfile = createProfile("test", "http://localhost");
+        PrimitiveType booleanPrimitiveType = importPrimitiveType(ecoreProfile, "Boolean");
+        Stereotype eStructuralFeatureStereotype = createStereotype(ecoreProfile, "EStructuralFeature", true);
+        Property isTransientProperty = createAttribute(eStructuralFeatureStereotype, "isTransient", booleanPrimitiveType, 0, 1, null);
+        org.eclipse.uml2.uml.Class propertyMetaclass = referenceMetaclass(ecoreProfile, UMLPackage.Literals.PROPERTY.getName());
+        //createExtension(propertyMetaclass, eAttributeStereotype, false);
+        defineProfile(ecoreProfile);
 
-        System.out.println(profile);
+        save(ecoreProfile, URI.createFileURI("/home/zsolt/test").appendSegment("Ecore").appendFileExtension(UMLResource.PROFILE_FILE_EXTENSION));
+
+        System.out.println(ecoreProfile);
         System.out.println(booleanPrimitiveType);
     }
 
