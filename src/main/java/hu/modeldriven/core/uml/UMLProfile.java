@@ -1,5 +1,6 @@
 package hu.modeldriven.core.uml;
 
+import java.io.File;
 import java.util.List;
 
 public interface UMLProfile {
@@ -19,5 +20,7 @@ public interface UMLProfile {
     void removeStereotype(UMLStereotype stereotype);
 
     List<UMLStereotype> stereotypes();
+
+    void save(File file);
 
 }

@@ -2,10 +2,14 @@ package hu.modeldriven.core.uml.impl;
 
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLStereotype;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Stereotype;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -70,5 +74,19 @@ public class EclipseProfile implements UMLProfile {
     @Override
     public List<UMLStereotype> stereotypes() {
         return Collections.unmodifiableList(stereotypes);
+    }
+
+    @Override
+    public void save(File file) {
+        profile.define();
+        Resource resource = resourceSet.createResource(URI.createFileURI(file.getAbsolutePath()));
+        resource.getContents().add(profile);
+
+        // And save.
+        try {
+            resource.save(null);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 }

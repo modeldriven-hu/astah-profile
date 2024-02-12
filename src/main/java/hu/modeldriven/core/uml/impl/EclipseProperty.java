@@ -26,7 +26,7 @@ public class EclipseProperty implements UMLProperty {
 
     @Override
     public UMLPropertyType type() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
