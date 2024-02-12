@@ -1,11 +1,11 @@
 package hu.modeldriven.core.uml;
 
-import hu.modeldriven.core.uml.command.ProfileCommand;
+import java.io.File;
 
 public interface UMLModel {
 
-    void execute(ProfileCommand command);
+    UMLProfile profile(File file);
 
-    UMLProfile profile();
+    UMLProfile profile(String name, String namespaceURI);
 
 }

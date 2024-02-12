@@ -4,10 +4,13 @@ public interface UMLAttribute {
 
     String name();
 
+    void modifyName(String name);
+
     UMLAttributeType type();
 
-    int lowerBound();
+    void modifyType(UMLAttributeType type);
 
-    int upperBound();
+    Cardinality cardinality();
 
+    void modifyCardinality(Cardinality cardinality);
 }
