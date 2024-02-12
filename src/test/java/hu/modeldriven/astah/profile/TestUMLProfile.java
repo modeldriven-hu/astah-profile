@@ -126,8 +126,6 @@ public class TestUMLProfile {
         return resourceSet;
     }
 
-
-
     protected org.eclipse.uml2.uml.Package load(URI uri) {
         try {
             Resource resource = createResourceSet().getResource(uri, true);
@@ -146,7 +144,7 @@ public class TestUMLProfile {
         Stereotype eStructuralFeatureStereotype = createStereotype(ecoreProfile, "EStructuralFeature", true);
         Property isTransientProperty = createAttribute(eStructuralFeatureStereotype, "isTransient", booleanPrimitiveType, 0, 1, null);
         org.eclipse.uml2.uml.Class propertyMetaclass = referenceMetaclass(ecoreProfile, UMLPackage.Literals.PROPERTY.getName());
-        //createExtension(propertyMetaclass, eAttributeStereotype, false);
+        createExtension(propertyMetaclass, eStructuralFeatureStereotype, false);
         defineProfile(ecoreProfile);
 
         save(ecoreProfile, URI.createFileURI("/home/zsolt/test").appendSegment("Ecore").appendFileExtension(UMLResource.PROFILE_FILE_EXTENSION));

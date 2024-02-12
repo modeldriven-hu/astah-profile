@@ -8,12 +8,12 @@ public interface UMLStereotype {
 
     void modifyName(String name);
 
-    UMLAttribute attribute(String name, UMLAttributeType type, Cardinality cardinality);
+    UMLProperty property(String name, UMLPropertyType type);
 
-    void addAttribute(UMLAttribute attribute);
+    void addProperty(UMLProperty attribute);
 
-    void removeAttribute(UMLAttribute attribute);
+    void removeProperty(UMLProperty attribute);
 
-    List<UMLAttribute> attributes();
+    List<UMLProperty> properties();
 
 }

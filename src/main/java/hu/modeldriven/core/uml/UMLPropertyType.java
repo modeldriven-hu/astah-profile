@@ -1,5 +1,5 @@
 package hu.modeldriven.core.uml;
 
-public enum UMLAttributeType {
+public enum UMLPropertyType {
     String, Integer, Boolean, UnlimitedNatural, Real
 }

@@ -14,12 +14,15 @@ public class EclipseProfile implements UMLProfile {
 
     private final Profile profile;
     private final ResourceSet resourceSet;
+    private final List<UMLStereotype> stereotypes;
 
-    List<UMLStereotype> stereotypes = new ArrayList<>();
+    private final PrimitiveTypesInProfile primitiveTypes;
 
     public EclipseProfile(Profile profile, ResourceSet resourceSet) {
         this.profile = profile;
         this.resourceSet = resourceSet;
+        this.stereotypes = new ArrayList<>();
+        this.primitiveTypes = new PrimitiveTypesInProfile(profile, resourceSet);
     }
 
     @Override
@@ -45,13 +48,13 @@ public class EclipseProfile implements UMLProfile {
     @Override
     public UMLStereotype stereotype(String name) {
 
-        if (stereotypes.stream().anyMatch(s -> s.name().equals(name))) {
+        if (stereotypes.stream().anyMatch(s -> name.equals(s.name()))) {
             throw new ModelElementCreationException("Stereotype with name " + name + " already exists!");
         }
 
         Stereotype stereotype = profile.createOwnedStereotype(name, false);
 
-        return new EclipseStereotype(stereotype, resourceSet);
+        return new EclipseStereotype(stereotype, resourceSet, primitiveTypes);
     }
 
     @Override

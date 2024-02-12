@@ -1,45 +1,65 @@
 package hu.modeldriven.core.uml.impl;
 
-import hu.modeldriven.core.uml.Cardinality;
-import hu.modeldriven.core.uml.UMLAttribute;
-import hu.modeldriven.core.uml.UMLAttributeType;
+import hu.modeldriven.core.uml.UMLProperty;
+import hu.modeldriven.core.uml.UMLPropertyType;
 import hu.modeldriven.core.uml.UMLStereotype;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class EclipseStereotype implements UMLStereotype {
-    public EclipseStereotype(Stereotype stereotype, ResourceSet resourceSet) {
+
+    private final Stereotype stereotype;
+    private final ResourceSet resourceSet;
+    private final List<UMLProperty> properties;
+
+    private final PrimitiveTypesInProfile primitiveTypes;
+
+    public EclipseStereotype(Stereotype stereotype, ResourceSet resourceSet, PrimitiveTypesInProfile primitiveTypes) {
+        this.stereotype = stereotype;
+        this.resourceSet = resourceSet;
+        this.properties = new ArrayList<>();
+        this.primitiveTypes = primitiveTypes;
     }
 
     @Override
     public String name() {
-        return null;
+        return stereotype.getName();
     }
 
     @Override
     public void modifyName(String name) {
-
+        stereotype.setName(name);
     }
 
     @Override
-    public UMLAttribute attribute(String name, UMLAttributeType type, Cardinality cardinality) {
-        return null;
+    public UMLProperty property(String name, UMLPropertyType type) {
+
+        Property property = stereotype.createOwnedAttribute(
+                name,
+                primitiveTypes.primitiveType(type),
+                0,
+                1);
+
+        return new EclipseProperty(property, primitiveTypes);
     }
 
     @Override
-    public void addAttribute(UMLAttribute attribute) {
-
+    public void addProperty(UMLProperty attribute) {
+        this.properties.add(attribute);
     }
 
     @Override
-    public void removeAttribute(UMLAttribute attribute) {
-
+    public void removeProperty(UMLProperty attribute) {
+        this.properties.remove(attribute);
     }
 
     @Override
-    public List<UMLAttribute> attributes() {
-        return null;
+    public List<UMLProperty> properties() {
+        return Collections.unmodifiableList(this.properties);
     }
 }
