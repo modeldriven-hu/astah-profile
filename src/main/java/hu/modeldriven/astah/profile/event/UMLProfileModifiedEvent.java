@@ -1,4 +1,4 @@
-package hu.modeldriven.core.uml.event;
+package hu.modeldriven.astah.profile.event;
 
 import hu.modeldriven.core.eventbus.Event;
 import hu.modeldriven.core.uml.UMLProfile;

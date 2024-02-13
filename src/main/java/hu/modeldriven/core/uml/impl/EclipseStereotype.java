@@ -4,12 +4,10 @@ import hu.modeldriven.core.uml.UMLMetaClass;
 import hu.modeldriven.core.uml.UMLProperty;
 import hu.modeldriven.core.uml.UMLPropertyType;
 import hu.modeldriven.core.uml.UMLStereotype;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,14 +16,15 @@ public class EclipseStereotype implements UMLStereotype {
     private final Stereotype stereotype;
     private final EclipseRepresentation eclipseRepresentation;
     private final List<UMLProperty> properties;
-
     private final PrimitiveTypesInProfile primitiveTypes;
+    private final MetaClassInProfile metaClasses;
 
-    public EclipseStereotype(Stereotype stereotype, EclipseRepresentation eclipseRepresentation, PrimitiveTypesInProfile primitiveTypes) {
+    public EclipseStereotype(Stereotype stereotype, EclipseRepresentation eclipseRepresentation, PrimitiveTypesInProfile primitiveTypes, MetaClassInProfile metaClasses) {
         this.stereotype = stereotype;
         this.eclipseRepresentation = eclipseRepresentation;
         this.properties = new ArrayList<>();
         this.primitiveTypes = primitiveTypes;
+        this.metaClasses = metaClasses;
     }
 
     @Override
@@ -40,11 +39,12 @@ public class EclipseStereotype implements UMLStereotype {
 
     @Override
     public UMLMetaClass metaClass() {
-        return null;
+        return metaClasses.metaClass(stereotype);
     }
 
     @Override
     public void modifyMetaClass(UMLMetaClass metaClass) {
+        metaClasses.applyMetaClass(this.stereotype, metaClass);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package hu.modeldriven.astah.profile;
+package hu.modeldriven.core.uml;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -20,9 +20,10 @@ import java.util.Map;
  * https://wiki.eclipse.org/MDT/UML2/FAQ#What.27s_required_to_load_a_UML_.28.uml.29_resource_from_a_standalone_application.3F.
  * https://github.com/MDE4CPP/MDE4CPP/blob/24e8ef69956d2a3c6b04dca3a61a97223f6aa959/generator/UML4CPP/UML4CPP.generator/src/UML4CPP/generator/main/Generate.java#L433
  * https://github.com/PasternakMichal/SimGen/blob/7276a61f301ee21daa5b88ddb72e068e12c56e7d/SimGen%20DSL/cs.queensu.ca.Unity/bin/cs/queensu/ca/generator/UMLRTLibraryGenerator.xtend#L71
- *
- *
+ * <p>
+ * <p>
  * https://medium.com/identity-beyond-borders/building-osgi-bundles-using-maven-bundle-plugin-with-embedded-dependencies-to-be-used-in-the-wso2-3b84b6a40ebe
+ * https://github.com/mondo-project/hawk-modelio/blob/4da0f70dfeddb0451eec8b2f361586e07ad3dab9/xmi/src/org/modelio/xmi/util/ProfileUtils.java#L1285
  */
 public class TestUMLProfile {
 
@@ -42,7 +43,26 @@ public class TestUMLProfile {
         UMLResourcesUtil.init(RESOURCE_SET);
     }
 
-    private Profile createProfile(String name, String nsURI){
+    protected static Property createAttribute(org.eclipse.uml2.uml.Class class_, String name, Type type, int lowerBound, int upperBound, Object defaultValue) {
+        Property attribute = class_.createOwnedAttribute(name, type, lowerBound, upperBound);
+
+        if (defaultValue instanceof Boolean) {
+            LiteralBoolean literal = (LiteralBoolean) attribute.createDefaultValue(null, null, UMLPackage.Literals.LITERAL_BOOLEAN);
+            literal.setValue(((Boolean) defaultValue).booleanValue());
+        } else if (defaultValue instanceof String) {
+            if (type instanceof Enumeration) {
+                InstanceValue value = (InstanceValue) attribute.createDefaultValue(null, null, UMLPackage.Literals.INSTANCE_VALUE);
+                value.setInstance(((Enumeration) type).getOwnedLiteral((String) defaultValue));
+            } else {
+                LiteralString literal = (LiteralString) attribute.createDefaultValue(null, null, UMLPackage.Literals.LITERAL_STRING);
+                literal.setValue((String) defaultValue);
+            }
+        }
+
+        return attribute;
+    }
+
+    private Profile createProfile(String name, String nsURI) {
         Profile profile = UMLFactory.eINSTANCE.createProfile();
         profile.setName(name);
         profile.setURI(nsURI);
@@ -62,25 +82,6 @@ public class TestUMLProfile {
     protected Stereotype createStereotype(Profile profile, String name, boolean isAbstract) {
         Stereotype stereotype = profile.createOwnedStereotype(name, isAbstract);
         return stereotype;
-    }
-
-    protected static Property createAttribute(org.eclipse.uml2.uml.Class class_, String name, Type type, int lowerBound, int upperBound, Object defaultValue) {
-        Property attribute = class_.createOwnedAttribute(name, type, lowerBound, upperBound);
-
-        if (defaultValue instanceof Boolean) {
-            LiteralBoolean literal = (LiteralBoolean) attribute.createDefaultValue(null, null, UMLPackage.Literals.LITERAL_BOOLEAN);
-            literal.setValue(((Boolean) defaultValue).booleanValue());
-        } else if (defaultValue instanceof String) {
-            if (type instanceof Enumeration) {
-                InstanceValue value = (InstanceValue) attribute.createDefaultValue(null, null, UMLPackage.Literals.INSTANCE_VALUE);
-                value.setInstance(((Enumeration) type).getOwnedLiteral((String) defaultValue));
-            } else {
-                LiteralString literal = (LiteralString) attribute.createDefaultValue(null, null, UMLPackage.Literals.LITERAL_STRING);
-                literal.setValue((String) defaultValue);
-            }
-        }
-
-        return attribute;
     }
 
     protected org.eclipse.uml2.uml.Class referenceMetaclass(Profile profile, String name) {

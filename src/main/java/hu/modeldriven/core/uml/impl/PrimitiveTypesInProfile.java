@@ -19,8 +19,9 @@ public class PrimitiveTypesInProfile {
     private final Map<UMLPropertyType, PrimitiveType> primitiveTypeMap;
 
     public PrimitiveTypesInProfile(Profile profile, EclipseRepresentation eclipseRepresentation) {
-        primitiveTypeMap = new EnumMap<>(UMLPropertyType.class);
         ResourceSet resourceSet = eclipseRepresentation.resourceSet();
+
+        primitiveTypeMap = new EnumMap<>(UMLPropertyType.class);
         primitiveTypeMap.put(UMLPropertyType.Boolean, importPrimitiveType(profile, loadLibrary(resourceSet), "Boolean"));
         primitiveTypeMap.put(UMLPropertyType.Real, importPrimitiveType(profile, loadLibrary(resourceSet), "Real"));
         primitiveTypeMap.put(UMLPropertyType.Integer, importPrimitiveType(profile, loadLibrary(resourceSet), "Integer"));

@@ -6,19 +6,23 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.UMLResource;
 import org.eclipse.uml2.uml.resources.util.UMLResourcesUtil;
+
+import java.io.File;
+import java.io.IOException;
 
 public class EclipseRepresentation {
 
     private final ResourceSet resourceSet;
 
-    public EclipseRepresentation(){
+    public EclipseRepresentation() {
         this.resourceSet = createResourceSet();
     }
 
-    private ResourceSet createResourceSet(){
+    private ResourceSet createResourceSet() {
         ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
 
         resourceSet.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
@@ -39,6 +43,19 @@ public class EclipseRepresentation {
             we.printStackTrace();
         }
         return null;
+    }
+
+    public void saveProfile(Profile profile, File file) {
+        profile.define();
+
+        Resource resource = resourceSet().createResource(URI.createFileURI(file.getAbsolutePath()));
+        resource.getContents().add(profile);
+
+        try {
+            resource.save(null);
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 
 }
