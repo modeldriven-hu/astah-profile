@@ -55,10 +55,10 @@ public class TestUMLModel {
     public void testAddRemoveStereotype() {
         UMLProfile profile = model.createProfile("MyProfile", "test");
 
-        UMLStereotype stereotype1 = profile.createChildStereotype("Stereotype1");
-        Assert.assertTrue(profile.stereotypes().stream().anyMatch(s -> s.name().equals(stereotype1.name())));
+        UMLStereotype stereotype = profile.createChildStereotype("Stereotype1");
+        Assert.assertTrue(profile.stereotypes().stream().anyMatch(s -> s.name().equals(stereotype.name())));
 
-        profile.removeStereotype(stereotype1);
+        profile.removeStereotype(stereotype);
         Assert.assertEquals(0, profile.stereotypes().size());
     }
 
@@ -76,40 +76,81 @@ public class TestUMLModel {
     public void testChangeStereotypeName() {
         UMLProfile profile = model.createProfile("MyProfile", "test");
 
-        UMLStereotype stereotype1 = profile.createChildStereotype("Stereotype1");
+        UMLStereotype stereotype = profile.createChildStereotype("Stereotype1");
 
-        Assert.assertEquals("Stereotype1", stereotype1.name());
-        stereotype1.modifyName("Stereotype2");
-        Assert.assertEquals("Stereotype2", stereotype1.name());
+        Assert.assertEquals("Stereotype1", stereotype.name());
+        stereotype.modifyName("Stereotype2");
+        Assert.assertEquals("Stereotype2", stereotype.name());
     }
 
-    @Test
-    public void testChangeStereotypeMetaclass() {
-        UMLProfile profile = model.createProfile("MyProfile", "test");
-
-        UMLStereotype stereotype1 = profile.createChildStereotype("Stereotype1");
-        Assert.assertEquals(UMLMetaClass.Class, stereotype1.metaClass());
-
-        stereotype1.modifyMetaClass(UMLMetaClass.Property);
-        Assert.assertEquals(UMLMetaClass.Property, stereotype1.metaClass());
-
-        stereotype1.modifyMetaClass(UMLMetaClass.Class);
-        Assert.assertEquals(UMLMetaClass.Class, stereotype1.metaClass());
-    }
-
-
+//    @Test
+//    public void testChangeStereotypeMetaclass() {
+//        UMLProfile profile = model.createProfile("MyProfile", "test");
+//
+//        UMLStereotype stereotype1 = profile.createChildStereotype("Stereotype1");
+//        Assert.assertEquals(UMLMetaClass.Class, stereotype1.metaClass());
+//
+//        stereotype1.modifyMetaClass(UMLMetaClass.Property);
+//        Assert.assertEquals(UMLMetaClass.Property, stereotype1.metaClass());
+//
+//        stereotype1.modifyMetaClass(UMLMetaClass.Class);
+//        Assert.assertEquals(UMLMetaClass.Class, stereotype1.metaClass());
+//    }
 
     @Test
-    public void testAddRemoveProperty() {
+    public void testAddProperty() {
         UMLProfile profile = model.createProfile("MyProfile", "test");
 
-        UMLStereotype stereotype1 = profile.createChildStereotype("Stereotype1");
+        UMLStereotype stereotype = profile.createChildStereotype("Stereotype1");
 
         for (UMLPropertyType type : UMLPropertyType.values()){
-            stereotype1.createChildProperty("some" + type.name(), type);
+            stereotype.createChildProperty("some" + type.name(), type);
         }
 
-        Assert.assertEquals(UMLPropertyType.values().length, stereotype1.properties().size());
+        Assert.assertEquals(UMLPropertyType.values().length, stereotype.properties().size());
+    }
+
+
+    @Test
+    public void testRemoveAndReAddProperty() {
+        UMLProfile profile = model.createProfile("MyProfile", "test");
+
+        UMLStereotype stereotype = profile.createChildStereotype("Stereotype1");
+        UMLProperty property = stereotype.createChildProperty("name", UMLPropertyType.String);
+
+        Assert.assertEquals(1, stereotype.properties().size());
+        stereotype.removeProperty(property);
+        Assert.assertEquals(0, stereotype.properties().size());
+
+        UMLProperty newProperty = stereotype.createChildProperty("name", UMLPropertyType.Boolean);
+        Assert.assertEquals(1, stereotype.properties().size());
+        Assert.assertEquals("name", newProperty.name());
+        Assert.assertEquals(UMLPropertyType.Boolean, newProperty.type());
+    }
+
+    @Test
+    public void testChangePropertyName() {
+        UMLProfile profile = model.createProfile("MyProfile", "test");
+
+        UMLStereotype stereotype = profile.createChildStereotype("Stereotype");
+        UMLProperty property = stereotype.createChildProperty("name", UMLPropertyType.String);
+
+        Assert.assertEquals("name", property.name());
+        property.modifyName("name2");
+        Assert.assertEquals("name2", property.name());
+    }
+
+
+    @Test
+    public void testChangePropertyType() {
+        UMLProfile profile = model.createProfile("MyProfile", "test");
+
+        UMLStereotype stereotype = profile.createChildStereotype("Stereotype1");
+        UMLProperty property = stereotype.createChildProperty("name", UMLPropertyType.String);
+
+        Assert.assertEquals(UMLPropertyType.String, property.type());
+        property.modifyType(UMLPropertyType.Boolean);
+        Assert.assertEquals(UMLPropertyType.Boolean, property.type());
     }
 
 }

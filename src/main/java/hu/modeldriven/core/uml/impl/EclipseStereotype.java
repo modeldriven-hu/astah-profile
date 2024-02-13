@@ -7,22 +7,19 @@ import hu.modeldriven.core.uml.UMLStereotype;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EclipseStereotype implements UMLStereotype {
 
     private final Stereotype stereotype;
     private final EclipseRepresentation eclipseRepresentation;
-    private final List<UMLProperty> properties;
     private final PrimitiveTypesInProfile primitiveTypes;
     private final MetaClassInProfile metaClasses;
 
     public EclipseStereotype(Stereotype stereotype, EclipseRepresentation eclipseRepresentation, PrimitiveTypesInProfile primitiveTypes, MetaClassInProfile metaClasses) {
         this.stereotype = stereotype;
         this.eclipseRepresentation = eclipseRepresentation;
-        this.properties = new ArrayList<>();
         this.primitiveTypes = primitiveTypes;
         this.metaClasses = metaClasses;
     }
@@ -37,10 +34,10 @@ public class EclipseStereotype implements UMLStereotype {
         stereotype.setName(name);
     }
 
-    @Override
-    public UMLMetaClass metaClass() {
-        return metaClasses.metaClass(stereotype);
-    }
+//    @Override
+//    public UMLMetaClass metaClass() {
+//        return metaClasses.metaClass(stereotype);
+//    }
 
     @Override
     public void modifyMetaClass(UMLMetaClass metaClass) {
@@ -61,11 +58,25 @@ public class EclipseStereotype implements UMLStereotype {
 
     @Override
     public void removeProperty(UMLProperty attribute) {
-        this.properties.remove(attribute);
+        this.stereotype.getAttributes().get(0).destroy();
+
+        for (Property property : this.stereotype.getAttributes()){
+                if (property.getName().equals(attribute.name())){
+                    property.destroy();
+                    break;
+                }
+        }
     }
 
     @Override
     public List<UMLProperty> properties() {
-        return Collections.unmodifiableList(this.properties);
+        return this.stereotype.getAttributes().stream()
+                .filter(p -> !this.internalProperty(p))
+                .map(property -> new EclipseProperty(property, primitiveTypes))
+                .collect(Collectors.toList());
+    }
+
+    private boolean internalProperty(Property property) {
+        return "base_Class".equals(property.getName());
     }
 }

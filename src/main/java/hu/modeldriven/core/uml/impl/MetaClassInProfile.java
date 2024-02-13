@@ -31,10 +31,35 @@ public class MetaClassInProfile {
 
     public void applyMetaClass(Stereotype stereotype, UMLMetaClass metaClass) {
         // FIXME you cannot add extensions two times to a stereotype!
+        // destroyExtension
         stereotype.createExtension(metaClassMap.get(metaClass), false);
     }
 
+    private void destroyExtension(Stereotype stereotype) {
+        org.eclipse.uml2.uml.Class metaclass = null;
+        Profile profile = stereotype.getProfile();
+        if (metaclass != null && profile != null) {
+            for (Extension ext : profile.getOwnedExtensions(false)) {
+                if (ext.getMetaclass() == metaclass && ext.getEndTypes().contains(stereotype)) {
+                    for (Property p : stereotype.getAttributes()) {
+                        Association assoc = p.getAssociation();
+                        if (assoc != null && assoc == ext) {
+                            // additional cleanup needed, because
+                            // this would not be removed by ext.destroy():
+                            p.destroy();
+                            break;
+                        }
+                    }
+                    // remove base class by destroying the extension
+                    ext.destroy();
+                    break;
+                }
+            }
+        }
+    }
+
     public UMLMetaClass metaClass(Stereotype stereotype) {
+        // FIXME does not work!
         for (Extension extension : stereotype.getExtensions()) {
             for (Map.Entry<UMLMetaClass, org.eclipse.uml2.uml.Class> mapEntry : metaClassMap.entrySet()) {
                 if (extension.getMetaclass().getName().equals(mapEntry.getValue().getName())) {

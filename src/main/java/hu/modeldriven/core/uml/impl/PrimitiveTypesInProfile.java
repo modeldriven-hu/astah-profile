@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.PrimitiveType;
 import org.eclipse.uml2.uml.Profile;
+import org.eclipse.uml2.uml.Type;
 import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.resource.UMLResource;
 
@@ -31,6 +32,17 @@ public class PrimitiveTypesInProfile {
 
     public PrimitiveType primitiveType(UMLPropertyType type) {
         return primitiveTypeMap.get(type);
+    }
+
+    public UMLPropertyType propertyType(Type type) {
+
+        for (Map.Entry<UMLPropertyType, PrimitiveType> entry : primitiveTypeMap.entrySet()) {
+            if (type.conformsTo(entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+
+        return null;
     }
 
     private org.eclipse.uml2.uml.Package loadLibrary(ResourceSet resourceSet) {
