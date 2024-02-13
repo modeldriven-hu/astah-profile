@@ -11,6 +11,7 @@ import org.eclipse.uml2.uml.Stereotype;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -62,8 +63,8 @@ public class EclipseProfile implements UMLProfile {
     }
 
     @Override
-    public void addStereotype(UMLStereotype stereotype) {
-        stereotypes.add(stereotype);
+    public void addStereotype(UMLStereotype ... stereotypeList) {
+        this.stereotypes.addAll(Arrays.asList(stereotypeList));
     }
 
     @Override

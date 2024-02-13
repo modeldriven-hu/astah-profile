@@ -8,6 +8,7 @@ import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -49,8 +50,8 @@ public class EclipseStereotype implements UMLStereotype {
     }
 
     @Override
-    public void addProperty(UMLProperty attribute) {
-        this.properties.add(attribute);
+    public void addProperty(UMLProperty ... propertyList) {
+        this.properties.addAll(Arrays.asList(propertyList));
     }
 
     @Override

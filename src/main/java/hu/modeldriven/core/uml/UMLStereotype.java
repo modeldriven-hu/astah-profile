@@ -10,7 +10,7 @@ public interface UMLStereotype {
 
     UMLProperty property(String name, UMLPropertyType type);
 
-    void addProperty(UMLProperty attribute);
+    void addProperty(UMLProperty ... propertyList);
 
     void removeProperty(UMLProperty attribute);
 

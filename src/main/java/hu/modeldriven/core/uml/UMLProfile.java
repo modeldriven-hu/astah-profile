@@ -15,7 +15,7 @@ public interface UMLProfile {
 
     UMLStereotype stereotype(String name);
 
-    void addStereotype(UMLStereotype stereotype);
+    void addStereotype(UMLStereotype ... stereotypeList);
 
     void removeStereotype(UMLStereotype stereotype);
 
