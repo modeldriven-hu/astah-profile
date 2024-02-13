@@ -32,10 +32,10 @@ public class EclipseStereotype implements UMLStereotype {
         stereotype.setName(name);
     }
 
-//    @Override
-//    public UMLMetaClass metaClass() {
-//        return metaClasses.metaClass(stereotype);
-//    }
+    @Override
+    public UMLMetaClass metaClass() {
+        return metaClasses.metaClass(stereotype);
+    }
 
     @Override
     public void modifyMetaClass(UMLMetaClass metaClass) {
@@ -58,11 +58,11 @@ public class EclipseStereotype implements UMLStereotype {
     public void removeProperty(UMLProperty attribute) {
         this.stereotype.getAttributes().get(0).destroy();
 
-        for (Property property : this.stereotype.getAttributes()){
-                if (property.getName().equals(attribute.name())){
-                    property.destroy();
-                    break;
-                }
+        for (Property property : this.stereotype.getAttributes()) {
+            if (property.getName().equals(attribute.name())) {
+                property.destroy();
+                break;
+            }
         }
     }
 

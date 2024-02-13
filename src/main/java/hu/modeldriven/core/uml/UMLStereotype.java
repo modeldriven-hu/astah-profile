@@ -8,8 +8,7 @@ public interface UMLStereotype {
 
     void modifyName(String name);
 
-    // FIXME does not work
-    //UMLMetaClass metaClass();
+    UMLMetaClass metaClass();
 
     void modifyMetaClass(UMLMetaClass metaClass);
 

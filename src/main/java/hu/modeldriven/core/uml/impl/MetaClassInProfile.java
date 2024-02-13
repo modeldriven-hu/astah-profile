@@ -35,7 +35,7 @@ public class MetaClassInProfile {
         stereotype.createExtension(metaClassMap.get(metaClass), false);
     }
 
-    private void destroyExtension(Stereotype stereotype) {
+    private void removeAllExtensions(Stereotype stereotype) {
         org.eclipse.uml2.uml.Class metaclass = null;
         Profile profile = stereotype.getProfile();
         if (metaclass != null && profile != null) {
@@ -59,14 +59,19 @@ public class MetaClassInProfile {
     }
 
     public UMLMetaClass metaClass(Stereotype stereotype) {
-        // FIXME does not work!
-        for (Extension extension : stereotype.getExtensions()) {
-            for (Map.Entry<UMLMetaClass, org.eclipse.uml2.uml.Class> mapEntry : metaClassMap.entrySet()) {
-                if (extension.getMetaclass().getName().equals(mapEntry.getValue().getName())) {
-                    return mapEntry.getKey();
+
+        Profile profile = stereotype.getProfile();
+
+        for (Extension extension : profile.getOwnedExtensions(false)) {
+            if (extension.getEndTypes().contains(stereotype)) {
+                for (Map.Entry<UMLMetaClass, org.eclipse.uml2.uml.Class> mapEntry : metaClassMap.entrySet()) {
+                    if (extension.getMetaclass().getName().equals(mapEntry.getValue().getName())) {
+                        return mapEntry.getKey();
+                    }
                 }
             }
         }
+
         return UMLMetaClass.UNKNOWN;
     }
 }
