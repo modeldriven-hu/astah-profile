@@ -23,12 +23,10 @@ public class EclipseRepresentation {
     }
 
     private ResourceSet createResourceSet() {
-        ResourceSet resourceSet = UMLResourcesUtil.init(new ResourceSetImpl());
-
-        resourceSet.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
-        resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
-
-        return resourceSet;
+        ResourceSet result = UMLResourcesUtil.init(new ResourceSetImpl());
+        result.getPackageRegistry().put(UMLPackage.eNS_URI, UMLPackage.eINSTANCE);
+        result.getResourceFactoryRegistry().getExtensionToFactoryMap().put(UMLResource.FILE_EXTENSION, UMLResource.Factory.INSTANCE);
+        return result;
     }
 
     public ResourceSet resourceSet() {

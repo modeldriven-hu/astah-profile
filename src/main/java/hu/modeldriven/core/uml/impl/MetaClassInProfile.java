@@ -19,8 +19,8 @@ public class MetaClassInProfile {
 
         Model umlMetamodel = (Model) eclipseRepresentation.load(URI.createURI(UMLResource.UML_METAMODEL_URI));
 
-        createMetaClass(umlMetamodel, UMLMetaClass.Class, UMLPackage.Literals.CLASS.getName());
-        createMetaClass(umlMetamodel, UMLMetaClass.Property, UMLPackage.Literals.PROPERTY.getName());
+        createMetaClass(umlMetamodel, UMLMetaClass.CLASS, UMLPackage.Literals.CLASS.getName());
+        createMetaClass(umlMetamodel, UMLMetaClass.PROPERTY, UMLPackage.Literals.PROPERTY.getName());
     }
 
     private void createMetaClass(Model umlMetamodel, UMLMetaClass metaClass, String name) {
@@ -67,6 +67,6 @@ public class MetaClassInProfile {
                 }
             }
         }
-        return UMLMetaClass.Unknown;
+        return UMLMetaClass.UNKNOWN;
     }
 }

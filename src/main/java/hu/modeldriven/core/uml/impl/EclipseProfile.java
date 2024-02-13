@@ -47,8 +47,8 @@ public class EclipseProfile implements UMLProfile {
     @Override
     public UMLStereotype createChildStereotype(String name) {
         Stereotype stereotype = profile.createOwnedStereotype(name, false);
-        UMLStereotype umlStereotype = new EclipseStereotype(stereotype, eclipseRepresentation, primitiveTypes, metaClasses);
-        umlStereotype.modifyMetaClass(UMLMetaClass.Class);
+        UMLStereotype umlStereotype = new EclipseStereotype(stereotype, primitiveTypes, metaClasses);
+        umlStereotype.modifyMetaClass(UMLMetaClass.CLASS);
         return umlStereotype;
     }
 
@@ -60,8 +60,7 @@ public class EclipseProfile implements UMLProfile {
     @Override
     public List<UMLStereotype> stereotypes() {
         return profile.getOwnedStereotypes().stream()
-                .map(stereotype -> new EclipseStereotype(stereotype,
-                        eclipseRepresentation, primitiveTypes, metaClasses))
+                .map(stereotype -> new EclipseStereotype(stereotype, primitiveTypes, metaClasses))
                 .collect(Collectors.toList());
     }
 

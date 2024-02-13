@@ -23,11 +23,11 @@ public class PrimitiveTypesInProfile {
         ResourceSet resourceSet = eclipseRepresentation.resourceSet();
 
         primitiveTypeMap = new EnumMap<>(UMLPropertyType.class);
-        primitiveTypeMap.put(UMLPropertyType.Boolean, importPrimitiveType(profile, loadLibrary(resourceSet), "Boolean"));
-        primitiveTypeMap.put(UMLPropertyType.Real, importPrimitiveType(profile, loadLibrary(resourceSet), "Real"));
-        primitiveTypeMap.put(UMLPropertyType.Integer, importPrimitiveType(profile, loadLibrary(resourceSet), "Integer"));
-        primitiveTypeMap.put(UMLPropertyType.String, importPrimitiveType(profile, loadLibrary(resourceSet), "String"));
-        primitiveTypeMap.put(UMLPropertyType.UnlimitedNatural, importPrimitiveType(profile, loadLibrary(resourceSet), "UnlimitedNatural"));
+        primitiveTypeMap.put(UMLPropertyType.BOOLEAN, importPrimitiveType(profile, loadLibrary(resourceSet), "Boolean"));
+        primitiveTypeMap.put(UMLPropertyType.REAL, importPrimitiveType(profile, loadLibrary(resourceSet), "Real"));
+        primitiveTypeMap.put(UMLPropertyType.INTEGER, importPrimitiveType(profile, loadLibrary(resourceSet), "Integer"));
+        primitiveTypeMap.put(UMLPropertyType.STRING, importPrimitiveType(profile, loadLibrary(resourceSet), "String"));
+        primitiveTypeMap.put(UMLPropertyType.UNLIMITED_NATURAL, importPrimitiveType(profile, loadLibrary(resourceSet), "UnlimitedNatural"));
     }
 
     public PrimitiveType primitiveType(UMLPropertyType type) {

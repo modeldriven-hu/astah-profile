@@ -13,13 +13,11 @@ import java.util.stream.Collectors;
 public class EclipseStereotype implements UMLStereotype {
 
     private final Stereotype stereotype;
-    private final EclipseRepresentation eclipseRepresentation;
     private final PrimitiveTypesInProfile primitiveTypes;
     private final MetaClassInProfile metaClasses;
 
-    public EclipseStereotype(Stereotype stereotype, EclipseRepresentation eclipseRepresentation, PrimitiveTypesInProfile primitiveTypes, MetaClassInProfile metaClasses) {
+    public EclipseStereotype(Stereotype stereotype, PrimitiveTypesInProfile primitiveTypes, MetaClassInProfile metaClasses) {
         this.stereotype = stereotype;
-        this.eclipseRepresentation = eclipseRepresentation;
         this.primitiveTypes = primitiveTypes;
         this.metaClasses = metaClasses;
     }
