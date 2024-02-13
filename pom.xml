@@ -1,13 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<profiles>
+		<profile>
+			<id>osx</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<os>
+					<name>mac</name>
+				</os>
+			</activation>
+			<properties>
+				<astah.path>/Applications/astah_sysml/astah sysml.app/Contents/Java</astah.path>
+			</properties>
+		</profile>
+		<profile>
+			<id>linux</id>
+			<activation>
+				<os>
+					<name>unix</name>
+				</os>
+			</activation>
+			<properties>
+				<astah.path>/usr/lib/astah_sysml</astah.path>
+			</properties>
+		</profile>
+	</profiles>
 	<properties>
 		<bundle.symbolicName>hu.modeldriven.astah-profile</bundle.symbolicName>
 		<bundle.namespace>hu.modeldriven.astah.profile</bundle.namespace>
 		<plugin.install>true</plugin.install>
 		<astah.version>1.1</astah.version>
 		<astah.edition>sysml</astah.edition>
-		<astah.path>/usr/lib/astah_sysml</astah.path>
 	</properties>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>hu.modeldriven</groupId>
