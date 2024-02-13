@@ -4,8 +4,8 @@ import java.io.File;
 
 public interface UMLModel {
 
-    UMLProfile profile(File file);
+    UMLProfile createProfile(File file);
 
-    UMLProfile profile(String name, String namespaceURI);
+    UMLProfile createProfile(String name, String namespaceURI);
 
 }

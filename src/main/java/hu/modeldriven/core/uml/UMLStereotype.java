@@ -8,9 +8,11 @@ public interface UMLStereotype {
 
     void modifyName(String name);
 
-    UMLProperty property(String name, UMLPropertyType type);
+    UMLMetaClass metaClass();
 
-    void addProperty(UMLProperty ... propertyList);
+    void modifyMetaClass(UMLMetaClass metaClass);
+
+    UMLProperty createChildProperty(String name, UMLPropertyType type);
 
     void removeProperty(UMLProperty attribute);
 

@@ -1,5 +1,6 @@
 package hu.modeldriven.core.uml.impl;
 
+import hu.modeldriven.core.uml.UMLMetaClass;
 import hu.modeldriven.core.uml.UMLProperty;
 import hu.modeldriven.core.uml.UMLPropertyType;
 import hu.modeldriven.core.uml.UMLStereotype;
@@ -15,14 +16,14 @@ import java.util.List;
 public class EclipseStereotype implements UMLStereotype {
 
     private final Stereotype stereotype;
-    private final ResourceSet resourceSet;
+    private final EclipseRepresentation eclipseRepresentation;
     private final List<UMLProperty> properties;
 
     private final PrimitiveTypesInProfile primitiveTypes;
 
-    public EclipseStereotype(Stereotype stereotype, ResourceSet resourceSet, PrimitiveTypesInProfile primitiveTypes) {
+    public EclipseStereotype(Stereotype stereotype, EclipseRepresentation eclipseRepresentation, PrimitiveTypesInProfile primitiveTypes) {
         this.stereotype = stereotype;
-        this.resourceSet = resourceSet;
+        this.eclipseRepresentation = eclipseRepresentation;
         this.properties = new ArrayList<>();
         this.primitiveTypes = primitiveTypes;
     }
@@ -38,7 +39,16 @@ public class EclipseStereotype implements UMLStereotype {
     }
 
     @Override
-    public UMLProperty property(String name, UMLPropertyType type) {
+    public UMLMetaClass metaClass() {
+        return null;
+    }
+
+    @Override
+    public void modifyMetaClass(UMLMetaClass metaClass) {
+    }
+
+    @Override
+    public UMLProperty createChildProperty(String name, UMLPropertyType type) {
 
         Property property = stereotype.createOwnedAttribute(
                 name,
@@ -47,11 +57,6 @@ public class EclipseStereotype implements UMLStereotype {
                 1);
 
         return new EclipseProperty(property, primitiveTypes);
-    }
-
-    @Override
-    public void addProperty(UMLProperty ... propertyList) {
-        this.properties.addAll(Arrays.asList(propertyList));
     }
 
     @Override

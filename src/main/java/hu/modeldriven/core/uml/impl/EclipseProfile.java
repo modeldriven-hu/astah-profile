@@ -1,5 +1,6 @@
 package hu.modeldriven.core.uml.impl;
 
+import hu.modeldriven.core.uml.UMLMetaClass;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLStereotype;
 import org.eclipse.emf.common.util.URI;
@@ -23,16 +24,16 @@ import java.util.List;
 public class EclipseProfile implements UMLProfile {
 
     private final Profile profile;
-    private final ResourceSet resourceSet;
+    private final EclipseRepresentation eclipseRepresentation;
     private final List<UMLStereotype> stereotypes;
 
     private final PrimitiveTypesInProfile primitiveTypes;
 
-    public EclipseProfile(Profile profile, ResourceSet resourceSet) {
+    public EclipseProfile(Profile profile, EclipseRepresentation eclipseRepresentation) {
         this.profile = profile;
-        this.resourceSet = resourceSet;
+        this.eclipseRepresentation = eclipseRepresentation;
         this.stereotypes = new ArrayList<>();
-        this.primitiveTypes = new PrimitiveTypesInProfile(profile, resourceSet);
+        this.primitiveTypes = new PrimitiveTypesInProfile(profile, eclipseRepresentation);
     }
 
     @Override
@@ -56,7 +57,7 @@ public class EclipseProfile implements UMLProfile {
     }
 
     @Override
-    public UMLStereotype stereotype(String name) {
+    public UMLStereotype createChildStereotype(String name) {
 
         if (stereotypes.stream().anyMatch(s -> name.equals(s.name()))) {
             throw new ModelElementCreationException("Stereotype with name " + name + " already exists!");
@@ -64,12 +65,7 @@ public class EclipseProfile implements UMLProfile {
 
         Stereotype stereotype = profile.createOwnedStereotype(name, false);
 
-        return new EclipseStereotype(stereotype, resourceSet, primitiveTypes);
-    }
-
-    @Override
-    public void addStereotype(UMLStereotype ... stereotypeList) {
-        this.stereotypes.addAll(Arrays.asList(stereotypeList));
+        return new EclipseStereotype(stereotype, eclipseRepresentation, primitiveTypes);
     }
 
     @Override
@@ -85,7 +81,7 @@ public class EclipseProfile implements UMLProfile {
     @Override
     public void save(File file) {
 
-        Model umlMetamodel = (Model) load(URI.createURI(UMLResource.UML_METAMODEL_URI));
+        Model umlMetamodel = (Model) eclipseRepresentation.load(URI.createURI(UMLResource.UML_METAMODEL_URI));
 
         org.eclipse.uml2.uml.Class metaclass = (org.eclipse.uml2.uml.Class) umlMetamodel.getOwnedType(UMLPackage.Literals.PROPERTY.getName());
         profile.createMetaclassReference(metaclass);
@@ -100,7 +96,7 @@ public class EclipseProfile implements UMLProfile {
 
         profile.define();
 
-        Resource resource = resourceSet.createResource(URI.createFileURI(file.getAbsolutePath()));
+        Resource resource = eclipseRepresentation.resourceSet().createResource(URI.createFileURI(file.getAbsolutePath()));
         resource.getContents().add(profile);
 
         // And save.
@@ -111,14 +107,4 @@ public class EclipseProfile implements UMLProfile {
         }
     }
 
-    private org.eclipse.uml2.uml.Package load(URI uri) {
-        try {
-            Resource resource = resourceSet.getResource(uri, true);
-            return (org.eclipse.uml2.uml.Package) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.PACKAGE);
-        } catch (WrappedException we) {
-            we.printStackTrace();
-        }
-
-        return null;
-    }
 }

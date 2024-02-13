@@ -12,23 +12,17 @@ public class TestUMLModel {
     @Test
     public void testProfileCreation() throws IOException {
         UMLModel model = new EclipseModel();
-        UMLProfile profile = model.profile("MyProfile","https://www.modeldriven.hu/schemas/myprofile");
+        UMLProfile profile = model.createProfile("MyProfile","https://www.modeldriven.hu/schemas/myprofile");
 
-        UMLStereotype stereotype1 = profile.stereotype("Stereotype1");
+        UMLStereotype stereotype1 = profile.createChildStereotype("Stereotype1");
 
-        UMLProperty someString = stereotype1.property("someString", UMLPropertyType.String);
-        UMLProperty someBoolean = stereotype1.property("someBoolean", UMLPropertyType.Boolean);
+        stereotype1.createChildProperty("someString", UMLPropertyType.String);
+        stereotype1.createChildProperty("someBoolean", UMLPropertyType.Boolean);
 
-        stereotype1.addProperty(someString, someBoolean);
-
-        UMLStereotype stereotype2 = profile.stereotype("Stereotype2");
-        UMLProperty someInt = stereotype2.property("someInt", UMLPropertyType.Integer);
-        UMLProperty someReal = stereotype2.property("someReal", UMLPropertyType.Real);
-        UMLProperty someNatural = stereotype2.property("someNatural", UMLPropertyType.UnlimitedNatural);
-
-        stereotype2.addProperty(someInt, someReal, someNatural);
-
-        profile.addStereotype(stereotype1, stereotype2);
+        UMLStereotype stereotype2 = profile.createChildStereotype("Stereotype2");
+        stereotype2.createChildProperty("someInt", UMLPropertyType.Integer);
+        stereotype2.createChildProperty("someReal", UMLPropertyType.Real);
+        stereotype2.createChildProperty("someNatural", UMLPropertyType.UnlimitedNatural);
 
         File temporaryFile = File.createTempFile("testProfile","profile.uml");
         profile.save(temporaryFile);

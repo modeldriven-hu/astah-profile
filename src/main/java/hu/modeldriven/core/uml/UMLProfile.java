@@ -13,9 +13,7 @@ public interface UMLProfile {
 
     void modifyUri(String uri);
 
-    UMLStereotype stereotype(String name);
-
-    void addStereotype(UMLStereotype ... stereotypeList);
+    UMLStereotype createChildStereotype(String name);
 
     void removeStereotype(UMLStereotype stereotype);
 
