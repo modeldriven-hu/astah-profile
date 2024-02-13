@@ -3,10 +3,15 @@ package hu.modeldriven.core.uml.impl;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLStereotype;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Stereotype;
+import org.eclipse.uml2.uml.UMLPackage;
+import org.eclipse.uml2.uml.resource.UMLResource;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,7 +84,22 @@ public class EclipseProfile implements UMLProfile {
 
     @Override
     public void save(File file) {
+
+        Model umlMetamodel = (Model) load(URI.createURI(UMLResource.UML_METAMODEL_URI));
+
+        org.eclipse.uml2.uml.Class metaclass = (org.eclipse.uml2.uml.Class) umlMetamodel.getOwnedType(UMLPackage.Literals.PROPERTY.getName());
+        profile.createMetaclassReference(metaclass);
+
+        List<Stereotype> stereotypeList = new ArrayList<>();
+
+        for (Stereotype stereotype : profile.getOwnedStereotypes()) {
+            stereotypeList.add(stereotype);
+        }
+
+        stereotypeList.forEach(stereotype -> stereotype.createExtension(metaclass, false));
+
         profile.define();
+
         Resource resource = resourceSet.createResource(URI.createFileURI(file.getAbsolutePath()));
         resource.getContents().add(profile);
 
@@ -89,5 +109,16 @@ public class EclipseProfile implements UMLProfile {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+    }
+
+    private org.eclipse.uml2.uml.Package load(URI uri) {
+        try {
+            Resource resource = resourceSet.getResource(uri, true);
+            return (org.eclipse.uml2.uml.Package) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.PACKAGE);
+        } catch (WrappedException we) {
+            we.printStackTrace();
+        }
+
+        return null;
     }
 }
