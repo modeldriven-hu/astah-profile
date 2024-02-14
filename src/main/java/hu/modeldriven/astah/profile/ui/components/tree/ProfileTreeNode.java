@@ -3,6 +3,7 @@ package hu.modeldriven.astah.profile.ui.components.tree;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLStereotype;
 
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,10 +12,12 @@ import java.util.List;
 
 public class ProfileTreeNode implements TreeNode {
 
+    private final DefaultTreeModel treeModel;
     private final UMLProfile profile;
 
-    public ProfileTreeNode(UMLProfile profile){
-        this.profile = profile;
+    public ProfileTreeNode(DefaultTreeModel treeModel, UMLProfile profile){
+        this.treeModel = treeModel;
+        this.profile = new UMLProfileWrapper(this, profile);
     }
 
     public UMLProfile profile(){
@@ -78,5 +81,9 @@ public class ProfileTreeNode implements TreeNode {
         }
 
         return Collections.enumeration(result);
+    }
+
+    public void notifyChanged() {
+        treeModel.nodeChanged(this);
     }
 }

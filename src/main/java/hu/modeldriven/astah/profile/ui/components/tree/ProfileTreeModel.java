@@ -7,7 +7,8 @@ import javax.swing.tree.DefaultTreeModel;
 public class ProfileTreeModel extends DefaultTreeModel {
 
     public ProfileTreeModel(UMLProfile profile) {
-        super(new ProfileTreeNode(profile));
+        super(null);
+        this.setRoot(new ProfileTreeNode(this, profile));
     }
 
 }
