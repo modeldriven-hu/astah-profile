@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_b41lAMsAEe6i-NRl8gFxXg" name="MyProfile" URI="https://www.modeldriven.hu/schemas/myprofile" metaclassReference="_b42MFMsAEe6i-NRl8gFxXg _b42MFcsAEe6i-NRl8gFxXg">
+  <eAnnotations xmi:id="_b41lAcsAEe6i-NRl8gFxXg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_b41lAssAEe6i-NRl8gFxXg" name="MyProfile" nsURI="https://www.modeldriven.hu/schemas/myprofile" nsPrefix="MyProfile">
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_b41lA8sAEe6i-NRl8gFxXg" name="Stereotype1">
+        <eAnnotations xmi:id="_b41lBMsAEe6i-NRl8gFxXg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_b42MFssAEe6i-NRl8gFxXg"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_b41lBcsAEe6i-NRl8gFxXg" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_b41lB8sAEe6i-NRl8gFxXg" name="someString" ordered="false">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//String"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_b41lCcsAEe6i-NRl8gFxXg" name="someBoolean" ordered="false">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_b41lC8sAEe6i-NRl8gFxXg" name="Stereotype2">
+        <eAnnotations xmi:id="_b41lDMsAEe6i-NRl8gFxXg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_b42MIMsAEe6i-NRl8gFxXg"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_b41lDcsAEe6i-NRl8gFxXg" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/5.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_b41lD8sAEe6i-NRl8gFxXg" name="someInt" ordered="false">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_b41lEcsAEe6i-NRl8gFxXg" name="someReal" ordered="false">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//Real"/>
+        </eStructuralFeatures>
+        <eStructuralFeatures xmi:type="ecore:EAttribute" xmi:id="_b41lE8sAEe6i-NRl8gFxXg" name="someNatural" ordered="false">
+          <eType xmi:type="ecore:EDataType" href="http://www.eclipse.org/uml2/5.0.0/Types#//UnlimitedNatural"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+    </contents>
+  </eAnnotations>
+  <elementImport xmi:id="_b41lFcsAEe6i-NRl8gFxXg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_b42MEMsAEe6i-NRl8gFxXg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+  </elementImport>
+  <elementImport xmi:id="_b42MEcsAEe6i-NRl8gFxXg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_b42MEssAEe6i-NRl8gFxXg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_b42ME8sAEe6i-NRl8gFxXg">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <elementImport xmi:id="_b42MFMsAEe6i-NRl8gFxXg">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+  </elementImport>
+  <elementImport xmi:id="_b42MFcsAEe6i-NRl8gFxXg">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_b42MFssAEe6i-NRl8gFxXg" name="Stereotype1">
+    <ownedAttribute xmi:id="_b42MF8sAEe6i-NRl8gFxXg" name="base_Class" association="_b42MHssAEe6i-NRl8gFxXg">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_b42MGMsAEe6i-NRl8gFxXg" name="someString">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_b42MGcsAEe6i-NRl8gFxXg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_b42MGssAEe6i-NRl8gFxXg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_b42MG8sAEe6i-NRl8gFxXg" name="someBoolean">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_b42MHMsAEe6i-NRl8gFxXg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_b42MHcsAEe6i-NRl8gFxXg" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_b42MHssAEe6i-NRl8gFxXg" name="Class_Stereotype1" memberEnd="_b42MH8sAEe6i-NRl8gFxXg _b42MF8sAEe6i-NRl8gFxXg">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_b42MH8sAEe6i-NRl8gFxXg" name="extension_Stereotype1" type="_b42MFssAEe6i-NRl8gFxXg" aggregation="composite" association="_b42MHssAEe6i-NRl8gFxXg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_b42MIMsAEe6i-NRl8gFxXg" name="Stereotype2">
+    <ownedAttribute xmi:id="_b42MIcsAEe6i-NRl8gFxXg" name="base_Class" association="_b42MK8sAEe6i-NRl8gFxXg">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_b42MIssAEe6i-NRl8gFxXg" name="someInt">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_b42MI8sAEe6i-NRl8gFxXg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_b42MJMsAEe6i-NRl8gFxXg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_b42MJcsAEe6i-NRl8gFxXg" name="someReal">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_b42MJssAEe6i-NRl8gFxXg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_b42MJ8sAEe6i-NRl8gFxXg" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_b42MKMsAEe6i-NRl8gFxXg" name="someNatural">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_b42MKcsAEe6i-NRl8gFxXg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_b42MKssAEe6i-NRl8gFxXg" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_b42MK8sAEe6i-NRl8gFxXg" name="Class_Stereotype2" memberEnd="_b42MLMsAEe6i-NRl8gFxXg _b42MIcsAEe6i-NRl8gFxXg">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_b42MLMsAEe6i-NRl8gFxXg" name="extension_Stereotype2" type="_b42MIMsAEe6i-NRl8gFxXg" aggregation="composite" association="_b42MK8sAEe6i-NRl8gFxXg"/>
+  </packagedElement>
+</uml:Profile>

@@ -7,6 +7,9 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 
 public class TestUMLModel {
 
@@ -17,6 +20,17 @@ public class TestUMLModel {
     public void before() {
         this.model = new EclipseModel();
         this.profile = model.createProfile("MyProfile", "https://www.modeldriven.hu/schemas/myprofile");
+    }
+
+    @Test
+    public void testLoadProfile() throws URISyntaxException, ProfileCreationFailedException {
+
+        URL resource = getClass().getClassLoader().getResource("test.profile.uml");
+        File file = Paths.get(resource.toURI()).toFile();
+
+        UMLProfile loadedProfile = model.createProfile(file);
+
+        Assert.assertEquals(2, loadedProfile.stereotypes().size());
     }
 
     @Test
@@ -37,6 +51,8 @@ public class TestUMLModel {
         File temporaryFile = File.createTempFile("testProfile", "profile.uml");
         profile.save(temporaryFile);
     }
+
+
 
     @Test
     public void testChangeProfileName() {
