@@ -39,7 +39,7 @@ public class EclipseStereotype implements UMLStereotype {
 
     @Override
     public void modifyMetaClass(UMLMetaClass metaClass) {
-        metaClasses.applyMetaClass(this.stereotype, metaClass);
+        metaClasses.setMetaClass(this.stereotype, metaClass);
     }
 
     @Override

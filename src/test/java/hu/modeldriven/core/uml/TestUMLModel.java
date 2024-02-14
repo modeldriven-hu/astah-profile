@@ -80,9 +80,31 @@ public class TestUMLModel {
     }
 
     @Test
-    public void testChangeStereotypeMetaClass() {
+    public void testStereotypeDefaultMetaClass() {
         UMLStereotype stereotype = profile.createChildStereotype("Stereotype1");
         Assert.assertEquals(UMLMetaClass.CLASS, stereotype.metaClass());
+    }
+
+    @Test
+    public void testChangeToSameMetaClass() {
+        UMLStereotype stereotype = profile.createChildStereotype("Stereotype1");
+
+        stereotype.modifyMetaClass(UMLMetaClass.CLASS);
+        Assert.assertEquals(UMLMetaClass.CLASS, stereotype.metaClass());
+
+        stereotype.modifyMetaClass(UMLMetaClass.CLASS);
+        Assert.assertEquals(UMLMetaClass.CLASS, stereotype.metaClass());
+    }
+
+    @Test
+    public void testChangeToDifferentMetaClass() {
+        UMLStereotype stereotype = profile.createChildStereotype("Stereotype1");
+
+        stereotype.modifyMetaClass(UMLMetaClass.CLASS);
+        Assert.assertEquals(UMLMetaClass.CLASS, stereotype.metaClass());
+
+        stereotype.modifyMetaClass(UMLMetaClass.PROPERTY);
+        Assert.assertEquals(UMLMetaClass.PROPERTY, stereotype.metaClass());
     }
 
     @Test

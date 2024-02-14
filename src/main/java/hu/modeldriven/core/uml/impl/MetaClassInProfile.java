@@ -29,39 +29,31 @@ public class MetaClassInProfile {
         this.metaClassMap.put(metaClass, classMetaClass);
     }
 
-    public void applyMetaClass(Stereotype stereotype, UMLMetaClass metaClass) {
-        // FIXME you cannot add extensions two times to a stereotype!
-        // destroyExtension
+    public void setMetaClass(Stereotype stereotype, UMLMetaClass metaClass) {
+        removeAllExtensions(stereotype);
         stereotype.createExtension(metaClassMap.get(metaClass), false);
     }
 
     private void removeAllExtensions(Stereotype stereotype) {
-        org.eclipse.uml2.uml.Class metaclass = null;
-        Profile profile = stereotype.getProfile();
-        if (metaclass != null && profile != null) {
-            for (Extension ext : profile.getOwnedExtensions(false)) {
-                if (ext.getMetaclass() == metaclass && ext.getEndTypes().contains(stereotype)) {
-                    for (Property p : stereotype.getAttributes()) {
-                        Association assoc = p.getAssociation();
-                        if (assoc != null && assoc == ext) {
-                            // additional cleanup needed, because
-                            // this would not be removed by ext.destroy():
-                            p.destroy();
-                            break;
-                        }
+        for (Extension extension :  stereotype.getProfile().getOwnedExtensions(false)) {
+            if (extension.getEndTypes().contains(stereotype)) {
+                for (Property property : stereotype.getAttributes()) {
+                    Association assoc = property.getAssociation();
+                    if (assoc != null && assoc == extension) {
+                        // additional cleanup needed, because
+                        // this would not be removed by ext.destroy():
+                        property.destroy();
+                        break;
                     }
-                    // remove base class by destroying the extension
-                    ext.destroy();
-                    break;
                 }
+                // remove base class by destroying the extension
+                extension.destroy();
+                break;
             }
         }
     }
 
     public UMLMetaClass metaClass(Stereotype stereotype) {
-
-        Profile profile = stereotype.getProfile();
-
         for (Extension extension : profile.getOwnedExtensions(false)) {
             if (extension.getEndTypes().contains(stereotype)) {
                 for (Map.Entry<UMLMetaClass, org.eclipse.uml2.uml.Class> mapEntry : metaClassMap.entrySet()) {
