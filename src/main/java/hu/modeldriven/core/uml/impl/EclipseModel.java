@@ -28,12 +28,12 @@ public class EclipseModel implements UMLModel {
             org.eclipse.uml2.uml.Package rootPackage = (org.eclipse.uml2.uml.Package) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.PACKAGE);
 
             if (rootPackage instanceof Profile) {
-                return new EclipseProfile((Profile)rootPackage, eclipseRepresentation);
+                return new EclipseProfile((Profile) rootPackage, eclipseRepresentation);
             }
 
             throw new WrappedException(new IllegalArgumentException("File contains a package, but it is not a profile!"));
 
-        } catch (WrappedException e){
+        } catch (WrappedException e) {
             throw new ProfileCreationFailedException(e);
         }
     }

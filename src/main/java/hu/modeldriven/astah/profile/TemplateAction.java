@@ -11,6 +11,7 @@ import javax.swing.*;
 
 public class TemplateAction implements IPluginActionDelegate {
 
+    @Override
     public Object run(IWindow window) throws UnExpectedException {
         try {
             AstahAPI api = AstahAPI.getAstahAPI();

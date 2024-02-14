@@ -6,10 +6,12 @@ import org.osgi.framework.BundleContext;
 
 public class Activator implements BundleActivator {
 
+    @Override
     public void start(BundleContext context) {
         // Nothing to do here
     }
 
+    @Override
     public void stop(BundleContext context) {
         // Nothing to do here
     }

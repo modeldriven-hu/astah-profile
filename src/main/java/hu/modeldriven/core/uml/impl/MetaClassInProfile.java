@@ -35,7 +35,7 @@ public class MetaClassInProfile {
     }
 
     private void removeAllExtensions(Stereotype stereotype) {
-        for (Extension extension :  stereotype.getProfile().getOwnedExtensions(false)) {
+        for (Extension extension : stereotype.getProfile().getOwnedExtensions(false)) {
             if (extension.getEndTypes().contains(stereotype)) {
                 for (Property property : stereotype.getAttributes()) {
                     Association assoc = property.getAssociation();

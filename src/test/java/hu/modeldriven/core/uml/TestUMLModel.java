@@ -45,14 +45,12 @@ public class TestUMLModel {
         stereotype2.createChildProperty("someReal", UMLPropertyType.REAL);
         stereotype2.createChildProperty("someNatural", UMLPropertyType.UNLIMITED_NATURAL);
 
-        Assert.assertTrue(profile.stereotypes().stream().anyMatch(s -> s.name().equals("Stereotype1")));
-        Assert.assertTrue(profile.stereotypes().stream().anyMatch(s -> s.name().equals("Stereotype2")));
+        Assert.assertTrue(profile.stereotypes().stream().anyMatch(s -> "Stereotype1".equals(s.name())));
+        Assert.assertTrue(profile.stereotypes().stream().anyMatch(s -> "Stereotype2".equals(s.name())));
 
         File temporaryFile = File.createTempFile("testProfile", "profile.uml");
         profile.save(temporaryFile);
     }
-
-
 
     @Test
     public void testChangeProfileName() {
