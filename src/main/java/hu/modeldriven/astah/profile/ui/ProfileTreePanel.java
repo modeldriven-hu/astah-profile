@@ -1,20 +1,28 @@
 package hu.modeldriven.astah.profile.ui;
 
 import hu.modeldriven.astah.profile.ui.components.tree.ProfileTreeLabelRenderer;
-import hu.modeldriven.astah.profile.ui.event.LoadProfileRequestedEvent;
-import hu.modeldriven.astah.profile.ui.event.NewProfileRequestedEvent;
-import hu.modeldriven.astah.profile.ui.event.SaveProfileRequestedEvent;
+import hu.modeldriven.astah.profile.ui.components.tree.ProfileTreeNode;
+import hu.modeldriven.astah.profile.ui.components.tree.PropertyTreeNode;
+import hu.modeldriven.astah.profile.ui.components.tree.StereotypeTreeNode;
+import hu.modeldriven.astah.profile.ui.event.*;
 import hu.modeldriven.astah.profile.ui.usecase.CreateNewProfileUseCase;
 import hu.modeldriven.astah.profile.ui.usecase.DisplayExceptionUseCase;
 import hu.modeldriven.astah.profile.ui.usecase.InitTreeUseCase;
 import hu.modeldriven.astah.profile.ui.usecase.LoadProfileUseCase;
 import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.uml.UMLModel;
+import hu.modeldriven.core.uml.UMLProfile;
+import hu.modeldriven.core.uml.UMLProperty;
+import hu.modeldriven.core.uml.UMLStereotype;
 import hu.modeldriven.core.uml.impl.EclipseModel;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.swing.FontIcon;
 
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 
 public class ProfileTreePanel extends AbstractProfileTreePanel {
 
@@ -36,6 +44,31 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
     private void initUIComponents() {
 
         this.tree.setCellRenderer(new ProfileTreeLabelRenderer());
+
+        this.tree.addTreeSelectionListener(new TreeSelectionListener(){
+
+            @Override
+            public void valueChanged(TreeSelectionEvent treeSelectionEvent) {
+                TreeNode node = (TreeNode)tree.getLastSelectedPathComponent();
+
+                if (node == null){
+                    return;
+                }
+
+                if (node instanceof ProfileTreeNode){
+                    eventBus.publish(new ProfileSelectedEvent(((ProfileTreeNode) node).profile()));
+                }
+
+                if (node instanceof StereotypeTreeNode){
+                    eventBus.publish(new StereotypeSelectedEvent(((StereotypeTreeNode) node).stereotype()));
+                }
+
+                if (node instanceof PropertyTreeNode){
+                    eventBus.publish(new PropertySelectedEvent(((PropertyTreeNode) node).property()));
+                }
+
+            }
+        });
 
         newButton.setIcon(FontIcon.of(
                 MaterialDesign.MDI_FILE,

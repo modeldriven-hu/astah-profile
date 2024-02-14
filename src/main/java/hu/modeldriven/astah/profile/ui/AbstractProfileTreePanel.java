@@ -31,6 +31,7 @@ public class AbstractProfileTreePanel extends JPanel {
         toolBar.setRollover(true);
 
         tree = new JTree();
+        tree.setShowsRootHandles(true);
         treeScrollPane = new JScrollPane(tree);
 
         table = new JTable();
