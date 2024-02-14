@@ -5,7 +5,6 @@
 		<profile>
 			<id>osx</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
 				<os>
 					<name>mac</name>
 				</os>
@@ -17,6 +16,7 @@
 		<profile>
 			<id>linux</id>
 			<activation>
+				<activeByDefault>true</activeByDefault>
 				<os>
 					<name>unix</name>
 				</os>
@@ -32,6 +32,8 @@
 		<plugin.install>true</plugin.install>
 		<astah.version>1.1</astah.version>
 		<astah.edition>sysml</astah.edition>
+		<flatlaf.version>2.0.1</flatlaf.version>
+		<ikonli.version>2.6.0</ikonli.version>
 	</properties>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>hu.modeldriven</groupId>
@@ -271,6 +273,29 @@
 			<artifactId>junit</artifactId>
 			<version>4.13.2</version>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf</artifactId>
+			<version>${flatlaf.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.formdev</groupId>
+			<artifactId>flatlaf-intellij-themes</artifactId>
+			<version>${flatlaf.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-swing</artifactId>
+			<version>${ikonli.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.kordamp.ikonli</groupId>
+			<artifactId>ikonli-materialdesign-pack</artifactId>
+			<version>${ikonli.version}</version>
 		</dependency>
 
 		<dependency>

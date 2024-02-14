@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
-    <extension point="com.change_vision.astah.ui.actionSets">
-        <actionSet
-                label="%action_set_label"
-                visible="true"
-                id="hu.modeldriven.astah-profile.actionSet">
-            <menu
-                    id="astah-profile"
-                    label="%menu_group"
-                    path="tool/astah-profile">
-            </menu>
-            <action
-                    label="%menu_label"
-                    icon="icons/sample.gif"
-                    class="hu.modeldriven.astah.profile.TemplateAction"
-                    tooltip="%menu_tooltip"
-                    menubarPath="tool/astah-profile/"
-                    id="astah-profile">
-            </action>
-        </actionSet>
+    <extension point="com.change_vision.astah.ui.view">
+        <view
+                id="hu.modeldriven.astah-profile.ProfileBrowserView"
+                type="tabView"
+                class="hu.modeldriven.astah.profile.ProfileBrowserView"/>
     </extension>
 </plugin>
