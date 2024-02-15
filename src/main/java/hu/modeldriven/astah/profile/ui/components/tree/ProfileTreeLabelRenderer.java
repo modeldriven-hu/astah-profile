@@ -10,8 +10,16 @@ import java.awt.Component;
 
 public class ProfileTreeLabelRenderer extends DefaultTreeCellRenderer {
 
+    private final Icon profileIcon;
+    private final Icon stereotypeIcon;
+
+    private final Icon propertyIcon;
+
     public ProfileTreeLabelRenderer() {
         super();
+        this.profileIcon = new ImageIcon(getClass().getResource("/icons/Profile.gif"));
+        this.stereotypeIcon = new ImageIcon(getClass().getResource("/icons/Stereotype.gif"));
+        this.propertyIcon = new ImageIcon(getClass().getResource("/icons/Property.gif"));
     }
 
     public Component getTreeCellRendererComponent(JTree tree, Object value,
@@ -24,17 +32,20 @@ public class ProfileTreeLabelRenderer extends DefaultTreeCellRenderer {
 
         if (value instanceof ProfileTreeNode){
             UMLProfile profile = ((ProfileTreeNode) value).profile();
-            this.setText("" + profile.name() + ", " +profile.uri() );
+            this.setText(profile.name() + " " +profile.uri() );
+            this.setIcon(profileIcon);
         }
 
         if (value instanceof StereotypeTreeNode){
             UMLStereotype stereotype = ((StereotypeTreeNode) value).stereotype();
-            this.setText("<S> " + stereotype.name() + " : " + stereotype.metaClass().label() );
+            this.setText(stereotype.name() + " : " + stereotype.metaClass().label() );
+            this.setIcon(stereotypeIcon);
         }
 
         if (value instanceof PropertyTreeNode){
             UMLProperty property = ((PropertyTreeNode) value).property();
-            this.setText("<P> " + property.name() + " : " + property.type().label() );
+            this.setText(property.name() + " : " + property.type().label() );
+            this.setIcon(propertyIcon);
         }
 
         return this;
