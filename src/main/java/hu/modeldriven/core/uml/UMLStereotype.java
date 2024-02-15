@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface UMLStereotype {
 
+    String id();
+
     String name();
 
     void modifyName(String name);

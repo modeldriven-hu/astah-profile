@@ -1,5 +1,6 @@
-package hu.modeldriven.astah.profile.ui.components.tree;
+package hu.modeldriven.astah.profile.ui.components.tree.wrapper;
 
+import hu.modeldriven.astah.profile.ui.components.tree.ProfileTreeNode;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLStereotype;
 

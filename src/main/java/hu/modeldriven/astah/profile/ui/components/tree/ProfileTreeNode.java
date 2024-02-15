@@ -1,5 +1,6 @@
 package hu.modeldriven.astah.profile.ui.components.tree;
 
+import hu.modeldriven.astah.profile.ui.components.tree.wrapper.UMLProfileWrapper;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLStereotype;
 
@@ -26,7 +27,7 @@ public class ProfileTreeNode implements TreeNode {
 
     @Override
     public TreeNode getChildAt(int i) {
-        return new StereotypeTreeNode(this, profile.stereotypes().get(i));
+        return new StereotypeTreeNode(this, treeModel, profile.stereotypes().get(i));
     }
 
     @Override
@@ -53,7 +54,7 @@ public class ProfileTreeNode implements TreeNode {
             UMLStereotype umlStereotype = stereotypeTreeNode.stereotype();
 
             for (int i = 0; i < stereotypeList.size(); i++) {
-                if (umlStereotype.equals(stereotypeList.get(i))){
+                if (umlStereotype.id().equals(stereotypeList.get(i).id())){
                     return i;
                 }
             }
@@ -77,7 +78,7 @@ public class ProfileTreeNode implements TreeNode {
         List<StereotypeTreeNode> result = new ArrayList<>();
 
         for (UMLStereotype stereotype : this.profile.stereotypes()){
-            result.add(new StereotypeTreeNode(this, stereotype));
+            result.add(new StereotypeTreeNode(this, treeModel, stereotype));
         }
 
         return Collections.enumeration(result);

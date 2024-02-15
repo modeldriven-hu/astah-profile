@@ -1,12 +1,14 @@
 package hu.modeldriven.astah.profile.ui.usecase;
 
 import hu.modeldriven.astah.profile.ui.components.table.ProfileTableModel;
+import hu.modeldriven.astah.profile.ui.components.table.StereotypeTableModel;
 import hu.modeldriven.astah.profile.ui.event.ProfileSelectedEvent;
 import hu.modeldriven.astah.profile.ui.event.PropertySelectedEvent;
 import hu.modeldriven.astah.profile.ui.event.StereotypeSelectedEvent;
 import hu.modeldriven.core.eventbus.Event;
 import hu.modeldriven.core.eventbus.EventHandler;
 import hu.modeldriven.core.uml.UMLProfile;
+import hu.modeldriven.core.uml.UMLStereotype;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -25,10 +27,19 @@ public class DisplayTableOnSelectionUseCase implements EventHandler<Event> {
         if (event instanceof ProfileSelectedEvent) {
             handleProfileSelected(((ProfileSelectedEvent) event).profile());
         }
+
+        if (event instanceof StereotypeSelectedEvent){
+            handleStereotypeSelected(((StereotypeSelectedEvent)event).stereotype());
+        }
     }
 
     private void handleProfileSelected(UMLProfile profile) {
         ProfileTableModel tableModel = new ProfileTableModel(profile);
+        table.setModel(tableModel);
+    }
+
+    private void handleStereotypeSelected(UMLStereotype stereotype) {
+        StereotypeTableModel tableModel = new StereotypeTableModel(stereotype);
         table.setModel(tableModel);
     }
 

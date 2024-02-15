@@ -4,27 +4,36 @@ import hu.modeldriven.core.uml.UMLMetaClass;
 import hu.modeldriven.core.uml.UMLProperty;
 import hu.modeldriven.core.uml.UMLPropertyType;
 import hu.modeldriven.core.uml.UMLStereotype;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class EclipseStereotype implements UMLStereotype {
 
+    private final String id;
     private final Stereotype stereotype;
     private final PrimitiveTypesInProfile primitiveTypes;
     private final MetaClassInProfile metaClasses;
 
     public EclipseStereotype(Stereotype stereotype, PrimitiveTypesInProfile primitiveTypes, MetaClassInProfile metaClasses) {
+        this.id = EcoreUtil.getIdentification(stereotype);
         this.stereotype = stereotype;
         this.primitiveTypes = primitiveTypes;
         this.metaClasses = metaClasses;
     }
 
     @Override
+    public String id() {
+        return this.id;
+    }
+
+    @Override
     public String name() {
-        return stereotype.getName();
+        return this.stereotype.getName();
     }
 
     @Override
@@ -34,7 +43,7 @@ public class EclipseStereotype implements UMLStereotype {
 
     @Override
     public UMLMetaClass metaClass() {
-        return metaClasses.metaClass(stereotype);
+        return this.metaClasses.metaClass(stereotype);
     }
 
     @Override
