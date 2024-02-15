@@ -6,6 +6,8 @@ import hu.modeldriven.core.eventbus.Event;
 import hu.modeldriven.core.eventbus.EventHandler;
 
 import javax.swing.*;
+import javax.swing.event.TreeModelEvent;
+import javax.swing.event.TreeModelListener;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +23,28 @@ public class InitTreeUseCase implements EventHandler<ProfileAvailableEvent> {
     public void handleEvent(ProfileAvailableEvent event) {
         ProfileTreeModel treeModel = new ProfileTreeModel(event.profile());
         tree.setModel(treeModel);
+        treeModel.addTreeModelListener(new TreeModelListener(){
+
+            @Override
+            public void treeNodesChanged(TreeModelEvent treeModelEvent) {
+                // Do nothing
+            }
+
+            @Override
+            public void treeNodesInserted(TreeModelEvent treeModelEvent) {
+                // Do nothing
+            }
+
+            @Override
+            public void treeNodesRemoved(TreeModelEvent treeModelEvent) {
+                // Do nothing
+            }
+
+            @Override
+            public void treeStructureChanged(TreeModelEvent treeModelEvent) {
+                tree.expandPath(treeModelEvent.getTreePath());
+            }
+        });
     }
 
     @Override

@@ -95,4 +95,5 @@ public class StereotypeTreeNode implements TreeNode {
     public void notifyStructureChanged() {
         treeModel.nodeStructureChanged(this);
     }
+
 }
