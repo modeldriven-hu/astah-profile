@@ -18,13 +18,13 @@ import java.util.List;
 
 public class LoadProfileUseCase implements EventHandler<LoadProfileRequestedEvent> {
 
-    private final Component parentComponent;
     private final EventBus eventBus;
+    private final Component parentComponent;
     private final UMLModel model;
 
-    public LoadProfileUseCase(Component parentComponent, EventBus eventBus, UMLModel model){
-        this.parentComponent = parentComponent;
+    public LoadProfileUseCase(EventBus eventBus, Component parentComponent, UMLModel model){
         this.eventBus = eventBus;
+        this.parentComponent = parentComponent;
         this.model = model;
     }
 

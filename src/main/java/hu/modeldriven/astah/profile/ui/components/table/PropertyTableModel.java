@@ -1,22 +1,28 @@
 package hu.modeldriven.astah.profile.ui.components.table;
 
-import hu.modeldriven.core.uml.UMLProfile;
+import hu.modeldriven.core.uml.UMLMetaClass;
+import hu.modeldriven.core.uml.UMLProperty;
+import hu.modeldriven.core.uml.UMLPropertyType;
+import hu.modeldriven.core.uml.UMLStereotype;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileTableModel extends AbstractTableModel {
+public class PropertyTableModel extends AbstractTableModel {
 
-    private final UMLProfile profile;
+    private final UMLProperty property;
 
     private final List<FieldRow<String>> fields;
 
-    public ProfileTableModel(UMLProfile profile){
-        this.profile = profile;
+    public PropertyTableModel(UMLProperty property){
+        this.property = property;
         this.fields = new ArrayList<>();
-        this.fields.add(new FieldRow<>("name", profile::name, profile::modifyName ));
-        this.fields.add(new FieldRow<>("uri", profile::uri, profile::modifyUri ));
+        this.fields.add(new FieldRow<>("name", property::name, property::modifyName ));
+        this.fields.add(new FieldRow<>("type", () -> property.type().label(), s -> {
+            UMLPropertyType newType = UMLPropertyType.propertyType(s);
+            property.modifyType(newType);
+        }));
     }
 
     @Override
@@ -62,6 +68,7 @@ public class ProfileTableModel extends AbstractTableModel {
             default:
                 return null;
         }
+
     }
 
     @Override

@@ -1,18 +1,23 @@
 package hu.modeldriven.astah.profile.ui.components.tree;
 
+import hu.modeldriven.astah.profile.ui.components.tree.wrapper.UMLPropertyWrapper;
 import hu.modeldriven.core.uml.UMLProperty;
 
+import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import java.util.Enumeration;
 
 public class PropertyTreeNode implements TreeNode {
 
     private final StereotypeTreeNode parent;
+
+    private final DefaultTreeModel treeModel;
     private final UMLProperty property;
 
-    public PropertyTreeNode(StereotypeTreeNode parent, UMLProperty property) {
+    public PropertyTreeNode(StereotypeTreeNode parent, DefaultTreeModel treeModel, UMLProperty property) {
         this.parent = parent;
-        this.property = property;
+        this.treeModel = treeModel;
+        this.property = new UMLPropertyWrapper(this, property);
     }
 
     public UMLProperty property() {
@@ -54,4 +59,7 @@ public class PropertyTreeNode implements TreeNode {
         return null;
     }
 
+    public void notifyChanged() {
+        treeModel.nodeChanged(this);
+    }
 }

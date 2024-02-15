@@ -2,16 +2,26 @@ package hu.modeldriven.core.uml.impl;
 
 import hu.modeldriven.core.uml.UMLProperty;
 import hu.modeldriven.core.uml.UMLPropertyType;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Property;
+
+import java.util.UUID;
 
 public class EclipseProperty implements UMLProperty {
 
+    private final String id;
     private final Property property;
     private final PrimitiveTypesInProfile primitiveTypes;
 
     public EclipseProperty(Property property, PrimitiveTypesInProfile primitiveTypes) {
+        this.id = EcoreUtil.getIdentification(property);
         this.property = property;
         this.primitiveTypes = primitiveTypes;
+    }
+
+    @Override
+    public String id() {
+        return this.id;
     }
 
     @Override

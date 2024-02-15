@@ -12,12 +12,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-public class CreateNewProfileUseCase implements EventHandler<NewProfileRequestedEvent> {
+public class CreateProfileUseCase implements EventHandler<NewProfileRequestedEvent> {
 
     private final EventBus eventBus;
     private final UMLModel model;
 
-    public CreateNewProfileUseCase(EventBus eventBus, UMLModel model) {
+    public CreateProfileUseCase(EventBus eventBus, UMLModel model) {
         this.eventBus = eventBus;
         this.model = model;
     }

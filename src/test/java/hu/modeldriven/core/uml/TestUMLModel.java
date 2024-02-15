@@ -148,6 +148,16 @@ public class TestUMLModel {
         Assert.assertEquals(UMLPropertyType.BOOLEAN, newProperty.type());
     }
 
+
+    @Test
+    public void testRemoveMultipleProperty() {
+        UMLStereotype stereotype = profile.createChildStereotype("Stereotype");
+        UMLProperty property1 = stereotype.createChildProperty("name1", UMLPropertyType.STRING);
+        UMLProperty property2 = stereotype.createChildProperty("name2", UMLPropertyType.STRING);
+
+        stereotype.removeProperty(property2);
+        stereotype.removeProperty(property1);
+    }
     @Test
     public void testChangePropertyName() {
         UMLStereotype stereotype = profile.createChildStereotype("Stereotype");

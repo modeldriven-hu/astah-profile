@@ -1,5 +1,7 @@
 package hu.modeldriven.core.uml;
 
+import java.util.Arrays;
+
 public enum UMLMetaClass {
     CLASS("Class"), PROPERTY("Property"), UNKNOWN("Unknown");
 
@@ -12,4 +14,12 @@ public enum UMLMetaClass {
     public String label() {
         return label;
     }
+
+    public static UMLMetaClass metaClass(String label){
+        return Arrays.stream(UMLMetaClass.values())
+                .filter(meta -> meta.label().equals(label))
+                .findFirst()
+                .orElse(null);
+    }
+
 }

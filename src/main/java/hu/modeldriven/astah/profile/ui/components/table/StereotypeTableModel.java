@@ -1,22 +1,26 @@
 package hu.modeldriven.astah.profile.ui.components.table;
 
-import hu.modeldriven.core.uml.UMLProfile;
+import hu.modeldriven.core.uml.UMLMetaClass;
+import hu.modeldriven.core.uml.UMLStereotype;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileTableModel extends AbstractTableModel {
+public class StereotypeTableModel extends AbstractTableModel {
 
-    private final UMLProfile profile;
+    private final UMLStereotype stereotype;
 
     private final List<FieldRow<String>> fields;
 
-    public ProfileTableModel(UMLProfile profile){
-        this.profile = profile;
+    public StereotypeTableModel(UMLStereotype stereotype){
+        this.stereotype = stereotype;
         this.fields = new ArrayList<>();
-        this.fields.add(new FieldRow<>("name", profile::name, profile::modifyName ));
-        this.fields.add(new FieldRow<>("uri", profile::uri, profile::modifyUri ));
+        this.fields.add(new FieldRow<>("name", stereotype::name, stereotype::modifyName ));
+        this.fields.add(new FieldRow<>("metaClass", () -> stereotype.metaClass().label(), s -> {
+            UMLMetaClass newMetaClass = UMLMetaClass.metaClass(s);
+            stereotype.modifyMetaClass(newMetaClass);
+        }));
     }
 
     @Override
@@ -62,6 +66,7 @@ public class ProfileTableModel extends AbstractTableModel {
             default:
                 return null;
         }
+
     }
 
     @Override

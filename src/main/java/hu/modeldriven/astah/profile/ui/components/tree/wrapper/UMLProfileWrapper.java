@@ -1,5 +1,6 @@
-package hu.modeldriven.astah.profile.ui.components.tree;
+package hu.modeldriven.astah.profile.ui.components.tree.wrapper;
 
+import hu.modeldriven.astah.profile.ui.components.tree.ProfileTreeNode;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLStereotype;
 
@@ -41,14 +42,14 @@ public class UMLProfileWrapper implements UMLProfile {
     @Override
     public UMLStereotype createChildStereotype(String name) {
         UMLStereotype stereotype = profile.createChildStereotype(name);
-        treeNode.notifyChanged();
+        treeNode.notifyStructureChanged();
         return stereotype;
     }
 
     @Override
     public void removeStereotype(UMLStereotype stereotype) {
         profile.removeStereotype(stereotype);
-        treeNode.notifyChanged();
+        treeNode.notifyStructureChanged();
     }
 
     @Override
