@@ -24,17 +24,17 @@ public class ProfileTreeLabelRenderer extends DefaultTreeCellRenderer {
 
         if (value instanceof ProfileTreeNode){
             UMLProfile profile = ((ProfileTreeNode) value).profile();
-            this.setText("<Profile> " + profile.name() + ", " +profile.uri() );
+            this.setText("" + profile.name() + ", " +profile.uri() );
         }
 
         if (value instanceof StereotypeTreeNode){
             UMLStereotype stereotype = ((StereotypeTreeNode) value).stereotype();
-            this.setText("<Stereotype> " + stereotype.name() + " : " + stereotype.metaClass().label() );
+            this.setText("<S> " + stereotype.name() + " : " + stereotype.metaClass().label() );
         }
 
         if (value instanceof PropertyTreeNode){
             UMLProperty property = ((PropertyTreeNode) value).property();
-            this.setText("<Property> " + property.name() + " : " + property.type().label() );
+            this.setText("<P> " + property.name() + " : " + property.type().label() );
         }
 
         return this;

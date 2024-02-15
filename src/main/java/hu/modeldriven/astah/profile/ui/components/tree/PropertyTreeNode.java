@@ -60,6 +60,6 @@ public class PropertyTreeNode implements TreeNode {
     }
 
     public void notifyChanged() {
-        treeModel.nodeChanged(this);
+        treeModel.nodeStructureChanged(this);
     }
 }
