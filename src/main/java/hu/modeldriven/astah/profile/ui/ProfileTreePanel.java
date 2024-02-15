@@ -32,7 +32,7 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
 
     private void initUIComponents() {
 
-        this.tree.setCellRenderer(new ProfileTreeLabelRenderer());
+        this.tree.setCellRenderer(new ProfileTreeCellRenderer());
 
         this.tree.addTreeSelectionListener(treeSelectionEvent -> {
             TreeNode node = (TreeNode)tree.getLastSelectedPathComponent();

@@ -8,14 +8,14 @@ import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.Component;
 
-public class ProfileTreeLabelRenderer extends DefaultTreeCellRenderer {
+public class ProfileTreeCellRenderer extends DefaultTreeCellRenderer {
 
     private final Icon profileIcon;
     private final Icon stereotypeIcon;
 
     private final Icon propertyIcon;
 
-    public ProfileTreeLabelRenderer() {
+    public ProfileTreeCellRenderer() {
         super();
         this.profileIcon = new ImageIcon(getClass().getResource("/icons/Profile.gif"));
         this.stereotypeIcon = new ImageIcon(getClass().getResource("/icons/Stereotype.gif"));

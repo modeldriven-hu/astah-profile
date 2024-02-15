@@ -19,10 +19,7 @@ public class PropertyTableModel extends AbstractTableModel {
         this.property = property;
         this.fields = new ArrayList<>();
         this.fields.add(new FieldRow<>("name", property::name, property::modifyName ));
-        this.fields.add(new FieldRow<>("type", () -> property.type().label(), s -> {
-            UMLPropertyType newType = UMLPropertyType.propertyType(s);
-            property.modifyType(newType);
-        }));
+        this.fields.add(new UMLPropertyFieldRow("type", property));
     }
 
     @Override

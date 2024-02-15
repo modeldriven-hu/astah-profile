@@ -17,10 +17,7 @@ public class StereotypeTableModel extends AbstractTableModel {
         this.stereotype = stereotype;
         this.fields = new ArrayList<>();
         this.fields.add(new FieldRow<>("name", stereotype::name, stereotype::modifyName ));
-        this.fields.add(new FieldRow<>("metaClass", () -> stereotype.metaClass().label(), s -> {
-            UMLMetaClass newMetaClass = UMLMetaClass.metaClass(s);
-            stereotype.modifyMetaClass(newMetaClass);
-        }));
+        this.fields.add(new UMLMetaClassFieldRow("metaClass", stereotype));
     }
 
     @Override
