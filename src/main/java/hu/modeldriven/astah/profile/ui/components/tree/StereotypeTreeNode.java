@@ -74,7 +74,7 @@ public class StereotypeTreeNode implements TreeNode {
 
     @Override
     public boolean isLeaf() {
-        return false;
+        return this.stereotype.properties().isEmpty();
     }
 
     @Override

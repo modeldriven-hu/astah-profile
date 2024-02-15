@@ -12,7 +12,12 @@ import java.util.List;
 public class CreatePropertyUseCase implements EventHandler<CreatePropertyRequestedEvent> {
     @Override
     public void handleEvent(CreatePropertyRequestedEvent event) {
-        String propertyName = JOptionPane.showInputDialog("Property name:");
+        String propertyName = (String)JOptionPane.showInputDialog(
+                null,
+                "Property name:",
+                "Create property",
+                JOptionPane.INFORMATION_MESSAGE, null, null, "");
+
         if (propertyName != null) {
             event.treeNode().stereotype().createChildProperty(propertyName, UMLPropertyType.STRING);
         }
