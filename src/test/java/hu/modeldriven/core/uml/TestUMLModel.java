@@ -1,6 +1,7 @@
 package hu.modeldriven.core.uml;
 
 import hu.modeldriven.core.uml.impl.EclipseModel;
+import hu.modeldriven.core.uml.simpleimpl.SimpleUMLModel;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -31,7 +31,7 @@ public class UMLStereotypeWrapper implements UMLStereotype {
     @Override
     public void modifyName(String name) {
         stereotype.modifyName(name);
-        treeNode.notifyStructureChanged();
+        treeNode.notifyChanged();
     }
 
     @Override
@@ -42,7 +42,7 @@ public class UMLStereotypeWrapper implements UMLStereotype {
     @Override
     public void modifyMetaClass(UMLMetaClass metaClass) {
         stereotype.modifyMetaClass(metaClass);
-        treeNode.notifyStructureChanged();
+        treeNode.notifyChanged();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class UMLStereotypeWrapper implements UMLStereotype {
     @Override
     public void removeProperty(UMLProperty attribute) {
         stereotype.removeProperty(attribute);
-        treeNode.notifyStructureChanged();
+        treeNode.notifyParentStructureChanged();
     }
 
     @Override

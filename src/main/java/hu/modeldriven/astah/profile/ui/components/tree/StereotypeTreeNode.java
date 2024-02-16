@@ -88,9 +88,16 @@ public class StereotypeTreeNode implements TreeNode {
         return Collections.enumeration(result);
     }
 
+    public void notifyChanged() {
+        treeModel.nodeChanged(this);
+    }
+
     public void notifyStructureChanged() {
         treeModel.nodeStructureChanged(this);
-        treeModel.nodeChanged(this);
+    }
+
+    public void notifyParentStructureChanged() {
+        treeModel.nodeStructureChanged(this.parent);
     }
 
 }

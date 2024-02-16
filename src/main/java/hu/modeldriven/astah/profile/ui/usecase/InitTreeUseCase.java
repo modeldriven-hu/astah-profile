@@ -46,7 +46,7 @@ public class InitTreeUseCase implements EventHandler<ProfileAvailableEvent> {
             @Override
             public void treeStructureChanged(TreeModelEvent treeModelEvent) {
                 tree.expandPath(treeModelEvent.getTreePath());
-                invalidateLayoutCache();
+                //invalidateLayoutCache();
             }
         });
     }

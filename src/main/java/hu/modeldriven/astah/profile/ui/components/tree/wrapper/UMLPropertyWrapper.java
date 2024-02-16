@@ -27,7 +27,7 @@ public class UMLPropertyWrapper implements UMLProperty {
     @Override
     public void modifyName(String name) {
         this.property.modifyName(name);
-        treeNode.notifyStructureChanged();
+        treeNode.notifyChanged();
     }
 
     @Override
@@ -38,6 +38,6 @@ public class UMLPropertyWrapper implements UMLProperty {
     @Override
     public void modifyType(UMLPropertyType type) {
         this.property.modifyType(type);
-        treeNode.notifyStructureChanged();
+        treeNode.notifyChanged();
     }
 }
