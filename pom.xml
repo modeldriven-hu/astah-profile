@@ -32,7 +32,7 @@
         <plugin.install>true</plugin.install>
         <astah.version>1.1</astah.version>
         <astah.edition>sysml</astah.edition>
-        <flatlaf.version>2.0.1</flatlaf.version>
+        <flatlaf.version>2.3</flatlaf.version>
         <ikonli.version>2.6.0</ikonli.version>
     </properties>
     <modelVersion>4.0.0</modelVersion>

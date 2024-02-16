@@ -46,11 +46,11 @@ public class ValueColumnCellEditor extends DefaultCellEditor implements ActionLi
     @Override
     public Object getCellEditorValue() {
 
-        if (comboBox.isShowing()) {
+        if (comboBox != null && comboBox.isShowing()) {
             return comboBox.getSelectedItem();
         }
 
-        if (textField.isShowing()) {
+        if (textField != null && textField.isShowing()) {
             return textField.getText();
         }
 
