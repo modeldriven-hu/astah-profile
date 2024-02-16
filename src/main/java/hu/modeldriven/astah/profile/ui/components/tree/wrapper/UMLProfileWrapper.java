@@ -12,7 +12,7 @@ public class UMLProfileWrapper implements UMLProfile {
     private final ProfileTreeNode treeNode;
     private final UMLProfile profile;
 
-    public UMLProfileWrapper(ProfileTreeNode treeNode, UMLProfile profile){
+    public UMLProfileWrapper(ProfileTreeNode treeNode, UMLProfile profile) {
         this.treeNode = treeNode;
         this.profile = profile;
     }

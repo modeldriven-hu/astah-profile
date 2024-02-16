@@ -157,7 +157,10 @@ public class TestUMLModel {
 
         stereotype.removeProperty(property2);
         stereotype.removeProperty(property1);
+
+        Assert.assertEquals(0, stereotype.properties().size());
     }
+
     @Test
     public void testChangePropertyName() {
         UMLStereotype stereotype = profile.createChildStereotype("Stereotype");

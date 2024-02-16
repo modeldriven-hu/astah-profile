@@ -8,16 +8,8 @@ import hu.modeldriven.core.eventbus.EventBus;
 import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProfileBrowserView extends JPanel implements IPluginTabView {
-
-    private final List<ISelectionListener> listeners;
-
-    public ProfileBrowserView() {
-        this.listeners = new ArrayList<>();
-    }
 
     @Override
     public String getTitle() {

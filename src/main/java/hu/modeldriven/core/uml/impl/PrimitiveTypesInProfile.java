@@ -35,6 +35,10 @@ public class PrimitiveTypesInProfile {
 
     public UMLPropertyType propertyType(Type type) {
 
+        if (type == null) {
+            return null;
+        }
+
         for (Map.Entry<UMLPropertyType, PrimitiveType> entry : primitiveTypeMap.entrySet()) {
             if (type.conformsTo(entry.getValue())) {
                 return entry.getKey();

@@ -16,12 +16,12 @@ public class ProfileTreeNode implements TreeNode {
     private final DefaultTreeModel treeModel;
     private final UMLProfile profile;
 
-    public ProfileTreeNode(DefaultTreeModel treeModel, UMLProfile profile){
+    public ProfileTreeNode(DefaultTreeModel treeModel, UMLProfile profile) {
         this.treeModel = treeModel;
         this.profile = new UMLProfileWrapper(this, profile);
     }
 
-    public UMLProfile profile(){
+    public UMLProfile profile() {
         return this.profile;
     }
 
@@ -45,16 +45,16 @@ public class ProfileTreeNode implements TreeNode {
 
         List<UMLStereotype> stereotypeList = this.profile.stereotypes();
 
-        if (stereotypeList.isEmpty()){
+        if (stereotypeList.isEmpty()) {
             return -1;
         }
 
-        if (treeNode instanceof StereotypeTreeNode){
+        if (treeNode instanceof StereotypeTreeNode) {
             StereotypeTreeNode stereotypeTreeNode = (StereotypeTreeNode) treeNode;
             UMLStereotype umlStereotype = stereotypeTreeNode.stereotype();
 
             for (int i = 0; i < stereotypeList.size(); i++) {
-                if (umlStereotype.id().equals(stereotypeList.get(i).id())){
+                if (umlStereotype.id().equals(stereotypeList.get(i).id())) {
                     return i;
                 }
             }
@@ -77,7 +77,7 @@ public class ProfileTreeNode implements TreeNode {
     public Enumeration<? extends TreeNode> children() {
         List<StereotypeTreeNode> result = new ArrayList<>();
 
-        for (UMLStereotype stereotype : this.profile.stereotypes()){
+        for (UMLStereotype stereotype : this.profile.stereotypes()) {
             result.add(new StereotypeTreeNode(this, treeModel, stereotype));
         }
 

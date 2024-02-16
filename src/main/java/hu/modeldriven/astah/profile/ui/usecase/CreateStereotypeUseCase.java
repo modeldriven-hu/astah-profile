@@ -12,7 +12,7 @@ public class CreateStereotypeUseCase implements EventHandler<CreateStereotypeReq
 
     @Override
     public void handleEvent(CreateStereotypeRequestedEvent event) {
-        String stereotypeName =   (String)JOptionPane.showInputDialog(
+        String stereotypeName = (String) JOptionPane.showInputDialog(
                 null,
                 "Stereotype name:",
                 "Create stereotype",

@@ -9,7 +9,6 @@ import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class EclipseStereotype implements UMLStereotype {

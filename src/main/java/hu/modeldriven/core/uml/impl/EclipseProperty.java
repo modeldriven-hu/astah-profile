@@ -5,8 +5,6 @@ import hu.modeldriven.core.uml.UMLPropertyType;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Property;
 
-import java.util.UUID;
-
 public class EclipseProperty implements UMLProperty {
 
     private final String id;

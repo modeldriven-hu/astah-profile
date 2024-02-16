@@ -12,7 +12,7 @@ import java.util.List;
 public class CreatePropertyUseCase implements EventHandler<CreatePropertyRequestedEvent> {
     @Override
     public void handleEvent(CreatePropertyRequestedEvent event) {
-        String propertyName = (String)JOptionPane.showInputDialog(
+        String propertyName = (String) JOptionPane.showInputDialog(
                 null,
                 "Property name:",
                 "Create property",

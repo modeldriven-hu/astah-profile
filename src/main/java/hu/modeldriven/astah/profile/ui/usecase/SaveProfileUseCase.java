@@ -31,7 +31,7 @@ public class SaveProfileUseCase implements EventHandler<Event> {
     @Override
     public void handleEvent(Event event) {
 
-        if (event instanceof ProfileAvailableEvent){
+        if (event instanceof ProfileAvailableEvent) {
             this.profile = ((ProfileAvailableEvent) event).profile();
         }
 
@@ -40,7 +40,7 @@ public class SaveProfileUseCase implements EventHandler<Event> {
         }
     }
 
-    private void saveFile(){
+    private void saveFile() {
         try {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Specify a file to save");

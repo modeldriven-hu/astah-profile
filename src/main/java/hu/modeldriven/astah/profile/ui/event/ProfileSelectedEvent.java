@@ -7,7 +7,7 @@ public class ProfileSelectedEvent implements Event {
 
     private final UMLProfile profile;
 
-    public ProfileSelectedEvent(UMLProfile profile){
+    public ProfileSelectedEvent(UMLProfile profile) {
         this.profile = profile;
     }
 

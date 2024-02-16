@@ -7,7 +7,7 @@ public class CreateStereotypeRequestedEvent implements Event {
 
     private final ProfileTreeNode treeNode;
 
-    public CreateStereotypeRequestedEvent(ProfileTreeNode treeNode){
+    public CreateStereotypeRequestedEvent(ProfileTreeNode treeNode) {
         this.treeNode = treeNode;
     }
 

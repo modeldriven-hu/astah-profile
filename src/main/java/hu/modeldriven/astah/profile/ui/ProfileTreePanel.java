@@ -1,5 +1,8 @@
 package hu.modeldriven.astah.profile.ui;
 
+import hu.modeldriven.astah.profile.ui.components.table.FieldRow;
+import hu.modeldriven.astah.profile.ui.components.table.ValueColumnCellEditor;
+import hu.modeldriven.astah.profile.ui.components.table.ValueColumnCellRenderer;
 import hu.modeldriven.astah.profile.ui.components.tree.*;
 import hu.modeldriven.astah.profile.ui.event.*;
 import hu.modeldriven.astah.profile.ui.usecase.*;
@@ -16,9 +19,9 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
 
     private static final String BUTTON_FOREGROUND = "Button.foreground";
 
-    private final EventBus eventBus;
+    private final transient EventBus eventBus;
 
-    private final UMLModel model;
+    private final transient UMLModel model;
 
     public ProfileTreePanel(EventBus eventBus) {
         super();
@@ -32,24 +35,28 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
 
     private void initUIComponents() {
 
+        this.table.setDefaultEditor(FieldRow.class, new ValueColumnCellEditor());
+        this.table.setDefaultRenderer(FieldRow.class, new ValueColumnCellRenderer());
+
+        this.tree.setLargeModel(true);
         this.tree.setCellRenderer(new ProfileTreeCellRenderer());
 
         this.tree.addTreeSelectionListener(treeSelectionEvent -> {
-            TreeNode node = (TreeNode)tree.getLastSelectedPathComponent();
+            TreeNode node = (TreeNode) tree.getLastSelectedPathComponent();
 
-            if (node == null){
+            if (node == null) {
                 return;
             }
 
-            if (node instanceof ProfileTreeNode){
+            if (node instanceof ProfileTreeNode) {
                 eventBus.publish(new ProfileSelectedEvent(((ProfileTreeNode) node).profile()));
             }
 
-            if (node instanceof StereotypeTreeNode){
+            if (node instanceof StereotypeTreeNode) {
                 eventBus.publish(new StereotypeSelectedEvent(((StereotypeTreeNode) node).stereotype()));
             }
 
-            if (node instanceof PropertyTreeNode){
+            if (node instanceof PropertyTreeNode) {
                 eventBus.publish(new PropertySelectedEvent(((PropertyTreeNode) node).property()));
             }
 
@@ -82,7 +89,7 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
 
     private void initUseCases() {
         eventBus.subscribe(new InitTreeUseCase(tree));
-        eventBus.subscribe(new LoadProfileUseCase(eventBus,this, model));
+        eventBus.subscribe(new LoadProfileUseCase(eventBus, this, model));
         eventBus.subscribe(new DisplayExceptionUseCase());
         eventBus.subscribe(new DisplayTableOnSelectionUseCase(table));
         eventBus.subscribe(new SaveProfileUseCase(eventBus, this));
@@ -94,7 +101,7 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
     }
 
     private void initTree() {
-        eventBus.publish(new ProfileAvailableEvent(model.createProfile("Template","https://www.example.com")));
+        eventBus.publish(new ProfileAvailableEvent(model.createProfile("Template", "https://www.example.com")));
     }
 
 }

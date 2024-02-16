@@ -22,7 +22,7 @@ public class LoadProfileUseCase implements EventHandler<LoadProfileRequestedEven
     private final Component parentComponent;
     private final UMLModel model;
 
-    public LoadProfileUseCase(EventBus eventBus, Component parentComponent, UMLModel model){
+    public LoadProfileUseCase(EventBus eventBus, Component parentComponent, UMLModel model) {
         this.eventBus = eventBus;
         this.parentComponent = parentComponent;
         this.model = model;

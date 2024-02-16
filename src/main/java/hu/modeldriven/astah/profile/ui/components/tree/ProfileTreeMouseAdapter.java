@@ -16,16 +16,18 @@ public class ProfileTreeMouseAdapter extends MouseAdapter {
 
     private final EventBus eventBus;
 
-    public ProfileTreeMouseAdapter(EventBus eventBus){
+    public ProfileTreeMouseAdapter(EventBus eventBus) {
         this.eventBus = eventBus;
     }
 
+    @Override
     public void mousePressed(MouseEvent e) {
         if (e.isPopupTrigger()) {
             handleEvent(e);
         }
     }
 
+    @Override
     public void mouseReleased(MouseEvent e) {
         if (e.isPopupTrigger()) {
             handleEvent(e);
@@ -65,9 +67,9 @@ public class ProfileTreeMouseAdapter extends MouseAdapter {
         JPopupMenu menu = new JPopupMenu();
 
         if (rightClickedNode instanceof ProfileTreeNode) {
-            createProfileMenu(menu, (ProfileTreeNode)rightClickedNode);
-        } else if (rightClickedNode instanceof StereotypeTreeNode){
-            createStereotypeMenu(menu, (StereotypeTreeNode)rightClickedNode);
+            createProfileMenu(menu, (ProfileTreeNode) rightClickedNode);
+        } else if (rightClickedNode instanceof StereotypeTreeNode) {
+            createStereotypeMenu(menu, (StereotypeTreeNode) rightClickedNode);
         } else if (rightClickedNode instanceof PropertyTreeNode) {
             createPropertyMenu(menu, (PropertyTreeNode) rightClickedNode);
         } else {
@@ -79,23 +81,23 @@ public class ProfileTreeMouseAdapter extends MouseAdapter {
 
     private void createProfileMenu(JPopupMenu menu, ProfileTreeNode treeNode) {
         JMenuItem addStereotypeMenuItem = new JMenuItem("Add Stereotype");
-        addStereotypeMenuItem.addActionListener( event -> eventBus.publish(new CreateStereotypeRequestedEvent(treeNode)));
+        addStereotypeMenuItem.addActionListener(event -> eventBus.publish(new CreateStereotypeRequestedEvent(treeNode)));
         menu.add(addStereotypeMenuItem);
     }
 
     private void createStereotypeMenu(JPopupMenu menu, StereotypeTreeNode treeNode) {
         JMenuItem addPropertyMenuItem = new JMenuItem("Add Property");
-        addPropertyMenuItem.addActionListener( event -> eventBus.publish(new CreatePropertyRequestedEvent(treeNode)));
+        addPropertyMenuItem.addActionListener(event -> eventBus.publish(new CreatePropertyRequestedEvent(treeNode)));
         menu.add(addPropertyMenuItem);
 
         JMenuItem removeStereotypeMenuItem = new JMenuItem("Remove Stereotype");
-        removeStereotypeMenuItem.addActionListener( event -> eventBus.publish(new RemoveStereotypeRequestedEvent(treeNode)));
+        removeStereotypeMenuItem.addActionListener(event -> eventBus.publish(new RemoveStereotypeRequestedEvent(treeNode)));
         menu.add(removeStereotypeMenuItem);
     }
 
     private void createPropertyMenu(JPopupMenu menu, PropertyTreeNode treeNode) {
         JMenuItem removePropertyMenuItem = new JMenuItem("Remove Property");
-        removePropertyMenuItem .addActionListener( event -> eventBus.publish(new RemovePropertyRequestedEvent(treeNode)));
+        removePropertyMenuItem.addActionListener(event -> eventBus.publish(new RemovePropertyRequestedEvent(treeNode)));
         menu.add(removePropertyMenuItem);
     }
 }

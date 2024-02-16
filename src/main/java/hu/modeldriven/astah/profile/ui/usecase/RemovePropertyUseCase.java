@@ -16,7 +16,7 @@ public class RemovePropertyUseCase implements EventHandler<RemovePropertyRequest
 
         PropertyTreeNode treeNode = event.treeNode();
 
-        if (treeNode.getParent() instanceof StereotypeTreeNode){
+        if (treeNode.getParent() instanceof StereotypeTreeNode) {
             StereotypeTreeNode parent = (StereotypeTreeNode) treeNode.getParent();
             parent.stereotype().removeProperty(treeNode.property());
         }

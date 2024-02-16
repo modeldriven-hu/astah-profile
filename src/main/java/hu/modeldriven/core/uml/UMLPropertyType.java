@@ -11,7 +11,7 @@ public enum UMLPropertyType {
 
     private final String label;
 
-    private UMLPropertyType(String label){
+    UMLPropertyType(String label) {
         this.label = label;
     }
 

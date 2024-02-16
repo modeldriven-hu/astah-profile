@@ -23,17 +23,17 @@ public class TestProfileTreePanel {
         });
 
         SwingUtilities.invokeLater(() -> {
-            JDialog dialog = new JDialog();
+            JFrame frame = new JFrame();
             JPanel contentPanel = new JPanel(new BorderLayout());
-            dialog.setContentPane(contentPanel);
+            frame.setContentPane(contentPanel);
 
             ProfileTreePanel panel = new ProfileTreePanel(new EventBus());
             contentPanel.add(panel, BorderLayout.CENTER);
 
-            dialog.pack();
-            dialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            frame.pack();
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-            dialog.setVisible(true);
+            frame.setVisible(true);
         });
     }
 

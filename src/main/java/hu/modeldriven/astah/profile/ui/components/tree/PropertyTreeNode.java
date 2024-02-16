@@ -59,7 +59,7 @@ public class PropertyTreeNode implements TreeNode {
         return null;
     }
 
-    public void notifyChanged() {
+    public void notifyStructureChanged() {
         treeModel.nodeStructureChanged(this);
     }
 }

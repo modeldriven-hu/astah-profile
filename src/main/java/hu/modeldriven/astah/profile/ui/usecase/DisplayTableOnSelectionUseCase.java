@@ -30,12 +30,12 @@ public class DisplayTableOnSelectionUseCase implements EventHandler<Event> {
             handleProfileSelected(((ProfileSelectedEvent) event).profile());
         }
 
-        if (event instanceof StereotypeSelectedEvent){
-            handleStereotypeSelected(((StereotypeSelectedEvent)event).stereotype());
+        if (event instanceof StereotypeSelectedEvent) {
+            handleStereotypeSelected(((StereotypeSelectedEvent) event).stereotype());
         }
 
-        if (event instanceof PropertySelectedEvent){
-            handlePropertySelected(((PropertySelectedEvent)event).property());
+        if (event instanceof PropertySelectedEvent) {
+            handlePropertySelected(((PropertySelectedEvent) event).property());
         }
     }
 

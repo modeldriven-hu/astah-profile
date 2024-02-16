@@ -10,10 +10,9 @@ import java.awt.Component;
 
 public class ProfileTreeCellRenderer extends DefaultTreeCellRenderer {
 
-    private final Icon profileIcon;
-    private final Icon stereotypeIcon;
-
-    private final Icon propertyIcon;
+    private final transient Icon profileIcon;
+    private final transient Icon stereotypeIcon;
+    private final transient Icon propertyIcon;
 
     public ProfileTreeCellRenderer() {
         super();
@@ -22,6 +21,7 @@ public class ProfileTreeCellRenderer extends DefaultTreeCellRenderer {
         this.propertyIcon = new ImageIcon(getClass().getResource("/icons/Property.gif"));
     }
 
+    @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value,
                                                   boolean sel,
                                                   boolean expanded,
@@ -30,24 +30,28 @@ public class ProfileTreeCellRenderer extends DefaultTreeCellRenderer {
                                                   boolean hasFocus) {
         super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
 
-        if (value instanceof ProfileTreeNode){
+        if (value instanceof ProfileTreeNode) {
             UMLProfile profile = ((ProfileTreeNode) value).profile();
-            this.setText(profile.name() + " " +profile.uri() );
+            this.setText(profile.name() + " " + profile.uri());
             this.setIcon(profileIcon);
         }
 
-        if (value instanceof StereotypeTreeNode){
+        if (value instanceof StereotypeTreeNode) {
             UMLStereotype stereotype = ((StereotypeTreeNode) value).stereotype();
-            this.setText(stereotype.name() + " : " + stereotype.metaClass().label() );
+            this.setText(stereotype.name() + " : " + stereotype.metaClass().label());
             this.setIcon(stereotypeIcon);
         }
 
-        if (value instanceof PropertyTreeNode){
+        if (value instanceof PropertyTreeNode) {
             UMLProperty property = ((PropertyTreeNode) value).property();
-            this.setText(property.name() + " : " + property.type().label() );
-            this.setIcon(propertyIcon);
+
+            if (property.type() != null) {
+                this.setText(property.name() + " : " + property.type().label());
+                this.setIcon(propertyIcon);
+            }
         }
 
         return this;
     }
+
 }

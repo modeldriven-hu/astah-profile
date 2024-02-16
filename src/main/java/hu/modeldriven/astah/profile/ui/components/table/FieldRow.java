@@ -13,7 +13,7 @@ public class FieldRow<T> {
 
     public FieldRow(String label,
                     Supplier<T> getValueFunction,
-                    Consumer<T> setValueFunction){
+                    Consumer<T> setValueFunction) {
         this.label = label;
         this.getValueFunction = getValueFunction;
         this.setValueFunction = setValueFunction;
@@ -23,11 +23,11 @@ public class FieldRow<T> {
         return label;
     }
 
-    public T getValue(){
+    public T getValue() {
         return getValueFunction.get();
     }
 
-    public void setValue(T value){
+    public void setValue(T value) {
         setValueFunction.accept(value);
     }
 

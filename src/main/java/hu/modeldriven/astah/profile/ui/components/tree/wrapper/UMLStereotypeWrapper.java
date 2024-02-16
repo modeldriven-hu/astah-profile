@@ -1,7 +1,10 @@
 package hu.modeldriven.astah.profile.ui.components.tree.wrapper;
 
 import hu.modeldriven.astah.profile.ui.components.tree.StereotypeTreeNode;
-import hu.modeldriven.core.uml.*;
+import hu.modeldriven.core.uml.UMLMetaClass;
+import hu.modeldriven.core.uml.UMLProperty;
+import hu.modeldriven.core.uml.UMLPropertyType;
+import hu.modeldriven.core.uml.UMLStereotype;
 
 import java.util.List;
 
@@ -10,7 +13,7 @@ public class UMLStereotypeWrapper implements UMLStereotype {
     private final StereotypeTreeNode treeNode;
     private final UMLStereotype stereotype;
 
-    public UMLStereotypeWrapper(StereotypeTreeNode treeNode, UMLStereotype stereotype){
+    public UMLStereotypeWrapper(StereotypeTreeNode treeNode, UMLStereotype stereotype) {
         this.treeNode = treeNode;
         this.stereotype = stereotype;
     }
@@ -28,7 +31,7 @@ public class UMLStereotypeWrapper implements UMLStereotype {
     @Override
     public void modifyName(String name) {
         stereotype.modifyName(name);
-        treeNode.notifyChanged();
+        treeNode.notifyStructureChanged();
     }
 
     @Override
@@ -39,7 +42,7 @@ public class UMLStereotypeWrapper implements UMLStereotype {
     @Override
     public void modifyMetaClass(UMLMetaClass metaClass) {
         stereotype.modifyMetaClass(metaClass);
-        treeNode.notifyChanged();
+        treeNode.notifyStructureChanged();
     }
 
     @Override
