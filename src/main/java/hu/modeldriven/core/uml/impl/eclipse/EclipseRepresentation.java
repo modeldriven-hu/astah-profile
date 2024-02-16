@@ -1,4 +1,4 @@
-package hu.modeldriven.core.uml.impl;
+package hu.modeldriven.core.uml.impl.eclipse;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;

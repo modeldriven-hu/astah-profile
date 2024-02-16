@@ -1,4 +1,4 @@
-package hu.modeldriven.core.uml.impl;
+package hu.modeldriven.core.uml.impl.eclipse;
 
 import hu.modeldriven.core.uml.UMLMetaClass;
 import org.eclipse.emf.common.util.URI;

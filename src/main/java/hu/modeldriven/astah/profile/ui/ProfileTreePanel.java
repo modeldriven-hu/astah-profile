@@ -8,8 +8,7 @@ import hu.modeldriven.astah.profile.ui.event.*;
 import hu.modeldriven.astah.profile.ui.usecase.*;
 import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.uml.UMLModel;
-import hu.modeldriven.core.uml.impl.EclipseModel;
-import hu.modeldriven.core.uml.simpleimpl.SimpleUMLModel;
+import hu.modeldriven.core.uml.impl.eclipse.EclipseModel;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.swing.FontIcon;
 

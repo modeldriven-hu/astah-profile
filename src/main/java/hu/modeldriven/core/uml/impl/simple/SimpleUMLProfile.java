@@ -1,4 +1,4 @@
-package hu.modeldriven.core.uml.simpleimpl;
+package hu.modeldriven.core.uml.impl.simple;
 
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLStereotype;

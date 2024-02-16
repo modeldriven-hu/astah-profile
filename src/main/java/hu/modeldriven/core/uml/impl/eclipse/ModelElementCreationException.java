@@ -1,4 +1,4 @@
-package hu.modeldriven.core.uml.impl;
+package hu.modeldriven.core.uml.impl.eclipse;
 
 public class ModelElementCreationException extends RuntimeException {
 

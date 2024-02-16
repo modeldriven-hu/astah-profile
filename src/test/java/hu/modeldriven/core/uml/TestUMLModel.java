@@ -1,7 +1,7 @@
 package hu.modeldriven.core.uml;
 
-import hu.modeldriven.core.uml.impl.EclipseModel;
-import hu.modeldriven.core.uml.simpleimpl.SimpleUMLModel;
+import hu.modeldriven.core.uml.impl.eclipse.EclipseModel;
+import hu.modeldriven.core.uml.impl.simple.SimpleUMLModel;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,14 +19,14 @@ public class TestUMLModel {
 
     @Before
     public void before() {
-        this.model = new EclipseModel();
+        this.model = new SimpleUMLModel();
         this.profile = model.createProfile("MyProfile", "https://www.modeldriven.hu/schemas/myprofile");
     }
 
     @Test
     public void testLoadProfile() throws URISyntaxException, ProfileCreationFailedException {
 
-        URL resource = getClass().getClassLoader().getResource("test.profile.uml");
+        URL resource = getClass().getClassLoader().getResource("test2.profile.uml");
         File file = Paths.get(resource.toURI()).toFile();
 
         UMLProfile loadedProfile = model.createProfile(file);
@@ -37,7 +37,7 @@ public class TestUMLModel {
     @Test
     public void testSaveProfile() throws IOException {
         UMLStereotype stereotype1 = profile.createChildStereotype("Stereotype1");
-
+        stereotype1.modifyMetaClass(UMLMetaClass.PROPERTY);
         stereotype1.createChildProperty("someString", UMLPropertyType.STRING);
         stereotype1.createChildProperty("someBoolean", UMLPropertyType.BOOLEAN);
 
@@ -49,7 +49,7 @@ public class TestUMLModel {
         Assert.assertTrue(profile.stereotypes().stream().anyMatch(s -> "Stereotype1".equals(s.name())));
         Assert.assertTrue(profile.stereotypes().stream().anyMatch(s -> "Stereotype2".equals(s.name())));
 
-        File temporaryFile = File.createTempFile("testProfile", "profile.uml");
+        File temporaryFile = new File("/Users/zsolt/multiData.uml");//File.createTempFile("testProfile", "profile.uml");
         profile.save(temporaryFile);
     }
 

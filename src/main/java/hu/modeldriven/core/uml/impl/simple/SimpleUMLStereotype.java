@@ -1,4 +1,4 @@
-package hu.modeldriven.core.uml.simpleimpl;
+package hu.modeldriven.core.uml.impl.simple;
 
 import hu.modeldriven.core.uml.*;
 
@@ -18,11 +18,15 @@ public class SimpleUMLStereotype implements UMLStereotype {
     private UMLMetaClass metaClass;
 
     public SimpleUMLStereotype(UMLProfile parent, String name) {
+       this(parent, name, UMLMetaClass.CLASS);
+    }
+
+    public SimpleUMLStereotype(UMLProfile parent, String name, UMLMetaClass metaClass) {
         this.id = UUID.randomUUID().toString();
         this.parent = parent;
         this.properties = new ArrayList<>();
         this.name = name;
-        this.metaClass = UMLMetaClass.CLASS;
+        this.metaClass = metaClass;
     }
 
     @Override

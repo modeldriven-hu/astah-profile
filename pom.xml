@@ -5,6 +5,7 @@
         <profile>
             <id>osx</id>
             <activation>
+                <activeByDefault>true</activeByDefault>
                 <os>
                     <name>mac</name>
                 </os>
@@ -16,7 +17,6 @@
         <profile>
             <id>linux</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
                 <os>
                     <name>unix</name>
                 </os>
@@ -175,7 +175,7 @@
             <plugin>
                 <groupId>com.change_vision.astah</groupId>
                 <artifactId>astah-maven-plugin</artifactId>
-                <version>1.0.2</version>
+                <version>1.0.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
