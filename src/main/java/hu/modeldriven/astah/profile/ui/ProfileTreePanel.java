@@ -23,10 +23,10 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
 
     private final transient UMLModel model;
 
-    public ProfileTreePanel(EventBus eventBus) {
+    public ProfileTreePanel(EventBus eventBus, UMLModel model) {
         super();
         this.eventBus = eventBus;
-        this.model = new EclipseModel();
+        this.model = model;
         initUIComponents();
         initActions();
         initUseCases();

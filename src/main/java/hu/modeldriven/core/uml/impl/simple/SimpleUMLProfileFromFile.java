@@ -67,6 +67,4 @@ public class SimpleUMLProfileFromFile {
         return !property.getName().startsWith("base_");
     }
 
-
-
 }

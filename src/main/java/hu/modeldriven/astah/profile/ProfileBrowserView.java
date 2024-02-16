@@ -4,6 +4,7 @@ import com.change_vision.jude.api.inf.ui.IPluginTabView;
 import com.change_vision.jude.api.inf.ui.ISelectionListener;
 import hu.modeldriven.astah.profile.ui.ProfileTreePanel;
 import hu.modeldriven.core.eventbus.EventBus;
+import hu.modeldriven.core.uml.impl.simple.SimpleUMLModel;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -35,7 +36,7 @@ public class ProfileBrowserView extends JPanel implements IPluginTabView {
     public void initTreeModel() {
         this.setLayout(new BorderLayout());
         EventBus eventBus = new EventBus();
-        ProfileTreePanel treePanel = new ProfileTreePanel(eventBus);
+        ProfileTreePanel treePanel = new ProfileTreePanel(eventBus, new SimpleUMLModel());
         this.add(treePanel, BorderLayout.CENTER);
     }
 

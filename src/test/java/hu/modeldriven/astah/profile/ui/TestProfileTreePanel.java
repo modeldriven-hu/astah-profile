@@ -3,6 +3,7 @@ package hu.modeldriven.astah.profile.ui;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import hu.modeldriven.core.eventbus.EventBus;
+import hu.modeldriven.core.uml.impl.simple.SimpleUMLModel;
 
 import javax.swing.*;
 import java.awt.BorderLayout;
@@ -27,7 +28,7 @@ public class TestProfileTreePanel {
             JPanel contentPanel = new JPanel(new BorderLayout());
             frame.setContentPane(contentPanel);
 
-            ProfileTreePanel panel = new ProfileTreePanel(new EventBus());
+            ProfileTreePanel panel = new ProfileTreePanel(new EventBus(), new SimpleUMLModel());
             contentPanel.add(panel, BorderLayout.CENTER);
 
             frame.pack();
