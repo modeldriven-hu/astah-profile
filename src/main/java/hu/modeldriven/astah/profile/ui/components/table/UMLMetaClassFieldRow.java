@@ -4,23 +4,24 @@ import hu.modeldriven.core.uml.UMLMetaClass;
 import hu.modeldriven.core.uml.UMLStereotype;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.stream.Collectors;
 
-public class UMLMetaClassFieldRow extends FieldRow<String> {
+public class UMLMetaClassFieldRow extends EnumerationFieldRow {
 
     public UMLMetaClassFieldRow(String label, UMLStereotype stereotype) {
-        super(label, () -> stereotype.metaClass().label(), s -> {
-            UMLMetaClass newMetaClass = UMLMetaClass.metaClass(s);
-            stereotype.modifyMetaClass(newMetaClass);
-        });
-    }
+        super(label,
+                () -> Arrays
+                        .stream(UMLMetaClass.values())
+                        .filter(x -> !x.equals(UMLMetaClass.UNKNOWN))
+                        .map(UMLMetaClass::label)
+                        .collect(Collectors.toList()),
 
-    public List<UMLMetaClass> getMetaClasses() {
-        return Arrays.asList(UMLMetaClass.values());
-    }
+                () -> stereotype.metaClass().label(),
 
-    public UMLMetaClass metaClass(String value) {
-        return UMLMetaClass.valueOf(value);
+                s -> {
+                    UMLMetaClass newMetaClass = UMLMetaClass.metaClass(s);
+                    stereotype.modifyMetaClass(newMetaClass);
+                }
+        );
     }
-
 }

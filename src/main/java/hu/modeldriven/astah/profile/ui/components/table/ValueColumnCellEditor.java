@@ -1,8 +1,5 @@
 package hu.modeldriven.astah.profile.ui.components.table;
 
-import hu.modeldriven.core.uml.UMLMetaClass;
-import hu.modeldriven.core.uml.UMLPropertyType;
-
 import javax.swing.*;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -10,44 +7,36 @@ import java.awt.event.ActionListener;
 
 public class ValueColumnCellEditor extends DefaultCellEditor implements ActionListener {
 
-    private final JTextField textField;
-    private final JComboBox<String> metaClassComboBox;
-    private final JComboBox<String> propertyTypeComboBox;
+    private JTextField textField;
+
+    private JComboBox<String> comboBox;
 
     public ValueColumnCellEditor() {
         super(new JTextField());
-        this.textField = new JTextField();
-
-        this.metaClassComboBox = new JComboBox<>();
-
-        for (UMLMetaClass metaClass : UMLMetaClass.values()) {
-            metaClassComboBox.addItem(metaClass.label());
-        }
-
-        this.propertyTypeComboBox = new JComboBox<>();
-
-        for (UMLPropertyType propertyType : UMLPropertyType.values()) {
-            propertyTypeComboBox.addItem(propertyType.label());
-        }
-
-        this.metaClassComboBox.addActionListener(this);
-        this.propertyTypeComboBox.addActionListener(this);
-        this.textField.addActionListener(this);
     }
 
     @Override
     public Component getTableCellEditorComponent(JTable jTable, Object value, boolean isSelected, int row, int column) {
 
-        if (value instanceof UMLMetaClassFieldRow) {
-            String currentElement = ((UMLMetaClassFieldRow) value).getValue();
-            metaClassComboBox.setSelectedItem(currentElement);
-            return metaClassComboBox;
-        } else if (value instanceof UMLPropertyTypeFieldRow) {
-            String currentElement = ((UMLPropertyTypeFieldRow) value).getValue();
-            propertyTypeComboBox.setSelectedItem(currentElement);
-            return propertyTypeComboBox;
+        if (value instanceof EnumerationFieldRow) {
+
+            EnumerationFieldRow fieldRow = (EnumerationFieldRow) value;
+
+            this.comboBox = new JComboBox<>();
+            fieldRow.getValues().forEach(comboBox::addItem);
+
+            String currentElement = fieldRow.getValue();
+            comboBox.setSelectedItem(currentElement);
+            comboBox.setSelectedItem(this);
+
+            comboBox.addActionListener(this);
+
+            return comboBox;
         } else if (value instanceof StringFieldRow) {
+            this.textField = new JTextField();
             textField.setText(((StringFieldRow) value).getValue());
+
+            this.textField.addActionListener(this);
             return textField;
         }
 
@@ -57,12 +46,8 @@ public class ValueColumnCellEditor extends DefaultCellEditor implements ActionLi
     @Override
     public Object getCellEditorValue() {
 
-        if (metaClassComboBox.isShowing()) {
-            return metaClassComboBox.getSelectedItem();
-        }
-
-        if (propertyTypeComboBox.isShowing()) {
-            return propertyTypeComboBox.getSelectedItem();
+        if (comboBox.isShowing()) {
+            return comboBox.getSelectedItem();
         }
 
         if (textField.isShowing()) {

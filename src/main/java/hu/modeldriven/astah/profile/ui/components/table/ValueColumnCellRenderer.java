@@ -15,14 +15,6 @@ public class ValueColumnCellRenderer extends DefaultTableCellRenderer {
             this.setText(((StringFieldRow) value).getValue());
         }
 
-        if (value instanceof UMLMetaClassFieldRow) {
-            this.setText(((UMLMetaClassFieldRow) value).getValue());
-        }
-
-        if (value instanceof UMLPropertyTypeFieldRow) {
-            this.setText(((UMLPropertyTypeFieldRow) value).getValue());
-        }
-
         return this;
     }
 }
