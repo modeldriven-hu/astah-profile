@@ -3,6 +3,8 @@ package hu.modeldriven.core.uml.impl.eclipse;
 import hu.modeldriven.core.uml.UMLMetaClass;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLStereotype;
+import hu.modeldriven.core.uml.impl.generic.MetaClassInProfile;
+import hu.modeldriven.core.uml.impl.generic.PrimitiveTypesInProfile;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Stereotype;
 

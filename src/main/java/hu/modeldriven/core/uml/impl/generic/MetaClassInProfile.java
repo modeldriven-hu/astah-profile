@@ -1,6 +1,7 @@
-package hu.modeldriven.core.uml.impl.eclipse;
+package hu.modeldriven.core.uml.impl.generic;
 
 import hu.modeldriven.core.uml.UMLMetaClass;
+import hu.modeldriven.core.uml.impl.eclipse.EclipseRepresentation;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.uml2.uml.*;
 import org.eclipse.uml2.uml.resource.UMLResource;
@@ -51,6 +52,10 @@ public class MetaClassInProfile {
                 break;
             }
         }
+    }
+
+    public org.eclipse.uml2.uml.Class extensionType(UMLMetaClass metaClass){
+        return metaClassMap.get(metaClass);
     }
 
     public UMLMetaClass metaClass(Stereotype stereotype) {

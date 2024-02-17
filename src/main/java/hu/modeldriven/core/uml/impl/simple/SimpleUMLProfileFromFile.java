@@ -2,8 +2,8 @@ package hu.modeldriven.core.uml.impl.simple;
 
 import hu.modeldriven.core.uml.*;
 import hu.modeldriven.core.uml.impl.eclipse.EclipseRepresentation;
-import hu.modeldriven.core.uml.impl.eclipse.MetaClassInProfile;
-import hu.modeldriven.core.uml.impl.eclipse.PrimitiveTypesInProfile;
+import hu.modeldriven.core.uml.impl.generic.MetaClassInProfile;
+import hu.modeldriven.core.uml.impl.generic.PrimitiveTypesInProfile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -31,7 +31,7 @@ public class SimpleUMLProfileFromFile {
             org.eclipse.uml2.uml.Package rootPackage = (org.eclipse.uml2.uml.Package) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.PACKAGE);
 
             if (rootPackage instanceof Profile) {
-                return buildUMLProfile((Profile)rootPackage);
+                return umlProfile((Profile)rootPackage);
             }
 
             throw new WrappedException(new IllegalArgumentException("File contains a package, but it is not a profile!"));
@@ -41,7 +41,7 @@ public class SimpleUMLProfileFromFile {
         }
     }
 
-    private UMLProfile buildUMLProfile(Profile profile) {
+    private UMLProfile umlProfile(Profile profile) {
 
         PrimitiveTypesInProfile primitiveTypes = new PrimitiveTypesInProfile(profile, eclipseRepresentation);
         MetaClassInProfile metaClassInProfile = new MetaClassInProfile(profile, eclipseRepresentation);

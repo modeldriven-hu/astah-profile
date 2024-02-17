@@ -4,6 +4,8 @@ import hu.modeldriven.core.uml.UMLMetaClass;
 import hu.modeldriven.core.uml.UMLProperty;
 import hu.modeldriven.core.uml.UMLPropertyType;
 import hu.modeldriven.core.uml.UMLStereotype;
+import hu.modeldriven.core.uml.impl.generic.MetaClassInProfile;
+import hu.modeldriven.core.uml.impl.generic.PrimitiveTypesInProfile;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Stereotype;

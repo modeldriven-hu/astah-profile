@@ -1,6 +1,7 @@
-package hu.modeldriven.core.uml.impl.eclipse;
+package hu.modeldriven.core.uml.impl.generic;
 
 import hu.modeldriven.core.uml.UMLPropertyType;
+import hu.modeldriven.core.uml.impl.eclipse.EclipseRepresentation;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.uml2.uml.PrimitiveType;
 import org.eclipse.uml2.uml.Profile;

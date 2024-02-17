@@ -2,6 +2,7 @@ package hu.modeldriven.core.uml.impl.eclipse;
 
 import hu.modeldriven.core.uml.UMLProperty;
 import hu.modeldriven.core.uml.UMLPropertyType;
+import hu.modeldriven.core.uml.impl.generic.PrimitiveTypesInProfile;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.uml2.uml.Property;
 

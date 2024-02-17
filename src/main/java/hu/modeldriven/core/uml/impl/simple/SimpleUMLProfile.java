@@ -59,6 +59,7 @@ public class SimpleUMLProfile implements UMLProfile {
 
     @Override
     public void save(File file) {
-        throw new UnsupportedOperationException("Not implemented");
+        new FileFromSimpleUMLProfile(this, file).save();;
+
     }
 }
