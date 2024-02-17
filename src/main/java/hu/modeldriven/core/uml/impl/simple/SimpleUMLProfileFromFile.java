@@ -42,7 +42,6 @@ public class SimpleUMLProfileFromFile {
     }
 
     private UMLProfile umlProfile(Profile profile) {
-
         PrimitiveTypesInProfile primitiveTypes = new PrimitiveTypesInProfile(profile, eclipseRepresentation);
         MetaClassInProfile metaClassInProfile = new MetaClassInProfile(profile, eclipseRepresentation);
 
