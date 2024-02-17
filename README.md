@@ -6,6 +6,10 @@ https://wiki.eclipse.org/MDT/UML2/Introduction_to_UML2_Profiles
 
 It would be beneficial to have the profile editing capability inside Astah, instead of needing to open a 3rd party tool.
 
+# Screenshot
+
+![image](https://github.com/modeldriven-hu/astah-profile/assets/8182138/05fd4f51-873b-42f7-90c0-65819317eb13)
+
 # Functions
 
  - Create a new profile
