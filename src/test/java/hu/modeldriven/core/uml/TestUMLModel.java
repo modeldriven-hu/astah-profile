@@ -1,6 +1,5 @@
 package hu.modeldriven.core.uml;
 
-import hu.modeldriven.core.uml.impl.eclipse.EclipseModel;
 import hu.modeldriven.core.uml.impl.simple.SimpleUMLModel;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,7 +19,7 @@ public class TestUMLModel {
     @Before
     public void before() {
         this.model = new SimpleUMLModel();
-        this.profile = model.createProfile("MyProfile", "https://www.modeldriven.hu/schemas/myprofile");
+        this.profile = model.profile("MyProfile", "https://www.modeldriven.hu/schemas/myprofile");
     }
 
     @Test
@@ -29,7 +28,7 @@ public class TestUMLModel {
         URL resource = getClass().getClassLoader().getResource("test2.profile.uml");
         File file = Paths.get(resource.toURI()).toFile();
 
-        UMLProfile loadedProfile = model.createProfile(file);
+        UMLProfile loadedProfile = model.profile(file);
 
         Assert.assertEquals(2, loadedProfile.stereotypes().size());
     }

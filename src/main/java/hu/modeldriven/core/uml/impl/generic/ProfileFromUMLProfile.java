@@ -12,11 +12,11 @@ public class ProfileFromUMLProfile {
 
     private final UMLProfile umlProfile;
 
-    public ProfileFromUMLProfile(UMLProfile umlProfile){
+    public ProfileFromUMLProfile(UMLProfile umlProfile) {
         this.umlProfile = umlProfile;
     }
 
-    public Profile profile(){
+    public Profile profile() {
 
         EclipseRepresentation eclipseRepresentation = new EclipseRepresentation();
 
@@ -27,11 +27,11 @@ public class ProfileFromUMLProfile {
         MetaClassInProfile metaClassInProfile = new MetaClassInProfile(profile, eclipseRepresentation);
         PrimitiveTypesInProfile primitiveTypesInProfile = new PrimitiveTypesInProfile(profile, eclipseRepresentation);
 
-        for (UMLStereotype umlStereotype : umlProfile.stereotypes()){
+        for (UMLStereotype umlStereotype : umlProfile.stereotypes()) {
             Stereotype stereotype = profile.createOwnedStereotype(umlStereotype.name(), false);
             stereotype.createExtension(metaClassInProfile.extensionType(umlStereotype.metaClass()), false);
 
-            for (UMLProperty umlProperty : umlStereotype.properties()){
+            for (UMLProperty umlProperty : umlStereotype.properties()) {
                 stereotype.createOwnedAttribute(
                         umlProperty.name(),
                         primitiveTypesInProfile.primitiveType(umlProperty.type()),

@@ -24,7 +24,7 @@ public class CreateProfileUseCase implements EventHandler<NewProfileRequestedEve
 
     @Override
     public void handleEvent(NewProfileRequestedEvent event) {
-        UMLProfile profile = model.createProfile(
+        UMLProfile profile = model.profile(
                 "Profile_" + UUID.randomUUID(),
                 "https://localhost");
 

@@ -54,7 +54,7 @@ public class MetaClassInProfile {
         }
     }
 
-    public org.eclipse.uml2.uml.Class extensionType(UMLMetaClass metaClass){
+    public org.eclipse.uml2.uml.Class extensionType(UMLMetaClass metaClass) {
         return metaClassMap.get(metaClass);
     }
 

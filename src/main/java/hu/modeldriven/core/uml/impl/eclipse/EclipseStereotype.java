@@ -88,4 +88,13 @@ public class EclipseStereotype implements UMLStereotype {
     private boolean internalProperty(Property property) {
         return property.getName().startsWith("base_");
     }
+
+    @Override
+    public boolean contains(UMLProperty property) {
+        return properties().stream()
+                .anyMatch(p ->
+                        p.name().equals(property.name()) &&
+                                p.type().equals(property.type()));
+    }
+
 }

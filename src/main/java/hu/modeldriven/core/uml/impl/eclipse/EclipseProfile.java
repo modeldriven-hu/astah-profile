@@ -55,6 +55,13 @@ public class EclipseProfile implements UMLProfile {
     }
 
     @Override
+    public UMLStereotype createChildStereotype(String name, UMLMetaClass metaClass) {
+        UMLStereotype stereotype = createChildStereotype(name);
+        stereotype.modifyMetaClass(metaClass);
+        return stereotype;
+    }
+
+    @Override
     public void removeStereotype(UMLStereotype stereotype) {
         profile.getOwnedStereotypes().removeIf(s -> s.getName().equals(stereotype.name()));
     }
@@ -64,6 +71,14 @@ public class EclipseProfile implements UMLProfile {
         return profile.getOwnedStereotypes().stream()
                 .map(stereotype -> new EclipseStereotype(stereotype, primitiveTypes, metaClasses))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean contains(UMLStereotype stereotype) {
+        return stereotypes().stream()
+                .anyMatch(s ->
+                        s.name().equals(stereotype.name()) &&
+                                s.metaClass().equals(stereotype.metaClass()));
     }
 
     @Override

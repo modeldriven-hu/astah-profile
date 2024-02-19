@@ -8,7 +8,6 @@ import hu.modeldriven.astah.profile.ui.event.*;
 import hu.modeldriven.astah.profile.ui.usecase.*;
 import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.uml.UMLModel;
-import hu.modeldriven.core.uml.impl.eclipse.EclipseModel;
 import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import org.kordamp.ikonli.swing.FontIcon;
 
@@ -101,7 +100,7 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
     }
 
     private void initTree() {
-        eventBus.publish(new ProfileAvailableEvent(model.createProfile("Template", "https://www.example.com")));
+        eventBus.publish(new ProfileAvailableEvent(model.profile("Template", "https://www.example.com")));
     }
 
 }
