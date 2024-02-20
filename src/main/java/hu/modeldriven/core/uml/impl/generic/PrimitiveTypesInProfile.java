@@ -3,6 +3,7 @@ package hu.modeldriven.core.uml.impl.generic;
 import hu.modeldriven.core.uml.UMLPropertyType;
 import hu.modeldriven.core.uml.impl.eclipse.EclipseRepresentation;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.uml2.uml.PackageableElement;
 import org.eclipse.uml2.uml.PrimitiveType;
 import org.eclipse.uml2.uml.Profile;
 import org.eclipse.uml2.uml.Type;
@@ -56,8 +57,18 @@ public class PrimitiveTypesInProfile {
     private PrimitiveType importPrimitiveType(org.eclipse.uml2.uml.Package currentProfile,
                                               org.eclipse.uml2.uml.Package umlLibrary,
                                               String name) {
+
+        // If the primitive type is already imported the just return it
+
+        for (PackageableElement element : currentProfile.getImportedElements()){
+            if (element.getName().equals(name) && element instanceof PrimitiveType){
+                return (PrimitiveType) element;
+            }
+        }
+
         PrimitiveType primitiveType = (PrimitiveType) umlLibrary.getOwnedType(name);
         currentProfile.createElementImport(primitiveType);
+
         return primitiveType;
     }
 
