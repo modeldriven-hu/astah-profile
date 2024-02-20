@@ -25,21 +25,22 @@ public class TestProfileDifference {
         // Create a copy of the base profile
 
         UMLModel simpleModel = new SimpleUMLModel();
-        UMLProfile newProfile = simpleModel.profile("name", "url");
-        UMLStereotype newStereotype = newProfile.createChildStereotype("S1", UMLMetaClass.CLASS);
-        UMLProperty newProperty = newStereotype.createChildProperty("P1", UMLPropertyType.STRING);
+        UMLProfile copyProfile = simpleModel.profile("name", "url");
+        UMLStereotype copyStereotype = copyProfile.createChildStereotype("S1", UMLMetaClass.CLASS);
+        UMLProperty copyProperty = copyStereotype.createChildProperty("P1", UMLPropertyType.STRING);
 
         // Create an addition to the base profile
 
-        UMLStereotype addedStereotype = newProfile.createChildStereotype("S2", UMLMetaClass.CLASS);
-
+        UMLStereotype newStereotype = copyProfile.createChildStereotype("S2", UMLMetaClass.CLASS);
+        UMLProperty newProperty = newStereotype.createChildProperty("P2", UMLPropertyType.INTEGER);
+        
         // Load the saved profile to ensure that everything is in place
 
         UMLProfile loadedProfile = eclipseModel.profile(tempFile);
 
         // Create the difference between the loaded profile and the new Profile
 
-        UMLProfileDifference difference = eclipseModel.difference(loadedProfile, newProfile);
+        UMLProfileDifference difference = eclipseModel.difference(loadedProfile, copyProfile);
 
         // Apply the difference to the loaded profile
 

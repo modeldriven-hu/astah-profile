@@ -26,7 +26,9 @@ public class MetaClassInProfile {
     private org.eclipse.uml2.uml.Class  importMetaClass(Profile profile, Model umlMetamodel, String name) {
 
         for (ElementImport elementImport : profile.getMetaclassReferences()){
-            
+            if (elementImport.getName().equals(name) && elementImport.getImportedElement() instanceof org.eclipse.uml2.uml.Class){
+                return (org.eclipse.uml2.uml.Class) elementImport.getImportedElement();
+            }
         }
 
         org.eclipse.uml2.uml.Class classMetaClass = (org.eclipse.uml2.uml.Class) umlMetamodel.getOwnedType(name);
