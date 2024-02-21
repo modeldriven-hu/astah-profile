@@ -31,12 +31,12 @@ public class AxmzFileProfilesSection implements AxmzFileSection {
     @Override
     public void process(Path file) {
         try {
-            // Because the model cannot read a file directly from a zip file, therefore
+            // Because the model cannot read a file directly from a zip file
             // we need to copy it out into a temporary file, and use this file as an
             // input to create a profile
 
             File tempFile = File.createTempFile("process-", ".profile.uml");
-            //tempFile.deleteOnExit();
+            tempFile.deleteOnExit();
 
             Files.copy(file, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 

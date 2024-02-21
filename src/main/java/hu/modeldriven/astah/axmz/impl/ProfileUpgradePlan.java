@@ -42,40 +42,20 @@ public class ProfileUpgradePlan implements UpgradePlan {
             // Create a temporary file
 
             File tempFile = File.createTempFile("upgraded-", ".profile.uml");
-            //tempFile.deleteOnExit();
+            tempFile.deleteOnExit();
 
             // Save profile into the temporary file
 
             upgradedProfile.save(tempFile);
 
-            // Copy the original file to resultFile
+            // Copy the original model file to the result model file
 
             Files.copy(section.modelFile().file().toPath(), resultFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
-            // Open the result file
+            // Replace the profile with  new one in the result model file
 
-            try (FileSystem fileSystem = FileSystems.newFileSystem(new ZipFile(resultFile).uri(), new HashMap<>())) {
-
-                for (Path rootDirectory : fileSystem.getRootDirectories()) {
-                    Files.walkFileTree(rootDirectory, new SimpleFileVisitor<Path>() {
-                        @Override
-                        public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
-                            try {
-
-                                if (path.getFileName().toString().equals(section.profilePath().getFileName().toString())) {
-                                    Files.copy(tempFile.toPath(), path, StandardCopyOption.REPLACE_EXISTING);
-                                    return FileVisitResult.TERMINATE;
-                                }
-
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-
-                            return FileVisitResult.CONTINUE;
-                        }
-                    });
-                }
-            }
+            ZipFile resultAsZip = new ZipFile(resultFile);
+            resultAsZip.copyFile(tempFile, section.profilePath(), ZipFile.CopyDirection.FILE_TO_ZIP);
 
         } catch (DifferenceNotApplicableException | IOException e) {
             throw new UpgradeFailedException(e);
