@@ -35,8 +35,8 @@ public class AxmzFileProfilesSection implements AxmzFileSection {
             // we need to copy it out into a temporary file, and use this file as an
             // input to create a profile
 
-            File tempFile = File.createTempFile("temp-", ".profile.uml");
-            tempFile.deleteOnExit();
+            File tempFile = File.createTempFile("process-", ".profile.uml");
+            //tempFile.deleteOnExit();
 
             Files.copy(file, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 

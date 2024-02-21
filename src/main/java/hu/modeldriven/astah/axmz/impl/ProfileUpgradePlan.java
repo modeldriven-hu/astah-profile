@@ -41,8 +41,8 @@ public class ProfileUpgradePlan implements UpgradePlan {
 
             // Create a temporary file
 
-            File tempFile = File.createTempFile("updated-", ".profile.uml");
-            tempFile.deleteOnExit();
+            File tempFile = File.createTempFile("upgraded-", ".profile.uml");
+            //tempFile.deleteOnExit();
 
             // Save profile into the temporary file
 
@@ -59,14 +59,13 @@ public class ProfileUpgradePlan implements UpgradePlan {
                 for (Path rootDirectory : fileSystem.getRootDirectories()) {
                     Files.walkFileTree(rootDirectory, new SimpleFileVisitor<Path>() {
                         @Override
-                        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+                        public FileVisitResult visitFile(Path path, BasicFileAttributes attrs) {
                             try {
 
-                                if (file.equals(section.profilePath())) {
-                                    Files.copy(tempFile.toPath(), file, StandardCopyOption.REPLACE_EXISTING);
+                                if (path.getFileName().toString().equals(section.profilePath().getFileName().toString())) {
+                                    Files.copy(tempFile.toPath(), path, StandardCopyOption.REPLACE_EXISTING);
+                                    return FileVisitResult.TERMINATE;
                                 }
-
-                                return FileVisitResult.TERMINATE;
 
                             } catch (IOException e) {
                                 e.printStackTrace();

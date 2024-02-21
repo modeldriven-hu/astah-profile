@@ -42,11 +42,10 @@ public class AxmzFileProfileSection {
                     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                         try {
 
-                            if (file.equals(profilePath)) {
+                            if (file.toUri().equals(profilePath.toUri())) {
                                 Files.copy(file, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                                return FileVisitResult.TERMINATE;
                             }
-
-                            return FileVisitResult.TERMINATE;
 
                         } catch (IOException e) {
                             e.printStackTrace();

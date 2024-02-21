@@ -23,7 +23,7 @@ public class TestAxmzFile {
 
         UpgradePlan plan = project.upgradeProfile(modifiedProfile);
 
-        File resultFile = File.createTempFile("merged-", ".axmz");
+        File resultFile = File.createTempFile("final-", ".axmz");
 
         System.out.println("Result file will be: " + resultFile);
 
