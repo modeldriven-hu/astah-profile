@@ -13,32 +13,37 @@ public class TestProfileDifference {
     public void testAddStereotype() throws IOException, ProfileCreationFailedException, DifferenceNotApplicableException {
         UMLModel eclipseModel = new EclipseModel();
 
-        // Create a base profile and save it to a file
+        // Create a base profile and save it as a temporary file
 
         UMLProfile originalProfile = eclipseModel.profile("name", "url");
         UMLStereotype stereotype = originalProfile.createChildStereotype("S1", UMLMetaClass.CLASS);
         UMLProperty property = stereotype.createChildProperty("P1", UMLPropertyType.STRING);
 
-        File tempFile = File.createTempFile("originalProfile", "profile.uml");
-        originalProfile.save(tempFile);
+        File originalFile = File.createTempFile("originalProfile", "profile.uml");
+        originalProfile.save(originalFile);
 
-        // Create a copy of the base profile
+        // Load the profile as we would in the GUI app using SimpleUMLModel
 
         UMLModel simpleModel = new SimpleUMLModel();
-        UMLProfile copyProfile = simpleModel.profile("name", "url");
-        UMLStereotype copyStereotype = copyProfile.createChildStereotype("S1", UMLMetaClass.CLASS);
-        UMLProperty copyProperty = copyStereotype.createChildProperty("P1", UMLPropertyType.STRING);
+        UMLProfile copyProfile = simpleModel.profile(originalFile);
 
-        // Create an addition to the base profile
+        // Extend the base profile's existing stereotype with a new property
+
+        UMLStereotype copyStereotype = copyProfile.stereotypes().get(0);
+        UMLProperty newProperty1 = copyStereotype.createChildProperty("P1_1", UMLPropertyType.BOOLEAN);
+
+        // Extend the base profile with a new stereotype and a new property
 
         UMLStereotype newStereotype = copyProfile.createChildStereotype("S2", UMLMetaClass.CLASS);
-        UMLProperty newProperty = newStereotype.createChildProperty("P2", UMLPropertyType.INTEGER);
+        UMLProperty newProperty2 = newStereotype.createChildProperty("P2", UMLPropertyType.INTEGER);
         
         // Load the saved profile to ensure that everything is in place
+        // We need to do this because we want to retain the original identifiers which we cannot do with
+        // the simpleModel implementation
 
-        UMLProfile loadedProfile = eclipseModel.profile(tempFile);
+        UMLProfile loadedProfile = eclipseModel.profile(originalFile);
 
-        // Create the difference between the loaded profile and the new Profile
+        // Create the difference between the loaded profile and the modified profile
 
         UMLProfileDifference difference = eclipseModel.difference(loadedProfile, copyProfile);
 
