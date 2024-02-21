@@ -2,7 +2,9 @@ package hu.modeldriven.core.uml.impl.simple;
 
 import hu.modeldriven.core.uml.UMLMetaClass;
 import hu.modeldriven.core.uml.UMLProfile;
+import hu.modeldriven.core.uml.UMLProfileDifference;
 import hu.modeldriven.core.uml.UMLStereotype;
+import hu.modeldriven.core.uml.impl.difference.UMLProfileDifferenceImpl;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -76,5 +78,10 @@ public class SimpleUMLProfile implements UMLProfile {
     @Override
     public void save(File file) {
         new FileFromSimpleUMLProfile(this, file).save();
+    }
+
+    @Override
+    public UMLProfileDifference difference(UMLProfile newProfile) {
+        return new UMLProfileDifferenceImpl(this, newProfile);
     }
 }

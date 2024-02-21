@@ -3,8 +3,6 @@ package hu.modeldriven.core.uml.impl.eclipse;
 import hu.modeldriven.core.uml.ProfileCreationFailedException;
 import hu.modeldriven.core.uml.UMLModel;
 import hu.modeldriven.core.uml.UMLProfile;
-import hu.modeldriven.core.uml.UMLProfileDifference;
-import hu.modeldriven.core.uml.impl.difference.UMLProfileDifferenceImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -15,11 +13,11 @@ import org.eclipse.uml2.uml.UMLPackage;
 
 import java.io.File;
 
-public class EclipseModel implements UMLModel {
+public class EclipseUMLModel implements UMLModel {
 
     private final EclipseRepresentation eclipseRepresentation;
 
-    public EclipseModel() {
+    public EclipseUMLModel() {
         this.eclipseRepresentation = new EclipseRepresentation();
     }
 
@@ -30,7 +28,7 @@ public class EclipseModel implements UMLModel {
             org.eclipse.uml2.uml.Package rootPackage = (org.eclipse.uml2.uml.Package) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.PACKAGE);
 
             if (rootPackage instanceof Profile) {
-                return new EclipseProfile((Profile) rootPackage, eclipseRepresentation);
+                return new EclipseUMLProfile((Profile) rootPackage, eclipseRepresentation);
             }
 
             throw new WrappedException(new IllegalArgumentException("File contains a package, but it is not a profile!"));
@@ -47,11 +45,7 @@ public class EclipseModel implements UMLModel {
         profile.setName(name);
         profile.setURI(namespaceURI);
 
-        return new EclipseProfile(profile, eclipseRepresentation);
+        return new EclipseUMLProfile(profile, eclipseRepresentation);
     }
 
-    @Override
-    public UMLProfileDifference difference(UMLProfile originalProfile, UMLProfile newProfile) {
-        return new UMLProfileDifferenceImpl(originalProfile, newProfile);
-    }
 }

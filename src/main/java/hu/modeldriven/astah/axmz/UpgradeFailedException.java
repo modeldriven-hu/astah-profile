@@ -6,4 +6,8 @@ public class UpgradeFailedException extends Exception{
         super(e);
     }
 
+    public UpgradeFailedException(String message){
+        super(message);
+    }
+
 }

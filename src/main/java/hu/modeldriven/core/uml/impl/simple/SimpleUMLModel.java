@@ -20,8 +20,4 @@ public class SimpleUMLModel implements UMLModel {
         return new SimpleUMLProfile(name, namespaceURI);
     }
 
-    @Override
-    public UMLProfileDifference difference(UMLProfile originalProfile, UMLProfile newProfile) {
-        return new UMLProfileDifferenceImpl(originalProfile, newProfile);
-    }
 }

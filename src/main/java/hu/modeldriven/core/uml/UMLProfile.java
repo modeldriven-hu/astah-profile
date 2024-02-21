@@ -25,4 +25,6 @@ public interface UMLProfile {
 
     void save(File file);
 
+    UMLProfileDifference difference(UMLProfile newProfile);
+
 }

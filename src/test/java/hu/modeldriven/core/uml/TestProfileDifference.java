@@ -1,6 +1,6 @@
 package hu.modeldriven.core.uml;
 
-import hu.modeldriven.core.uml.impl.eclipse.EclipseModel;
+import hu.modeldriven.core.uml.impl.eclipse.EclipseUMLModel;
 import hu.modeldriven.core.uml.impl.simple.SimpleUMLModel;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ public class TestProfileDifference {
 
     @Test
     public void testAddStereotype() throws IOException, ProfileCreationFailedException, DifferenceNotApplicableException {
-        UMLModel eclipseModel = new EclipseModel();
+        UMLModel eclipseModel = new EclipseUMLModel();
 
         // Create a base profile and save it as a temporary file
 
@@ -45,7 +45,7 @@ public class TestProfileDifference {
 
         // Create the difference between the loaded profile and the modified profile
 
-        UMLProfileDifference difference = eclipseModel.difference(loadedProfile, copyProfile);
+        UMLProfileDifference difference = loadedProfile.difference(copyProfile);
 
         // Apply the difference to the loaded profile
 

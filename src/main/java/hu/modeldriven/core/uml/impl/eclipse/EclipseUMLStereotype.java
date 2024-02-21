@@ -13,14 +13,14 @@ import org.eclipse.uml2.uml.Stereotype;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class EclipseStereotype implements UMLStereotype {
+public class EclipseUMLStereotype implements UMLStereotype {
 
     private final String id;
     private final Stereotype stereotype;
     private final PrimitiveTypesInProfile primitiveTypes;
     private final MetaClassInProfile metaClasses;
 
-    public EclipseStereotype(Stereotype stereotype, PrimitiveTypesInProfile primitiveTypes, MetaClassInProfile metaClasses) {
+    public EclipseUMLStereotype(Stereotype stereotype, PrimitiveTypesInProfile primitiveTypes, MetaClassInProfile metaClasses) {
         this.id = EcoreUtil.getIdentification(stereotype);
         this.stereotype = stereotype;
         this.primitiveTypes = primitiveTypes;
@@ -63,7 +63,7 @@ public class EclipseStereotype implements UMLStereotype {
                 0,
                 1);
 
-        return new EclipseProperty(property, primitiveTypes);
+        return new EclipseUMLProperty(property, primitiveTypes);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class EclipseStereotype implements UMLStereotype {
     public List<UMLProperty> properties() {
         return this.stereotype.getAttributes().stream()
                 .filter(p -> !this.internalProperty(p))
-                .map(property -> new EclipseProperty(property, primitiveTypes))
+                .map(property -> new EclipseUMLProperty(property, primitiveTypes))
                 .collect(Collectors.toList());
     }
 

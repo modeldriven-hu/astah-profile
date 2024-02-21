@@ -11,14 +11,16 @@ import java.nio.file.Paths;
 public class TestAxmzFile {
 
     @Test
-    public void testLoadFile() throws URISyntaxException, UpgradeFailedException {
+    public void testLoadFile() throws URISyntaxException, AstahProjectImportFailedException, UpgradeFailedException {
         URL resource = getClass().getClassLoader().getResource("ImportedStereotype.axmz");
         File file = Paths.get(resource.toURI()).toFile();
+
         AxmzFile axmzFile = new AxmzFile(file);
+        AstahProject project = axmzFile.project();
 
         UMLProfile profile = createUMLProfile();
 
-        UpgradePlan plan = axmzFile.upgradeProfile(profile);
+        UpgradePlan plan = project.upgradeProfile(profile);
 
         for (UpgradePlanStep step : plan.steps()){
             System.out.println(step.asString());

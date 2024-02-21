@@ -8,6 +8,4 @@ public interface UMLModel {
 
     UMLProfile profile(String name, String namespaceURI);
 
-    UMLProfileDifference difference(UMLProfile originalProfile, UMLProfile newProfile);
-
 }
