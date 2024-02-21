@@ -1,24 +1,29 @@
 package hu.modeldriven.astah.axmz.impl;
 
+import hu.modeldriven.astah.axmz.ZipFile;
 import hu.modeldriven.core.uml.UMLProfile;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
-import java.nio.file.Path;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.HashMap;
 
 public class AxmzFileProfileSection {
 
-    private final URI modelURI;
+    private final ZipFile modelFile;
     private final Path profilePath;
     private final UMLProfile umlProfile;
 
-    public AxmzFileProfileSection(URI modelURI, Path profilePath, UMLProfile umlProfile) {
-        this.modelURI = modelURI;
+    public AxmzFileProfileSection(ZipFile modelFile, Path profilePath, UMLProfile umlProfile) {
+        this.modelFile = modelFile;
         this.profilePath = profilePath;
         this.umlProfile = umlProfile;
     }
 
-    public URI modelURI() {
-        return modelURI;
+    public ZipFile modelFile() {
+        return modelFile;
     }
 
     public Path profilePath() {
@@ -28,4 +33,32 @@ public class AxmzFileProfileSection {
     public UMLProfile umlProfile() {
         return umlProfile;
     }
+
+    public void save(File targetFile) throws IOException {
+        try (FileSystem fileSystem = FileSystems.newFileSystem(modelFile.uri(), new HashMap<>())) {
+
+            for (Path rootDirectory : fileSystem.getRootDirectories()) {
+                Files.walkFileTree(rootDirectory, new SimpleFileVisitor<Path>() {
+                    @Override
+                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+                        try {
+
+                            if (file.equals(profilePath)) {
+                                Files.copy(file, targetFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                            }
+
+                            return FileVisitResult.TERMINATE;
+
+                        } catch (IOException e){
+                            e.printStackTrace();
+                        }
+
+                        return FileVisitResult.CONTINUE;
+                    }
+                });
+            }
+        }
+
+    }
+
 }

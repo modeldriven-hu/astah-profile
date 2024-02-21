@@ -14,31 +14,28 @@ import java.util.*;
 
 public class AxmzFile {
 
-    private final File file;
-    private final List<AxmzFileProfileSection> profiles;
+    private final ZipFile modelFile;
 
     public AxmzFile(File file) {
-        this.file = file;
-        this.profiles = new ArrayList<>();
+        this.modelFile = new ZipFile(file);
     }
 
     public AstahProject project() throws AstahProjectImportFailedException {
-        loadParts();
-        return new AstahProject(file, profiles);
-    }
-
-    // FIXME handle the various file types in an OOP way, this is a quick and dirty
-    // solution, this will result also in a bigger refactoring later
-    private void loadParts() throws AstahProjectImportFailedException {
-
-        Map<String, String> env = new HashMap<>();
-        env.put("create", "false");
-
-        URI uri = URI.create("jar:file:" + file.getPath());
+        List<AxmzFileProfileSection> profiles = new ArrayList<>();
 
         UMLModel model = new EclipseUMLModel();
 
-        List<AxmzFileSection> fileParts = Collections.singletonList(new AxmzFileProfilesSection(uri, model, profiles));
+        List<AxmzFileSection> fileSections = Collections.singletonList(new AxmzFileProfilesSection(modelFile, model, profiles));
+
+        loadSections(modelFile.uri(), fileSections);
+
+        return new AstahProject(profiles);
+    }
+
+    private void loadSections(URI uri, List<AxmzFileSection> fileSections) throws AstahProjectImportFailedException {
+
+        Map<String, String> env = new HashMap<>();
+        env.put("create", "false");
 
         try (FileSystem fileSystem = FileSystems.newFileSystem(uri, env)) {
 
@@ -47,9 +44,9 @@ public class AxmzFile {
                     @Override
                     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
 
-                        for (AxmzFileSection filePart : fileParts) {
-                            if (filePart.appliesTo(file)) {
-                                filePart.process(file);
+                        for (AxmzFileSection fileSection : fileSections) {
+                            if (fileSection.appliesTo(file)) {
+                                fileSection.process(file);
                             }
                         }
 

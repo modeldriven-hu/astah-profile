@@ -6,4 +6,7 @@ public class ProfileCreationFailedException extends Exception {
         super(e);
     }
 
+    public ProfileCreationFailedException(String message) {
+        super(message);
+    }
 }

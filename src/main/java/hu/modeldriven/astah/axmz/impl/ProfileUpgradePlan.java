@@ -29,7 +29,7 @@ public class ProfileUpgradePlan implements UpgradePlan {
     }
 
     @Override
-    public void execute() throws UpgradeFailedException {
+    public void execute(File resultFile) throws UpgradeFailedException {
         try {
 
             // Apply the difference on the UML profile
@@ -45,9 +45,13 @@ public class ProfileUpgradePlan implements UpgradePlan {
 
             upgradedProfile.save(tempFile);
 
-            // Open the file and replace the original one with the new
+            // Copy the original file to resultFile
 
-            try (FileSystem fileSystem = FileSystems.newFileSystem(section.modelURI(), new HashMap<>())) {
+            Files.copy(section.modelFile().file().toPath(), resultFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+            // Open the result file
+
+            try (FileSystem fileSystem = FileSystems.newFileSystem(new ZipFile(resultFile).uri(), new HashMap<>())) {
 
                 for (Path rootDirectory : fileSystem.getRootDirectories()) {
                     Files.walkFileTree(rootDirectory, new SimpleFileVisitor<Path>() {
