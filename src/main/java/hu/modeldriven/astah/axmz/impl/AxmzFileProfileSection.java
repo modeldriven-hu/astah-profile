@@ -5,7 +5,7 @@ import hu.modeldriven.core.uml.UMLProfile;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Path;
 
 public class AxmzFileProfileSection {
 

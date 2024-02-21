@@ -11,6 +11,8 @@ public class AbstractProfileTreePanel extends JPanel {
     protected JButton openButton;
     protected JButton saveButton;
 
+    protected JButton updateButton;
+
     protected JSplitPane splitPane;
 
     protected JScrollPane treeScrollPane;
@@ -42,10 +44,12 @@ public class AbstractProfileTreePanel extends JPanel {
         newButton = new JButton("New");
         openButton = new JButton("Open");
         saveButton = new JButton("Save");
+        updateButton = new JButton("Update model");
 
         toolBar.add(newButton);
         toolBar.add(openButton);
         toolBar.add(saveButton);
+        toolBar.add(updateButton);
 
         this.add(toolBar, BorderLayout.NORTH);
         this.add(splitPane, BorderLayout.CENTER);

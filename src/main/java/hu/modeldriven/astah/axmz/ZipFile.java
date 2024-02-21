@@ -36,7 +36,7 @@ public class ZipFile {
 
                                 if (direction.equals(CopyDirection.FILE_FROM_ZIP)) {
                                     Files.copy(path, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-                                } else{
+                                } else {
                                     Files.copy(file.toPath(), path, StandardCopyOption.REPLACE_EXISTING);
                                 }
 
@@ -54,7 +54,7 @@ public class ZipFile {
         }
     }
 
-     public enum CopyDirection {
+    public enum CopyDirection {
         FILE_TO_ZIP, FILE_FROM_ZIP
     }
 

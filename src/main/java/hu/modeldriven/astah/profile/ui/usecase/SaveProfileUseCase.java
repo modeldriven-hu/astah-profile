@@ -45,7 +45,7 @@ public class SaveProfileUseCase implements EventHandler<Event> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Specify a file to save");
 
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("UML Profiles", FILE_EXTENSION);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("UML Profiles", "uml");
             fileChooser.addChoosableFileFilter(filter);
             fileChooser.setFileFilter(filter);
 

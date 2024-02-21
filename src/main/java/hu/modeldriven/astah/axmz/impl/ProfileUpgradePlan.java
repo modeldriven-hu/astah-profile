@@ -10,10 +10,9 @@ import hu.modeldriven.core.uml.UMLProfileDifference;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.*;
-import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 
 public class ProfileUpgradePlan implements UpgradePlan {

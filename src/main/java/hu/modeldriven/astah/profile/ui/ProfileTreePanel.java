@@ -77,6 +77,12 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
                 MaterialDesign.MDI_CONTENT_SAVE,
                 16,
                 UIManager.getColor(BUTTON_FOREGROUND)));
+
+        updateButton.setIcon(FontIcon.of(
+                MaterialDesign.MDI_UPDATE,
+                16,
+                UIManager.getColor(BUTTON_FOREGROUND)));
+
     }
 
 
@@ -84,6 +90,7 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
         newButton.addActionListener(actionEvent -> eventBus.publish(new NewProfileRequestedEvent()));
         openButton.addActionListener(actionEvent -> eventBus.publish(new LoadProfileRequestedEvent()));
         saveButton.addActionListener(actionEvent -> eventBus.publish(new SaveProfileRequestedEvent()));
+        updateButton.addActionListener(actionEvent -> eventBus.publish(new UpdateModelRequestedEvent()));
     }
 
     private void initUseCases() {
@@ -97,6 +104,7 @@ public class ProfileTreePanel extends AbstractProfileTreePanel {
         eventBus.subscribe(new CreatePropertyUseCase());
         eventBus.subscribe(new RemoveStereotypeUseCase());
         eventBus.subscribe(new RemovePropertyUseCase());
+        eventBus.subscribe(new UpdateModelUseCase(eventBus, this));
     }
 
     private void initTree() {
