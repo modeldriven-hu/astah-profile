@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 
@@ -35,10 +34,10 @@ public class TestAxmzFile {
 
         File tempFile = File.createTempFile("copy-", "profile.uml");
 
-        if (project.profiles() == null || project.profiles().isEmpty()){
+        if (project.profiles() == null || project.profiles().isEmpty()) {
             throw new ProfileCreationFailedException("Empty profiles");
         }
-        
+
         project.profiles().get(0).save(tempFile);
 
         UMLModel model = new SimpleUMLModel();

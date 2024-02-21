@@ -1,6 +1,9 @@
 package hu.modeldriven.astah.axmz.impl;
 
-import hu.modeldriven.astah.axmz.*;
+import hu.modeldriven.astah.axmz.UpgradeFailedException;
+import hu.modeldriven.astah.axmz.UpgradePlan;
+import hu.modeldriven.astah.axmz.UpgradePlanStep;
+import hu.modeldriven.astah.axmz.ZipFile;
 import hu.modeldriven.core.uml.DifferenceNotApplicableException;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLProfileDifference;
@@ -65,7 +68,7 @@ public class ProfileUpgradePlan implements UpgradePlan {
 
                                 return FileVisitResult.TERMINATE;
 
-                            } catch (IOException e){
+                            } catch (IOException e) {
                                 e.printStackTrace();
                             }
 

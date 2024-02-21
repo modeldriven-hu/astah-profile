@@ -5,7 +5,6 @@ import hu.modeldriven.core.uml.UMLProfile;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.HashMap;
@@ -49,7 +48,7 @@ public class AxmzFileProfileSection {
 
                             return FileVisitResult.TERMINATE;
 
-                        } catch (IOException e){
+                        } catch (IOException e) {
                             e.printStackTrace();
                         }
 

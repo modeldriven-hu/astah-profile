@@ -6,7 +6,6 @@ import hu.modeldriven.core.uml.UMLModel;
 import hu.modeldriven.core.uml.UMLProfile;
 
 import java.io.File;
-import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;

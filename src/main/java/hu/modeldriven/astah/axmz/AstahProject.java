@@ -1,12 +1,10 @@
 package hu.modeldriven.astah.axmz;
 
 import hu.modeldriven.astah.axmz.impl.AxmzFileProfileSection;
-import hu.modeldriven.astah.axmz.impl.AxmzFileProfilesSection;
 import hu.modeldriven.astah.axmz.impl.ProfileUpgradePlan;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLProfileDifference;
 
-import java.io.File;
 import java.util.List;
 
 public class AstahProject {
@@ -17,7 +15,7 @@ public class AstahProject {
         this.profileSections = profileSections;
     }
 
-    public List<AxmzFileProfileSection> profiles(){
+    public List<AxmzFileProfileSection> profiles() {
         return profileSections;
     }
 

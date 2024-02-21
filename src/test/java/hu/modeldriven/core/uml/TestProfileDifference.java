@@ -36,7 +36,7 @@ public class TestProfileDifference {
 
         UMLStereotype newStereotype = copyProfile.createChildStereotype("S2", UMLMetaClass.CLASS);
         UMLProperty newProperty2 = newStereotype.createChildProperty("P2", UMLPropertyType.INTEGER);
-        
+
         // Load the saved profile to ensure that everything is in place
         // We need to do this because we want to retain the original identifiers which we cannot do with
         // the simpleModel implementation
