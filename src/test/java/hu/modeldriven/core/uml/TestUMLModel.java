@@ -48,7 +48,7 @@ public class TestUMLModel {
         Assert.assertTrue(profile.stereotypes().stream().anyMatch(s -> "Stereotype1".equals(s.name())));
         Assert.assertTrue(profile.stereotypes().stream().anyMatch(s -> "Stereotype2".equals(s.name())));
 
-        File temporaryFile = new File("/Users/zsolt/multiData.uml");//File.createTempFile("testProfile", "profile.uml");
+        File temporaryFile = File.createTempFile("testProfile", "profile.uml");
         profile.save(temporaryFile);
     }
 

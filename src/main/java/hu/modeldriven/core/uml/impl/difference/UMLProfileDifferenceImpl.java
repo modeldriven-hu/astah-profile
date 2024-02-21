@@ -67,9 +67,13 @@ public class UMLProfileDifferenceImpl implements UMLProfileDifference {
     }
 
     @Override
-    public void apply(UMLProfile profile) throws DifferenceNotApplicableException {
+    public UMLProfile apply(UMLProfile profile) throws DifferenceNotApplicableException {
         for (ProfileDifference difference : differences()) {
             difference.apply(profile);
         }
+
+        // FIXME this should be immutable
+
+        return  profile;
     }
 }

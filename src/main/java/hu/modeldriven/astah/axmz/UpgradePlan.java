@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface UpgradePlan {
 
-    public List<UpgradePlanStep> steps();
+    List<UpgradePlanStep> steps();
 
-    public void execute();
+    void execute() throws UpgradeFailedException;
 
 }

@@ -1,5 +1,7 @@
 package hu.modeldriven.astah.axmz;
 
+import hu.modeldriven.astah.axmz.impl.AxmzFileProfileSection;
+import hu.modeldriven.astah.axmz.impl.AxmzFileProfilesSection;
 import hu.modeldriven.core.uml.UMLModel;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.impl.eclipse.EclipseUMLModel;
@@ -9,27 +11,26 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AxmzFile {
 
     private final File file;
+    private final List<AxmzFileProfileSection> profiles;
 
     public AxmzFile(File file) {
         this.file = file;
+        this.profiles = new ArrayList<>();
     }
 
-    public AstahProject project() throws AstahProjectImportFailedException{
-        List<UMLProfile> umlProfiles = loadProfiles();
-        return new AstahProject(umlProfiles);
+    public AstahProject project() throws AstahProjectImportFailedException {
+        loadParts();
+        return new AstahProject(file, profiles);
     }
 
-    private List<UMLProfile> loadProfiles() throws AstahProjectImportFailedException {
-
-        List<UMLProfile> result = new ArrayList<>();
+    // FIXME handle the various file types in an OOP way, this is a quick and dirty
+    // solution, this will result also in a bigger refactoring later
+    private void loadParts() throws AstahProjectImportFailedException {
 
         Map<String, String> env = new HashMap<>();
         env.put("create", "false");
@@ -38,33 +39,18 @@ public class AxmzFile {
 
         UMLModel model = new EclipseUMLModel();
 
+        List<AxmzFileSection> fileParts = Collections.singletonList(new AxmzFileProfilesSection(file, model, profiles));
+
         try (FileSystem fileSystem = FileSystems.newFileSystem(uri, env)) {
 
             for (Path rootDirectory : fileSystem.getRootDirectories()) {
                 Files.walkFileTree(rootDirectory, new SimpleFileVisitor<Path>() {
                     @Override
-                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)  {
+                    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
 
-                        // FIXME handle the various file types in an OOP way, this is a quick and dirty
-                        // solution, this will result also in a bigger refactoring later
-
-                        if (file.toUri().getSchemeSpecificPart().endsWith(".profile.uml")){
-                            try {
-
-                                // Because the model cannot read a file directly from a zip file, therefore
-                                // we need to copy it out into a temporary file, and use this file as an
-                                // input to create a profile
-
-                                File tempFile = File.createTempFile("temp-", ".profile.uml");
-                                tempFile.deleteOnExit();
-
-                                Files.copy(file, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-
-                                UMLProfile profile = model.profile(tempFile);
-                                result.add(profile);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                                // In any case of error we will log and continue
+                        for (AxmzFileSection filePart : fileParts) {
+                            if (filePart.appliesTo(file)) {
+                                filePart.process(file);
                             }
                         }
 
@@ -73,11 +59,9 @@ public class AxmzFile {
                 });
             }
 
-        } catch (IOException e){
+        } catch (IOException e) {
             throw new AstahProjectImportFailedException(e);
         }
-
-        return result;
     }
 
 
