@@ -60,8 +60,8 @@ public class PrimitiveTypesInProfile {
 
         // If the primitive type is already imported the just return it
 
-        for (PackageableElement element : currentProfile.getImportedElements()){
-            if (element.getName().equals(name) && element instanceof PrimitiveType){
+        for (PackageableElement element : currentProfile.getImportedElements()) {
+            if (element.getName().equals(name) && element instanceof PrimitiveType) {
                 return (PrimitiveType) element;
             }
         }

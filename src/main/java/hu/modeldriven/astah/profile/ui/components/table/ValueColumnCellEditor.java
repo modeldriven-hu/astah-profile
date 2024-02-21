@@ -1,7 +1,7 @@
 package hu.modeldriven.astah.profile.ui.components.table;
 
 import javax.swing.*;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

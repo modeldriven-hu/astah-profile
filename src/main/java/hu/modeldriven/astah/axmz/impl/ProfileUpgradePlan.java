@@ -1,15 +1,16 @@
 package hu.modeldriven.astah.axmz.impl;
 
-import hu.modeldriven.astah.axmz.UpgradeFailedException;
-import hu.modeldriven.astah.axmz.UpgradePlan;
-import hu.modeldriven.astah.axmz.UpgradePlanStep;
+import hu.modeldriven.astah.axmz.*;
 import hu.modeldriven.core.uml.DifferenceNotApplicableException;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLProfileDifference;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class ProfileUpgradePlan implements UpgradePlan {
@@ -44,10 +45,33 @@ public class ProfileUpgradePlan implements UpgradePlan {
 
             upgradedProfile.save(tempFile);
 
-            // Put the profile back into the original file
-            // FIXME shall we create a copy of a model file, or are we brave enough to update the real file?
+            // Open the file and replace the original one with the new
 
-        } catch (DifferenceNotApplicableException | IOException e){
+            try (FileSystem fileSystem = FileSystems.newFileSystem(section.modelURI(), new HashMap<>())) {
+
+                for (Path rootDirectory : fileSystem.getRootDirectories()) {
+                    Files.walkFileTree(rootDirectory, new SimpleFileVisitor<Path>() {
+                        @Override
+                        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+                            try {
+
+                                if (file.equals(section.profilePath())) {
+                                    Files.copy(tempFile.toPath(), file, StandardCopyOption.REPLACE_EXISTING);
+                                }
+
+                                return FileVisitResult.TERMINATE;
+
+                            } catch (IOException e){
+                                e.printStackTrace();
+                            }
+
+                            return FileVisitResult.CONTINUE;
+                        }
+                    });
+                }
+            }
+
+        } catch (DifferenceNotApplicableException | IOException e) {
             throw new UpgradeFailedException(e);
         }
     }

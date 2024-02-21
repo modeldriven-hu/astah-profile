@@ -18,6 +18,7 @@ public class UMLProfileDifferenceImpl implements UMLProfileDifference {
     /**
      * FIXME this solves the creation of ProfileDifferences for the two cases,
      * but we definitely need a clearer, more OOP solution
+     *
      * @return
      */
     private List<ProfileDifference> differences() {
@@ -74,6 +75,6 @@ public class UMLProfileDifferenceImpl implements UMLProfileDifference {
 
         // FIXME this should be immutable
 
-        return  profile;
+        return profile;
     }
 }

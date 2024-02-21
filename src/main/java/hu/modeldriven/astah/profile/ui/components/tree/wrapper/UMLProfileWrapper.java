@@ -5,7 +5,6 @@ import hu.modeldriven.core.uml.UMLMetaClass;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLProfileDifference;
 import hu.modeldriven.core.uml.UMLStereotype;
-import hu.modeldriven.core.uml.impl.difference.UMLProfileDifferenceImpl;
 
 import java.io.File;
 import java.util.List;

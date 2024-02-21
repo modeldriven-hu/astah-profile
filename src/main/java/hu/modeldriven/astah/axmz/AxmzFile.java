@@ -3,7 +3,6 @@ package hu.modeldriven.astah.axmz;
 import hu.modeldriven.astah.axmz.impl.AxmzFileProfileSection;
 import hu.modeldriven.astah.axmz.impl.AxmzFileProfilesSection;
 import hu.modeldriven.core.uml.UMLModel;
-import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.impl.eclipse.EclipseUMLModel;
 
 import java.io.File;
@@ -39,7 +38,7 @@ public class AxmzFile {
 
         UMLModel model = new EclipseUMLModel();
 
-        List<AxmzFileSection> fileParts = Collections.singletonList(new AxmzFileProfilesSection(file, model, profiles));
+        List<AxmzFileSection> fileParts = Collections.singletonList(new AxmzFileProfilesSection(uri, model, profiles));
 
         try (FileSystem fileSystem = FileSystems.newFileSystem(uri, env)) {
 

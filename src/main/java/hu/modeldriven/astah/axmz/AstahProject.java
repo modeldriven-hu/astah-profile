@@ -1,9 +1,7 @@
 package hu.modeldriven.astah.axmz;
 
 import hu.modeldriven.astah.axmz.impl.AxmzFileProfileSection;
-import hu.modeldriven.astah.axmz.impl.AxmzFileProfilesSection;
 import hu.modeldriven.astah.axmz.impl.ProfileUpgradePlan;
-import hu.modeldriven.core.uml.DifferenceNotApplicableException;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLProfileDifference;
 
@@ -23,15 +21,14 @@ public class AstahProject {
     public UpgradePlan upgradeProfile(UMLProfile newProfile) throws UpgradeFailedException {
 
         AxmzFileProfileSection section = profileSections.stream()
-                            .filter(p -> p.umlProfile().name().equals(newProfile.name()))
-                            .findFirst()
-                            .orElseThrow(() ->
-                                    new UpgradeFailedException("No profile with name " + newProfile.name() + " in the model!"));
+                .filter(p -> p.umlProfile().name().equals(newProfile.name()))
+                .findFirst()
+                .orElseThrow(() ->
+                        new UpgradeFailedException("No profile with name " + newProfile.name() + " in the model!"));
 
+        UMLProfileDifference difference = section.umlProfile().difference(newProfile);
 
-            UMLProfileDifference difference = section.umlProfile().difference(newProfile);
-
-            return new ProfileUpgradePlan(section, difference);
+        return new ProfileUpgradePlan(section, difference);
     }
 
 }

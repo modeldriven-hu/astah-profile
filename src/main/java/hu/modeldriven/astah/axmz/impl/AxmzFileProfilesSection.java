@@ -5,6 +5,7 @@ import hu.modeldriven.core.uml.UMLModel;
 import hu.modeldriven.core.uml.UMLProfile;
 
 import java.io.File;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -12,12 +13,12 @@ import java.util.List;
 
 public class AxmzFileProfilesSection implements AxmzFileSection {
 
-    private final File modelFile;
+    private final URI modelURI;
     private final UMLModel model;
     private final List<AxmzFileProfileSection> profileSections;
 
-    public AxmzFileProfilesSection(File modelFile, UMLModel model, List<AxmzFileProfileSection> profiles){
-        this.modelFile = modelFile;
+    public AxmzFileProfilesSection(URI modelURI, UMLModel model, List<AxmzFileProfileSection> profiles) {
+        this.modelURI = modelURI;
         this.model = model;
         this.profileSections = profiles;
     }
@@ -40,7 +41,7 @@ public class AxmzFileProfilesSection implements AxmzFileSection {
             Files.copy(file, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
             UMLProfile umlProfile = model.profile(tempFile);
-            profileSections.add(new AxmzFileProfileSection(modelFile, file, umlProfile));
+            profileSections.add(new AxmzFileProfileSection(modelURI, file, umlProfile));
         } catch (Exception e) {
             e.printStackTrace();
             // In any case of error we will log and continue

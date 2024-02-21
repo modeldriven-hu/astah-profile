@@ -3,8 +3,6 @@ package hu.modeldriven.core.uml.impl.simple;
 import hu.modeldriven.core.uml.ProfileCreationFailedException;
 import hu.modeldriven.core.uml.UMLModel;
 import hu.modeldriven.core.uml.UMLProfile;
-import hu.modeldriven.core.uml.UMLProfileDifference;
-import hu.modeldriven.core.uml.impl.difference.UMLProfileDifferenceImpl;
 
 import java.io.File;
 

@@ -1,7 +1,7 @@
 package hu.modeldriven.astah.profile.ui;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
+import java.awt.*;
 
 public class AbstractProfileTreePanel extends JPanel {
 

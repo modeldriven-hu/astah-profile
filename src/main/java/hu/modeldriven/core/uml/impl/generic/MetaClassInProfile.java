@@ -23,10 +23,10 @@ public class MetaClassInProfile {
         this.metaClassMap.put(UMLMetaClass.PROPERTY, importMetaClass(profile, umlMetamodel, UMLPackage.Literals.PROPERTY.getName()));
     }
 
-    private org.eclipse.uml2.uml.Class  importMetaClass(Profile profile, Model umlMetamodel, String name) {
+    private org.eclipse.uml2.uml.Class importMetaClass(Profile profile, Model umlMetamodel, String name) {
 
-        for (ElementImport elementImport : profile.getMetaclassReferences()){
-            if (elementImport.getName().equals(name) && elementImport.getImportedElement() instanceof org.eclipse.uml2.uml.Class){
+        for (ElementImport elementImport : profile.getMetaclassReferences()) {
+            if (elementImport.getName().equals(name) && elementImport.getImportedElement() instanceof org.eclipse.uml2.uml.Class) {
                 return (org.eclipse.uml2.uml.Class) elementImport.getImportedElement();
             }
         }
