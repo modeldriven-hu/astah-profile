@@ -8,7 +8,7 @@ It would be beneficial to have the profile editing capability inside Astah, inst
 
 # Screenshot
 
-![image](https://github.com/modeldriven-hu/astah-profile/assets/8182138/05fd4f51-873b-42f7-90c0-65819317eb13)
+![image](https://github.com/modeldriven-hu/astah-profile/assets/8182138/541152fb-14d9-4529-a405-246d8d907061)
 
 # Functions
 
@@ -19,12 +19,7 @@ It would be beneficial to have the profile editing capability inside Astah, inst
  - Set metaclass for stereotype
  - Add tags to stereotypes
  - Set type for a tag
-
-# Planned features
-
-## Apply changes in profile to existing model files
-
-Add the ability to apply changed profiles to the model file without the need of removal of old stereotype assignment.
-
- 
+ - Apply changes to existing model file
+  - A copy will be created from the original model file
+  - Only create stereotype and create property actions are applied
  
