@@ -20,7 +20,14 @@ public class ZipFile {
     }
 
     public URI uri() {
-        return URI.create("jar:file:" + file.getPath());
+
+        String path = file.getPath().replace("\\","/");
+
+        if (path.startsWith("/")){
+            path = path.substring(1);
+        }
+
+        return URI.create("jar:file:/" + path);
     }
 
     public void copyFile(File file, Path matchingPath, CopyDirection direction) throws IOException {

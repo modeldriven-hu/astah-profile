@@ -5,7 +5,6 @@
         <profile>
             <id>osx</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
                 <os>
                     <name>mac</name>
                 </os>
@@ -17,6 +16,7 @@
         <profile>
             <id>linux</id>
             <activation>
+                <activeByDefault>true</activeByDefault>
                 <os>
                     <name>unix</name>
                 </os>
@@ -38,7 +38,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>hu.modeldriven</groupId>
     <artifactId>astah-profile</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
     <name>%bundle.name</name>
     <description>%bundle.description</description>
