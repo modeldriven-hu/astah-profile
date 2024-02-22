@@ -2,6 +2,7 @@ package hu.modeldriven.astah.profile.ui.usecase;
 
 import hu.modeldriven.astah.axmz.AstahProject;
 import hu.modeldriven.astah.axmz.AxmzFile;
+import hu.modeldriven.astah.axmz.impl.AxmzFileImpl;
 import hu.modeldriven.astah.axmz.UpgradePlan;
 import hu.modeldriven.astah.profile.ui.event.ExceptionOccurredEvent;
 import hu.modeldriven.astah.profile.ui.event.ProfileAvailableEvent;
@@ -62,7 +63,7 @@ public class UpdateModelUseCase implements EventHandler<Event> {
     }
 
     private void updateModel(File modelFile) throws Exception{
-        AxmzFile axmzFile = new AxmzFile(modelFile);
+        AxmzFile axmzFile = new AxmzFileImpl(modelFile);
         AstahProject project = axmzFile.project();
 
         UpgradePlan plan = project.upgradeProfile(umlProfile);

@@ -1,5 +1,6 @@
 package hu.modeldriven.astah.axmz;
 
+import hu.modeldriven.astah.axmz.impl.AxmzFileImpl;
 import hu.modeldriven.core.uml.*;
 import hu.modeldriven.core.uml.impl.simple.SimpleUMLModel;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class TestAxmzFile {
         URL resource = getClass().getClassLoader().getResource("ImportedStereotype.axmz");
         File file = Paths.get(resource.toURI()).toFile();
 
-        AxmzFile axmzFile = new AxmzFile(file);
+        AxmzFile axmzFile = new AxmzFileImpl(file);
         AstahProject project = axmzFile.project();
 
         UMLProfile modifiedProfile = createUMLProfile(project);

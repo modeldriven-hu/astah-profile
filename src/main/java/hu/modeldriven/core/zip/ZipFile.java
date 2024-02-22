@@ -1,4 +1,4 @@
-package hu.modeldriven.astah.axmz;
+package hu.modeldriven.core.zip;
 
 import java.io.File;
 import java.io.IOException;

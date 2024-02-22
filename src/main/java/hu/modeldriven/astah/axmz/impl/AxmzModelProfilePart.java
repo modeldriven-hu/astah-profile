@@ -1,7 +1,6 @@
 package hu.modeldriven.astah.axmz.impl;
 
-import hu.modeldriven.astah.axmz.AxmzFileSection;
-import hu.modeldriven.astah.axmz.ZipFile;
+import hu.modeldriven.core.zip.ZipFile;
 import hu.modeldriven.core.uml.UMLModel;
 import hu.modeldriven.core.uml.UMLProfile;
 
@@ -11,16 +10,16 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 
-public class AxmzFileProfilesSection implements AxmzFileSection {
+public class AxmzModelProfilePart implements AxmzModelPart {
 
     private final ZipFile modelFile;
     private final UMLModel model;
-    private final List<AxmzFileProfileSection> profileSections;
+    private final List<AxmzModelProfile> profiles;
 
-    public AxmzFileProfilesSection(ZipFile modelFile, UMLModel model, List<AxmzFileProfileSection> profiles) {
+    public AxmzModelProfilePart(ZipFile modelFile, UMLModel model, List<AxmzModelProfile> profiles) {
         this.modelFile = modelFile;
         this.model = model;
-        this.profileSections = profiles;
+        this.profiles = profiles;
     }
 
     @Override
@@ -41,7 +40,7 @@ public class AxmzFileProfilesSection implements AxmzFileSection {
             Files.copy(file, tempFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 
             UMLProfile umlProfile = model.profile(tempFile);
-            profileSections.add(new AxmzFileProfileSection(modelFile, file, umlProfile));
+            profiles.add(new AxmzModelProfile(modelFile, file, umlProfile));
         } catch (Exception e) {
             e.printStackTrace();
             // In any case of error we will log and continue

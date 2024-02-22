@@ -3,7 +3,7 @@ package hu.modeldriven.astah.axmz.impl;
 import hu.modeldriven.astah.axmz.UpgradeFailedException;
 import hu.modeldriven.astah.axmz.UpgradePlan;
 import hu.modeldriven.astah.axmz.UpgradePlanStep;
-import hu.modeldriven.astah.axmz.ZipFile;
+import hu.modeldriven.core.zip.ZipFile;
 import hu.modeldriven.core.uml.DifferenceNotApplicableException;
 import hu.modeldriven.core.uml.UMLProfile;
 import hu.modeldriven.core.uml.UMLProfileDifference;
@@ -17,10 +17,10 @@ import java.util.List;
 
 public class ProfileUpgradePlan implements UpgradePlan {
 
-    private final AxmzFileProfileSection section;
+    private final AxmzModelProfile section;
     private final UMLProfileDifference difference;
 
-    public ProfileUpgradePlan(AxmzFileProfileSection section, UMLProfileDifference difference) {
+    public ProfileUpgradePlan(AxmzModelProfile section, UMLProfileDifference difference) {
         this.section = section;
         this.difference = difference;
     }

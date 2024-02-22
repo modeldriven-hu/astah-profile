@@ -1,8 +1,8 @@
-package hu.modeldriven.astah.axmz;
+package hu.modeldriven.astah.axmz.impl;
 
 import java.nio.file.Path;
 
-public interface AxmzFileSection {
+public interface AxmzModelPart {
 
     boolean appliesTo(Path file);
 
