@@ -20,4 +20,5 @@ public interface UMLStereotype {
 
     List<UMLProperty> properties();
 
+    boolean contains(UMLProperty property);
 }

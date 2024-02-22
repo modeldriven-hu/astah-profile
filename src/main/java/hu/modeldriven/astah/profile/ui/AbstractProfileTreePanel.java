@@ -1,7 +1,7 @@
 package hu.modeldriven.astah.profile.ui;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
+import java.awt.*;
 
 public class AbstractProfileTreePanel extends JPanel {
 
@@ -10,6 +10,8 @@ public class AbstractProfileTreePanel extends JPanel {
     protected JButton newButton;
     protected JButton openButton;
     protected JButton saveButton;
+
+    protected JButton updateButton;
 
     protected JSplitPane splitPane;
 
@@ -42,10 +44,12 @@ public class AbstractProfileTreePanel extends JPanel {
         newButton = new JButton("New");
         openButton = new JButton("Open");
         saveButton = new JButton("Save");
+        updateButton = new JButton("Update model");
 
         toolBar.add(newButton);
         toolBar.add(openButton);
         toolBar.add(saveButton);
+        toolBar.add(updateButton);
 
         this.add(toolBar, BorderLayout.NORTH);
         this.add(splitPane, BorderLayout.CENTER);

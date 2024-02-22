@@ -13,22 +13,22 @@ import org.eclipse.uml2.uml.UMLPackage;
 
 import java.io.File;
 
-public class EclipseModel implements UMLModel {
+public class EclipseUMLModel implements UMLModel {
 
     private final EclipseRepresentation eclipseRepresentation;
 
-    public EclipseModel() {
+    public EclipseUMLModel() {
         this.eclipseRepresentation = new EclipseRepresentation();
     }
 
     @Override
-    public UMLProfile createProfile(File file) throws ProfileCreationFailedException {
+    public UMLProfile profile(File file) throws ProfileCreationFailedException {
         try {
             Resource resource = eclipseRepresentation.resourceSet().getResource(URI.createFileURI(file.getAbsolutePath()), true);
             org.eclipse.uml2.uml.Package rootPackage = (org.eclipse.uml2.uml.Package) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.PACKAGE);
 
             if (rootPackage instanceof Profile) {
-                return new EclipseProfile((Profile) rootPackage, eclipseRepresentation);
+                return new EclipseUMLProfile((Profile) rootPackage, eclipseRepresentation);
             }
 
             throw new WrappedException(new IllegalArgumentException("File contains a package, but it is not a profile!"));
@@ -39,12 +39,13 @@ public class EclipseModel implements UMLModel {
     }
 
     @Override
-    public UMLProfile createProfile(String name, String namespaceURI) {
+    public UMLProfile profile(String name, String namespaceURI) {
 
         Profile profile = UMLFactory.eINSTANCE.createProfile();
         profile.setName(name);
         profile.setURI(namespaceURI);
 
-        return new EclipseProfile(profile, eclipseRepresentation);
+        return new EclipseUMLProfile(profile, eclipseRepresentation);
     }
+
 }

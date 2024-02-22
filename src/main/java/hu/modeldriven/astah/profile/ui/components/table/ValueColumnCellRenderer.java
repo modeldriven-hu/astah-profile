@@ -2,7 +2,7 @@ package hu.modeldriven.astah.profile.ui.components.table;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import java.awt.Component;
+import java.awt.*;
 
 public class ValueColumnCellRenderer extends DefaultTableCellRenderer {
 

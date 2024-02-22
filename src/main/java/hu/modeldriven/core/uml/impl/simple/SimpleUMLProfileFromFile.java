@@ -1,6 +1,8 @@
 package hu.modeldriven.core.uml.impl.simple;
 
-import hu.modeldriven.core.uml.*;
+import hu.modeldriven.core.uml.ProfileCreationFailedException;
+import hu.modeldriven.core.uml.UMLProfile;
+import hu.modeldriven.core.uml.UMLStereotype;
 import hu.modeldriven.core.uml.impl.eclipse.EclipseRepresentation;
 import hu.modeldriven.core.uml.impl.generic.MetaClassInProfile;
 import hu.modeldriven.core.uml.impl.generic.PrimitiveTypesInProfile;
@@ -25,13 +27,13 @@ public class SimpleUMLProfileFromFile {
         this.eclipseRepresentation = new EclipseRepresentation();
     }
 
-    public UMLProfile umlProfile() throws ProfileCreationFailedException{
+    public UMLProfile umlProfile() throws ProfileCreationFailedException {
         try {
             Resource resource = eclipseRepresentation.resourceSet().getResource(URI.createFileURI(file.getAbsolutePath()), true);
             org.eclipse.uml2.uml.Package rootPackage = (org.eclipse.uml2.uml.Package) EcoreUtil.getObjectByType(resource.getContents(), UMLPackage.Literals.PACKAGE);
 
             if (rootPackage instanceof Profile) {
-                return umlProfile((Profile)rootPackage);
+                return umlProfile((Profile) rootPackage);
             }
 
             throw new WrappedException(new IllegalArgumentException("File contains a package, but it is not a profile!"));
@@ -47,12 +49,12 @@ public class SimpleUMLProfileFromFile {
 
         SimpleUMLProfile umlProfile = new SimpleUMLProfile(profile.getName(), profile.getURI());
 
-        for (Stereotype stereotype : profile.getOwnedStereotypes()){
+        for (Stereotype stereotype : profile.getOwnedStereotypes()) {
 
             UMLStereotype umlStereotype = umlProfile.createChildStereotype(stereotype.getName());
             umlStereotype.modifyMetaClass(metaClassInProfile.metaClass(stereotype));
 
-            for (Property property : stereotype.getOwnedAttributes()){
+            for (Property property : stereotype.getOwnedAttributes()) {
                 if (isNotInternalProperty(property)) {
                     umlStereotype.createChildProperty(property.getName(), primitiveTypes.propertyType(property.getType()));
                 }
@@ -62,7 +64,7 @@ public class SimpleUMLProfileFromFile {
         return umlProfile;
     }
 
-    private boolean isNotInternalProperty(Property property){
+    private boolean isNotInternalProperty(Property property) {
         return !property.getName().startsWith("base_");
     }
 

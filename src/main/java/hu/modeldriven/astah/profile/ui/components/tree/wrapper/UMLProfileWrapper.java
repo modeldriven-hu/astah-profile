@@ -1,7 +1,9 @@
 package hu.modeldriven.astah.profile.ui.components.tree.wrapper;
 
 import hu.modeldriven.astah.profile.ui.components.tree.ProfileTreeNode;
+import hu.modeldriven.core.uml.UMLMetaClass;
 import hu.modeldriven.core.uml.UMLProfile;
+import hu.modeldriven.core.uml.UMLProfileDifference;
 import hu.modeldriven.core.uml.UMLStereotype;
 
 import java.io.File;
@@ -47,6 +49,13 @@ public class UMLProfileWrapper implements UMLProfile {
     }
 
     @Override
+    public UMLStereotype createChildStereotype(String name, UMLMetaClass metaClass) {
+        UMLStereotype stereotype = profile.createChildStereotype(name, metaClass);
+        treeNode.notifyStructureChanged();
+        return stereotype;
+    }
+
+    @Override
     public void removeStereotype(UMLStereotype stereotype) {
         profile.removeStereotype(stereotype);
         treeNode.notifyStructureChanged();
@@ -58,7 +67,17 @@ public class UMLProfileWrapper implements UMLProfile {
     }
 
     @Override
+    public boolean contains(UMLStereotype stereotype) {
+        return profile.contains(stereotype);
+    }
+
+    @Override
     public void save(File file) {
         profile.save(file);
+    }
+
+    @Override
+    public UMLProfileDifference difference(UMLProfile newProfile) {
+        return profile.difference(newProfile);
     }
 }

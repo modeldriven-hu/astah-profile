@@ -12,21 +12,21 @@ public class FileFromSimpleUMLProfile {
     private final UMLProfile umlProfile;
     private final File file;
 
-    public FileFromSimpleUMLProfile(UMLProfile umlProfile, File file){
+    public FileFromSimpleUMLProfile(UMLProfile umlProfile, File file) {
         this.umlProfile = umlProfile;
         this.file = file;
     }
 
-    public void save(){
+    public void save() {
         Profile profile = buildProfile(umlProfile);
         saveProfile(profile, file);
     }
 
-    private Profile buildProfile(UMLProfile umlProfile){
+    private Profile buildProfile(UMLProfile umlProfile) {
         return new ProfileFromUMLProfile(umlProfile).profile();
     }
 
-    private void saveProfile(Profile profile, File file){
+    private void saveProfile(Profile profile, File file) {
         new EclipseRepresentation().saveProfile(profile, file);
     }
 

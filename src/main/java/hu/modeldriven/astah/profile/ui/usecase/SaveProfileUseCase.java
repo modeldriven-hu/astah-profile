@@ -10,7 +10,7 @@ import hu.modeldriven.core.uml.UMLProfile;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.Component;
+import java.awt.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -45,7 +45,7 @@ public class SaveProfileUseCase implements EventHandler<Event> {
             JFileChooser fileChooser = new JFileChooser();
             fileChooser.setDialogTitle("Specify a file to save");
 
-            FileNameExtensionFilter filter = new FileNameExtensionFilter("UML Profiles", FILE_EXTENSION);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("UML Profiles", "uml");
             fileChooser.addChoosableFileFilter(filter);
             fileChooser.setFileFilter(filter);
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Profile xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_65W2sNCmEe6aRakRPDA_rQ" name="name" URI="url" metaclassReference="_65W2ttCmEe6aRakRPDA_rQ _65W2t9CmEe6aRakRPDA_rQ">
+  <elementImport xmi:id="_65W2ttCmEe6aRakRPDA_rQ">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+  </elementImport>
+  <elementImport xmi:id="_65W2t9CmEe6aRakRPDA_rQ">
+    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Property"/>
+  </elementImport>
+  <elementImport xmi:id="_65W2sdCmEe6aRakRPDA_rQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_65W2stCmEe6aRakRPDA_rQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+  </elementImport>
+  <elementImport xmi:id="_65W2s9CmEe6aRakRPDA_rQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_65W2tNCmEe6aRakRPDA_rQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_65W2tdCmEe6aRakRPDA_rQ">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <packagedElement xmi:type="uml:Stereotype" xmi:id="_65W2uNCmEe6aRakRPDA_rQ" name="S1">
+    <ownedAttribute xmi:id="_65W2udCmEe6aRakRPDA_rQ" name="base_Class" association="_65XdwNCmEe6aRakRPDA_rQ">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_65W2utCmEe6aRakRPDA_rQ" name="P1">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_65W2u9CmEe6aRakRPDA_rQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_65W2vNCmEe6aRakRPDA_rQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Extension" xmi:id="_65XdwNCmEe6aRakRPDA_rQ" name="Class_S1" memberEnd="_65XdwdCmEe6aRakRPDA_rQ _65W2udCmEe6aRakRPDA_rQ">
+    <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_65XdwdCmEe6aRakRPDA_rQ" name="extension_S1" type="_65W2uNCmEe6aRakRPDA_rQ" aggregation="composite" association="_65XdwNCmEe6aRakRPDA_rQ"/>
+  </packagedElement>
+</uml:Profile>

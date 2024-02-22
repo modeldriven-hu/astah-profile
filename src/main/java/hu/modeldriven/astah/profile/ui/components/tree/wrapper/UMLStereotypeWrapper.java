@@ -62,4 +62,9 @@ public class UMLStereotypeWrapper implements UMLStereotype {
     public List<UMLProperty> properties() {
         return stereotype.properties();
     }
+
+    @Override
+    public boolean contains(UMLProperty property) {
+        return stereotype.contains(property);
+    }
 }

@@ -19,15 +19,21 @@ public class MetaClassInProfile {
         this.metaClassMap = new EnumMap<>(UMLMetaClass.class);
 
         Model umlMetamodel = (Model) eclipseRepresentation.load(URI.createURI(UMLResource.UML_METAMODEL_URI));
-
-        createMetaClass(umlMetamodel, UMLMetaClass.CLASS, UMLPackage.Literals.CLASS.getName());
-        createMetaClass(umlMetamodel, UMLMetaClass.PROPERTY, UMLPackage.Literals.PROPERTY.getName());
+        this.metaClassMap.put(UMLMetaClass.CLASS, importMetaClass(profile, umlMetamodel, UMLPackage.Literals.CLASS.getName()));
+        this.metaClassMap.put(UMLMetaClass.PROPERTY, importMetaClass(profile, umlMetamodel, UMLPackage.Literals.PROPERTY.getName()));
     }
 
-    private void createMetaClass(Model umlMetamodel, UMLMetaClass metaClass, String name) {
+    private org.eclipse.uml2.uml.Class importMetaClass(Profile profile, Model umlMetamodel, String name) {
+
+        for (ElementImport elementImport : profile.getMetaclassReferences()) {
+            if (elementImport.getName().equals(name) && elementImport.getImportedElement() instanceof org.eclipse.uml2.uml.Class) {
+                return (org.eclipse.uml2.uml.Class) elementImport.getImportedElement();
+            }
+        }
+
         org.eclipse.uml2.uml.Class classMetaClass = (org.eclipse.uml2.uml.Class) umlMetamodel.getOwnedType(name);
         this.profile.createMetaclassReference(classMetaClass);
-        this.metaClassMap.put(metaClass, classMetaClass);
+        return classMetaClass;
     }
 
     public void setMetaClass(Stereotype stereotype, UMLMetaClass metaClass) {
@@ -54,7 +60,7 @@ public class MetaClassInProfile {
         }
     }
 
-    public org.eclipse.uml2.uml.Class extensionType(UMLMetaClass metaClass){
+    public org.eclipse.uml2.uml.Class extensionType(UMLMetaClass metaClass) {
         return metaClassMap.get(metaClass);
     }
 

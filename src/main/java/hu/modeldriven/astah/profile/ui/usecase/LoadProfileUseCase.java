@@ -11,7 +11,7 @@ import hu.modeldriven.core.uml.UMLProfile;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.Component;
+import java.awt.*;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
@@ -39,7 +39,7 @@ public class LoadProfileUseCase implements EventHandler<LoadProfileRequestedEven
         if (fileChooser.showOpenDialog(parentComponent) == JFileChooser.APPROVE_OPTION) {
             try {
                 File file = fileChooser.getSelectedFile();
-                UMLProfile profile = model.createProfile(file);
+                UMLProfile profile = model.profile(file);
                 eventBus.publish(new ProfileAvailableEvent(profile));
             } catch (Exception e) {
                 eventBus.publish(new ExceptionOccurredEvent(e));

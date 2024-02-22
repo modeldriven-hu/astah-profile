@@ -18,7 +18,7 @@ public class SimpleUMLStereotype implements UMLStereotype {
     private UMLMetaClass metaClass;
 
     public SimpleUMLStereotype(UMLProfile parent, String name) {
-       this(parent, name, UMLMetaClass.CLASS);
+        this(parent, name, UMLMetaClass.CLASS);
     }
 
     public SimpleUMLStereotype(UMLProfile parent, String name, UMLMetaClass metaClass) {
@@ -71,5 +71,13 @@ public class SimpleUMLStereotype implements UMLStereotype {
     @Override
     public List<UMLProperty> properties() {
         return this.properties;
+    }
+
+    @Override
+    public boolean contains(UMLProperty property) {
+        return properties().stream()
+                .anyMatch(p ->
+                        p.name().equals(property.name()) &&
+                                p.type().equals(property.type()));
     }
 }

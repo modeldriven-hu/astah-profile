@@ -47,6 +47,8 @@ public class EclipseRepresentation {
         profile.define();
         profile.getEAnnotations().clear();
 
+        profile.getEAnnotations().clear();
+
         Resource resource = resourceSet().createResource(URI.createFileURI(file.getAbsolutePath()));
         resource.getContents().add(profile);
 

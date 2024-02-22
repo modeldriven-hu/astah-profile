@@ -6,7 +6,7 @@ import hu.modeldriven.core.uml.UMLStereotype;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeCellRenderer;
-import java.awt.Component;
+import java.awt.*;
 
 public class ProfileTreeCellRenderer extends DefaultTreeCellRenderer {
 

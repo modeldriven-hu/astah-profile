@@ -15,10 +15,16 @@ public interface UMLProfile {
 
     UMLStereotype createChildStereotype(String name);
 
+    UMLStereotype createChildStereotype(String name, UMLMetaClass metaClass);
+
     void removeStereotype(UMLStereotype stereotype);
 
     List<UMLStereotype> stereotypes();
 
+    boolean contains(UMLStereotype stereotype);
+
     void save(File file);
+
+    UMLProfileDifference difference(UMLProfile newProfile);
 
 }

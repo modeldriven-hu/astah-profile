@@ -7,8 +7,7 @@ import hu.modeldriven.core.eventbus.EventBus;
 import hu.modeldriven.core.uml.impl.simple.SimpleUMLModel;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 
 public class ProfileBrowserView extends JPanel implements IPluginTabView {
 
