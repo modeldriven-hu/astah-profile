@@ -44,5 +44,10 @@ public class ProfileBrowserView extends JPanel implements IPluginTabView {
         // Do nothing
     }
 
+    @Override
+    public void removeSelectionListener(ISelectionListener iSelectionListener) {
+
+    }
+
 }
 

@@ -3,6 +3,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <profiles>
         <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <name>windows</name>
+                </os>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <astah.path>C:/Program Files/astah_sysml</astah.path>
+            </properties>
+        </profile>
+        <profile>
             <id>osx</id>
             <activation>
                 <os>
@@ -16,7 +28,6 @@
         <profile>
             <id>linux</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
                 <os>
                     <name>unix</name>
                 </os>
@@ -175,7 +186,7 @@
             <plugin>
                 <groupId>com.change_vision.astah</groupId>
                 <artifactId>astah-maven-plugin</artifactId>
-                <version>1.0.0</version>
+                <version>1.1.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -313,73 +324,73 @@
         <dependency>
             <groupId>org.eclipse.uml2</groupId>
             <artifactId>uml</artifactId>
-            <version>5.5.0.v20210228-1829</version>
+            <version>5.5.0.v20221116-1811</version>
             <scope>system</scope>
-            <systemPath>${astah.path}/lib/org.eclipse.uml2.uml-5.5.0.v20210228-1829.jar</systemPath>
+            <systemPath>${astah.path}/lib/org.eclipse.uml2.uml-5.5.0.v20221116-1811.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.uml2</groupId>
             <artifactId>common</artifactId>
-            <version>2.5.0.v20210228-1829</version>
+            <version>2.5.0.v20221116-1811</version>
             <scope>system</scope>
-            <systemPath>${astah.path}/lib/org.eclipse.uml2.common-2.5.0.v20210228-1829.jar</systemPath>
+            <systemPath>${astah.path}/lib/org.eclipse.uml2.common-2.5.0.v20221116-1811.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.uml2</groupId>
             <artifactId>types</artifactId>
-            <version>2.5.0.v20210228-1829</version>
+            <version>2.5.0.v20221116-1811</version>
             <scope>system</scope>
-            <systemPath>${astah.path}/lib/org.eclipse.uml2.types-2.5.0.v20210228-1829.jar</systemPath>
+            <systemPath>${astah.path}/lib/org.eclipse.uml2.types-2.5.0.v20221116-1811.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.uml2.uml</groupId>
             <artifactId>resources</artifactId>
-            <version>5.5.0.v20210228-1829</version>
+            <version>5.5.0.v20221116-1811</version>
             <scope>system</scope>
-            <systemPath>${astah.path}/lib/org.eclipse.uml2.uml.resources-5.5.0.v20210228-1829.jar</systemPath>
+            <systemPath>${astah.path}/lib/org.eclipse.uml2.uml.resources-5.5.0.v20221116-1811.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.uml2.uml.profile</groupId>
             <artifactId>standard</artifactId>
-            <version>1.5.0.v20210228-1829</version>
+            <version>1.5.0.v20221116-1811</version>
             <scope>system</scope>
-            <systemPath>${astah.path}/lib/org.eclipse.uml2.uml.profile.standard-1.5.0.v20210228-1829.jar</systemPath>
+            <systemPath>${astah.path}/lib/org.eclipse.uml2.uml.profile.standard-1.5.0.v20221116-1811.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.emf</groupId>
             <artifactId>ecore</artifactId>
-            <version>2.26.0.v20220123-0838</version>
+            <version>2.35.0.v20230829-0934</version>
             <scope>system</scope>
-            <systemPath>${astah.path}/lib/org.eclipse.emf.ecore-2.26.0.v20220123-0838.jar</systemPath>
+            <systemPath>${astah.path}/lib/org.eclipse.emf.ecore-2.35.0.v20230829-0934.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.emf.mapping</groupId>
             <artifactId>ecore2xml</artifactId>
-            <version>2.11.0.v20180706-1146</version>
+            <version>2.12.0.v20230211-1150</version>
             <scope>system</scope>
-            <systemPath>${astah.path}/lib/org.eclipse.emf.mapping.ecore2xml-2.11.0.v20180706-1146.jar</systemPath>
+            <systemPath>${astah.path}/lib/org.eclipse.emf.mapping.ecore2xml-2.12.0.v20230211-1150.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.emf.ecore</groupId>
             <artifactId>xmi</artifactId>
-            <version>2.16.0.v20190528-0725</version>
+            <version>2.36.0.v20231002-1156</version>
             <scope>system</scope>
-            <systemPath>${astah.path}/lib/org.eclipse.emf.ecore.xmi-2.16.0.v20190528-0725.jar</systemPath>
+            <systemPath>${astah.path}/lib/org.eclipse.emf.ecore.xmi-2.36.0.v20231002-1156.jar</systemPath>
         </dependency>
 
         <dependency>
             <groupId>org.eclipse.emf</groupId>
             <artifactId>common</artifactId>
-            <version>2.24.0.v20220123-0838</version>
+            <version>2.29.0.v20230916-0637</version>
             <scope>system</scope>
-            <systemPath>${astah.path}/lib/org.eclipse.emf.common-2.24.0.v20220123-0838.jar</systemPath>
+            <systemPath>${astah.path}/lib/org.eclipse.emf.common-2.29.0.v20230916-0637.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
