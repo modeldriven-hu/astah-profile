@@ -3,7 +3,7 @@ package hu.modeldriven.core.uml;
 import java.util.Arrays;
 
 public enum UMLMetaClass {
-    CLASS("Class"), PROPERTY("Property"), UNKNOWN("Unknown");
+    CLASS("Class"), PROPERTY("Property"), OPERATION("Operation"), UNKNOWN("Unknown");
 
     private final String label;
 

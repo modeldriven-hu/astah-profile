@@ -21,6 +21,7 @@ public class MetaClassInProfile {
         Model umlMetamodel = (Model) eclipseRepresentation.load(URI.createURI(UMLResource.UML_METAMODEL_URI));
         this.metaClassMap.put(UMLMetaClass.CLASS, importMetaClass(profile, umlMetamodel, UMLPackage.Literals.CLASS.getName()));
         this.metaClassMap.put(UMLMetaClass.PROPERTY, importMetaClass(profile, umlMetamodel, UMLPackage.Literals.PROPERTY.getName()));
+        this.metaClassMap.put(UMLMetaClass.OPERATION, importMetaClass(profile, umlMetamodel, UMLPackage.Literals.OPERATION.getName()));
     }
 
     private org.eclipse.uml2.uml.Class importMetaClass(Profile profile, Model umlMetamodel, String name) {
